@@ -16,7 +16,7 @@ function LoginPage() {
           <h2 className="font-bold text-2xl text-[#002D74]">Login</h2>
           <p className="text-xs mt-4 text-[#002D74]">If you are already a member, easily log in</p>
 
-          <form action="" className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4">
             <input
               className="p-2 mt-8 rounded-xl border"
               type="email"
