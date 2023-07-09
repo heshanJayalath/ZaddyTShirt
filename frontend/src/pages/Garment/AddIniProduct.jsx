@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { RxAvatar } from "react-icons/rx";
-import { Link, useNavigate } from "react-router-dom";
 
-export default function Add_ini_product() {
+
+ const AddIniProduct = () =>{
   const [avatar, setAvatar] = useState(null);
 
   const handleFileInputChange = (e) => {
@@ -258,3 +257,5 @@ export default function Add_ini_product() {
     </section>
   );
 }
+
+export  default AddIniProduct;
