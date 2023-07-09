@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../../Assets/Customer/CustomerHomePage/Logo.jpg'
 import { categoriesData, productData } from '../../Static/Customer/data';
-import { AiOutlineHeart, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import { BiMenuAltLeft } from 'react-icons/bi'
+import { CgProfile } from 'react-icons/cg'
 import styles from '../../Styles/Customer/styles';
 import DropDown from './DropDown';
 import Navbar from './Navbar';
@@ -26,7 +27,7 @@ const Header = ({ activeHeading }) => {
     };
 
     window.addEventListener('scroll', () => {
-        if (window.screenY > 70) {
+        if (window.scrollY > 70) {
             setActive(true);
         } else {
             setActive(false);
@@ -88,7 +89,7 @@ const Header = ({ activeHeading }) => {
             <div className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null} transition 800px flex items-center justify-between w-full bg-[#3321cb] h-[70px]`}>
                 {/* categories */}
                 <div>
-                    <div className='relative h-[60px] top-2 mt-[10px] w-[270px]  1000px:block'>
+                    <div onClick={() => setDropDown(!dropDown)} className='relative h-[60px] bottom-0 left-5 mt-[10px] w-[270px]  1000px:block'>
                         <BiMenuAltLeft size={30} className='absolute top-4 left-2 ' />
                         <button className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}>
                             All Categories
@@ -96,7 +97,7 @@ const Header = ({ activeHeading }) => {
                         <IoIosArrowDown
                             size={20}
                             className='absolute right-2 top-6 cursor-pointer'
-                            onClick={() => setDropDown(!dropDown)}
+                            
                         />
                         {
                             dropDown ? (
@@ -115,16 +116,38 @@ const Header = ({ activeHeading }) => {
                 <div className={`${styles.noramlFlex}`}>
                     <Navbar active={activeHeading} />
                 </div>
-                <div>
+                <div className='flex'>
                     <div className={`${styles.noramlFlex}`}>
-                        <AiOutlineHeart
-                            size={30}
-                            className='rgb(255 2555 255 / 83%)'
-                        />
-                        <span className='absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center'>
-                            0
-                        </span>
-
+                        <div className='relative cursor-pointer mr-[15px]'>
+                            <AiOutlineHeart
+                                size={30}
+                                className=' rgb(255 2555 255 / 83%)'
+                            />
+                            <span className='absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center'>
+                                0
+                            </span>
+                        </div>
+                    </div>
+                    <div className={`${styles.noramlFlex}`}>
+                        <div className='relative cursor-pointer mr-[15px]'>
+                            <AiOutlineShoppingCart
+                                size={30}
+                                className=' rgb(255 2555 255 / 83%)'
+                            />
+                            <span className='absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center'>
+                                1
+                            </span>
+                        </div>
+                    </div>
+                    <div className={`${styles.noramlFlex}`}>
+                        <div className='relative cursor-pointer mr-[15px]'>
+                            <Link to="/login">
+                                <CgProfile
+                                    size={30}
+                                    className=' rgb(255 2555 255 / 83%)'
+                                />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
