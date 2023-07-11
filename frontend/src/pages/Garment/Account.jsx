@@ -1,39 +1,31 @@
-import React from 'react'
+import React from "react";
+import Header from "../../components/Customer/Header.jsx";
+import AccountDropDown from "../../components/Garment/AccountDropDown";
 
 function Account() {
   return (
-    <section className="bg-gray-50 p-10  min-h-screen items-center justify-center">
-        {/* full section  */}
-        <div>
-
-            {/* left section  */}
-            <div>
-                {/* garment pic section */}
-                <div>
-                    
-<div class="flex items-center space-x-4">
-    
-    <img class="w-10 h-10 rounded-full" src="frontend/src/Assets/Customer/CustomerHomePage/Logo.jpg" alt=""/>
-    
+    <section className="bg-gray-50 min-h-screen items-center justify-center">
+     
       
-    <div class="font-medium dark:text-slate-800">
-        <div>Welcome</div>
-        <div class="text-sm text-gray-500 dark:text-gray-400">Heshan</div>
-    </div>
-</div>
+      <div>
+        <Header activeHeading={1} />
+      </div>
+      <div className="bg-cyan-200">
+        <AccountDropDown />
+      </div>
+      <div className="bg-gray-100 md:m-5 m-5 min-h-screen rounded-2xl shadow-lg max-w-full py-2  items-center">
 
-                </div>
-    
-
-            </div>
-
-            {/* Right section  */}
-            <div></div>
+      <div>
+        <h1 className="text-center m-5"> ALL PRODUCTS</h1>
+        <h6 className="p-1 px-20 bg-cyan-200 rounded-md"> SELECT ALL</h6>
+      </div>
+      </div>
 
 
-        </div>
+
+
     </section>
-  )
+  );
 }
 
-export default Account
+export default Account;
