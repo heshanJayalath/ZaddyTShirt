@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -95,6 +95,8 @@ const Register = () => {
                   placeholder="Confirm-Password"
                   autoComplete="confirm-password"
                   required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 {visible1 ? (
                   <AiOutlineEye
