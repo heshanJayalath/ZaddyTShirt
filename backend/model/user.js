@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema({
-  username:{
+  name:{
     type: String,
     required: [true, "Please enter your name!"],
   },
@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
   ],
   role:{
     type: String,
-    default: "customer",
+    default: "user",
   },
   avatar:{
     type: String,
