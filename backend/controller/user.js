@@ -73,7 +73,7 @@ router.post("/activation", catchAsyncErrors(async (req, res, next) => {
 
         const newUser = jwt.verify(activation_token, process.env.ACTIVATION_SECRET);
 
-        console.log(newUser)
+        console.log("User data: ",newUser)
         if (!newUser) {
             return next(new ErrorHandler("Invalid token", 400));
         }
@@ -137,5 +137,21 @@ router.get("/getuser", isAuthenticated, catchAsyncErrors(async (req, res, next) 
         return next(new ErrorHandler(error.message, 500));
     }
 }));
+
+// logout user
+router.get("/logout", isAuthenticated, catchAsyncErrors(async (req, res, next) => {
+    try {
+        res.cookie("token", null, {
+            expires: new Date(Date.now()),
+            httpOnly: true,
+        });
+        res.status(201).json({
+            success: true,
+            message: "Logout successful"
+        })
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500))
+    }
+}))
 
 module.exports = router;

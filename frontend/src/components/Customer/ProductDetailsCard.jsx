@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import styles from '../../Styles/Customer/styles';
-
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
+import { FaTshirt } from 'react-icons/fa'
 
 const ProductDetailsCard = ({ setOpen, data }) => {
     const [count, setCount] = useState(1);
@@ -99,10 +99,17 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                                             )}
                                         </div>
                                     </div>
+                                    <div className='flex justify-between'>
                                     <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}>
                                         <span className='text-[#fff] flex items-center'>
                                             Add to Cart  <AiOutlineShoppingCart className='ml-1' />
                                         </span>
+                                    </div>
+                                    <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}>
+                                        <span className='text-[#fff] flex items-center'>
+                                            View 3D Model  <FaTshirt className='ml-1' />
+                                        </span>
+                                    </div>
                                     </div>
                                 </div>
 

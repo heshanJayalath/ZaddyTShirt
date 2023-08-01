@@ -10,6 +10,7 @@ import styles from '../../Styles/Customer/styles';
 import DropDown from './DropDown';
 import Navbar from './Navbar';
 import Cart from './Cart';
+import Wishlist from './Wishlist';
 import { useSelector } from 'react-redux';
 import { backend_url } from '../../server';
 
@@ -25,7 +26,7 @@ const Header = ({ activeHeading }) => {
     const [active, setActive] = useState(false);
     const [dropDown, setDropDown] = useState(false);
     const [openCart, setOpenCart] = useState(false);
-    const [openWishList, setOpenWishList] = useState(false);
+    const [openWishlist, setOpenWishlist] = useState(false);
 
     const handleSearchChange = (e) => {
         const term = e.target.value;
@@ -92,7 +93,7 @@ const Header = ({ activeHeading }) => {
                                 }
                             </div>
                             <div className={`${styles.button}`}>
-                                <Link to="../Garment">
+                                <Link to="/create-garment">
                                     <h1 className='text-[#fff] flex items-center'>
                                         Become a seller <IoIosArrowForward className="ml-1" />
                                     </h1>
@@ -133,7 +134,8 @@ const Header = ({ activeHeading }) => {
                             </div>
                             <div className='flex'>
                                 <div className={`${styles.noramlFlex}`}>
-                                    <div className='relative cursor-pointer mr-[15px]'>
+                                    <div className='relative cursor-pointer mr-[15px]'
+                                        onClick={() => setOpenWishlist(true)}>
                                         <AiOutlineHeart
                                             size={30}
                                             className=' rgb(255 2555 255 / 83%)'
@@ -145,7 +147,7 @@ const Header = ({ activeHeading }) => {
                                 </div>
                                 <div className={`${styles.noramlFlex}`}>
                                     <div className='relative cursor-pointer mr-[15px]'
-                                    onClick={() => setOpenCart(true)}>
+                                        onClick={() => setOpenCart(true)}>
                                         <AiOutlineShoppingCart
                                             size={30}
                                             className=' rgb(255 2555 255 / 83%)'
@@ -180,6 +182,13 @@ const Header = ({ activeHeading }) => {
                                 {
                                     openCart ? (
                                         <Cart setOpenCart={setOpenCart} />
+                                    ) : (
+                                        null
+                                    )
+                                }
+                                {
+                                    openWishlist ? (
+                                        <Wishlist setOpenWishlist={setOpenWishlist} />
                                     ) : (
                                         null
                                     )
