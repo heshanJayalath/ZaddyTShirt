@@ -35,7 +35,9 @@ const Signup = () => {
 
     axios.post(`${server}/user/create-user`, newForm, config)
       .then((res) => {
-        console.log(res.data);
+        
+        console.log("user data:",res.data);
+
         toast.success(res.data.message);
         setName("");
         setEmail("");

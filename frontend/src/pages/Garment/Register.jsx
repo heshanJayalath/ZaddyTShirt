@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { server } from '../../server';
+import FormData from "form-data";
+import { toast } from 'react-toastify';
+import { useSelector } from "react-redux";
+
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -9,13 +15,60 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [companyName, setCompanyName] = useState("");
+  const [brNumber, setBrNumber] = useState("");
+  const [companyEmail, setCompanyEmail] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [companyContact, setCompanyContact] = useState("");
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(true);
-  const [visible1, setVisible1] = useState(true);
+
+  
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setAvatar(file);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const newForm = new FormData();
+
+    newForm.append("file", avatar);
+    newForm.append("username", username);
+    newForm.append("email", email);
+    newForm.append("password", password);
+    newForm.append("companyName", companyName);
+    newForm.append("brNumber", brNumber);
+    newForm.append("companyEmail", companyEmail);
+    newForm.append("companyAddress", companyAddress);
+    newForm.append("city", city);
+    newForm.append("companyContact", companyContact);
+
+    axios.post(`${server}/garment/create-garment`, newForm, config)
+      .then((res) => {
+        
+        console.log("garment data:",res.data);
+
+        toast.success(res.data.message);
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setAvatar("");
+        setCompanyName("");
+        setBrNumber("");
+        setCompanyEmail("");
+        setCompanyAddress("");
+        setCity("");
+        setCompanyContact("");
+
+      }).catch((err) => {
+        toast.error(err.response.data.message);
+      })
+  }
 
   return (
     <section className="bg-gray-50  min-h-screen items-center justify-center">
@@ -29,7 +82,7 @@ const Register = () => {
           </p>
         </div>
 
-        <form className=" justify-center items-center content-center ">
+        <form className=" justify-center items-center content-center " onSubmit={handleSubmit}>
           <div className="md:flex  gap-4">
             <div className="md:w-1/2 md:pl-10 md:pr-5 pl-5 pr-5 ">
               <h5 className="p-2 font-bold md:text-2xl text-base text-[#002D74]">
@@ -90,7 +143,7 @@ const Register = () => {
               <div className="relative">
                 <input
                   className="p-2 rounded-xl border w-full"
-                  type={visible1 ? "password" : "text"}
+                  type={visible ? "password" : "text"}
                   name="confirmPassword"
                   placeholder="Confirm-Password"
                   autoComplete="confirm-password"
@@ -98,17 +151,17 @@ const Register = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                {visible1 ? (
+                {visible ? (
                   <AiOutlineEye
                     className="absolute right-2 top-3 cursor-pointer"
                     size={20}
-                    onClick={() => setVisible1(false)}
+                    onClick={() => setVisible(false)}
                   />
                 ) : (
                   <AiOutlineEyeInvisible
                     className="absolute right-2 top-3 cursor-pointer"
                     size={20}
-                    onClick={() => setVisible1(true)}
+                    onClick={() => setVisible(true)}
                   />
                 )}
               </div>
@@ -129,7 +182,7 @@ const Register = () => {
                   htmlFor="file-input"
                   className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                 >
-                  <span>Upload Profile Photo</span>
+                  <span>Upload Company Logo</span>
                   <input
                     type="file"
                     name="avatar"
@@ -150,8 +203,10 @@ const Register = () => {
                 <input
                   className="p-2 mt-2 rounded-xl border  w-full"
                   type="text"
-                  name="companyname"
-                  autoComplete="username"
+                  name="companyName"
+                  autoComplete="Company username"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
                   required
                   placeholder=" Company name"
                 />
@@ -161,7 +216,9 @@ const Register = () => {
                 <input
                   className="p-2 rounded-xl border w-full"
                   type="text"
-                  name="brnumber"
+                  name="brNumber"
+                  value={brNumber}
+                  onChange={(e) => setBrNumber(e.target.value)}
                   required
                   placeholder="BR Number"
                 />
@@ -171,8 +228,10 @@ const Register = () => {
                 <input
                   className="p-2 rounded-xl border w-full"
                   type="email"
-                  name="companyemail"
+                  name="companyEmail"
                   autoComplete="email"
+                  value={companyEmail}
+                  onChange={(e) => setCompanyEmail(e.target.value)}
                   required
                   placeholder="Company Email"
                 />
@@ -182,9 +241,11 @@ const Register = () => {
                 <input
                   className="p-2 rounded-xl border w-full"
                   type="text"
-                  name="add1"
+                  name="companyAddress"
                   placeholder="add line1 add line2 add line3"
                   autoComplete="add1"
+                  onChange={(e) => setCompanyAddress(e.target.value)}
+                  value={companyAddress}
                   required
                 />
               </div>
@@ -193,6 +254,8 @@ const Register = () => {
                   className="p-2 rounded-xl border w-full"
                   type="text"
                   name="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                   placeholder="City"
                   autoComplete="city"
                   required
@@ -202,7 +265,9 @@ const Register = () => {
                 <input
                   className="p-2 rounded-xl border w-full"
                   type="text"
-                  name="company"
+                  name="companyContact"
+                  value={companyContact}
+                  onChange={(e) => setCompanyContact(e.target.value)}
                   placeholder="Company Contact"
                   autoComplete="add3"
                   required
@@ -215,13 +280,13 @@ const Register = () => {
               className="bg-[#002D74] w-6/12  md:rounded-xl rounded-md text-white p-3 hover:scale-105 duration-300"
               type="submit"
             >
-              Register
+              Register Company
             </button>
           </div>
         </form>
         <div className="mt-5 text-xs flex items-center justify-center text-[#002D74]">
           <p className="p-5">Already have an account?</p>
-          <Link to="/login">
+          <Link to="/login-garment">
             <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">
               Login
             </button>

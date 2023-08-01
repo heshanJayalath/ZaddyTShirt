@@ -23,8 +23,10 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 }
 // imports
 const user = require("./controller/user");
+const garment = require("./controller/garment");
 
 app.use("/api/v2/user", user);
+app.use("/api/v2/garment", garment);
 
 // it's for ErrorHandling
 app.use(ErrorHandler);

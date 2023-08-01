@@ -23,3 +23,26 @@ export const loadUser = () => async (dispatch) => {
         });
     }
 }
+
+// load garment
+export const loadGarment = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "LoadGarmentRequest",
+        });
+
+        const { data } = await axios.get(`${server}/garment/getGarment`, { withCredentials: true });
+        console.log(data)
+        dispatch({
+            type: "LoadGarmentSuccess",
+            payload: data.garment,
+        });
+
+
+    } catch (error) {
+        dispatch({
+            type: "LoadGarmentFail",
+            payload: error.response.data.message
+        });
+    }
+}
