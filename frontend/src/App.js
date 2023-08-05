@@ -23,7 +23,8 @@ import {
   GarmentAccountPaymentDetails,
   GarmentAccountChangePassword,
   AddNewProduct,
-  GarmentViewReport
+  GarmentViewReport,
+  AdminPage,
 }
   from './Routes.js';
 
@@ -95,6 +96,8 @@ const App = () => {
                 <Route path='allproduct/add-new-product' element={<AddNewProduct />}></Route>
                 <Route path='view-report' element={<GarmentViewReport />}></Route>
               </Route>
+
+              <Route path='/admin' element={<AdminPage/>}></Route>
 
             </Routes>
             <ToastContainer
