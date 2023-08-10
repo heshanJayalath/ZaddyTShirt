@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../../Styles/Customer/styles';
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
+import { backend_url } from '../../server';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProductsGarment } from "../../redux/actions/product";
+import {toast} from 'react-toastify';
+import {addTocart} from "../../redux/actions/cart"
 
 const ProductDetails = ({ data }) => {
-
+  console.log("data:", data)
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
+
+  const {cart} = useSelector((state)=>state.cart);
+  const { products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsGarment(data && data.garment._id));
+  }, [dispatch, data])
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -23,6 +36,16 @@ const ProductDetails = ({ data }) => {
     navigate("/index?coversation=506ebjverasd")
   }
 
+  const addToCartHandler = (id)=>{
+    const isItemExists = cart && cart.find((i)=>i._id === id);
+    if(isItemExists){
+      toast.error("Item already in cart")
+    }else{
+      const cartData = {...data, qty:count}
+      dispatch(addTocart(cartData));
+      toast.success("Item added to cart successfully")
+    }
+  }
   return (
     <div className='bg-white'>
       {
@@ -31,18 +54,20 @@ const ProductDetails = ({ data }) => {
             <div className='w-full py-5'>
               <div className='flex w-full 800px:block gap-5'>
                 <div className='w-full 800px:w-[50%]'>
-                  <img src={data.image_Url[select].url} alt='' className='w-[80%]' />
+                  <img src={`${backend_url}/${data.images && data?.images[select]}`} alt='' className='w-[80%]' />
                   <div className='w-full flex'>
-                    <div className={`${select === 0 ? "border" : "null"} cursor-pointer`}>
-                      <img src={data?.image_Url[0].url} alt='' className='h-[200px]'
-                        onClick={() => setSelect(0)}
-                      />
-                    </div>
-                    <div className={`${select === 1 ? "border" : "null"} cursor-pointer`}>
-                      <img src={data?.image_Url[1].url} alt='' className='h-[200px]'
-                        onClick={() => setSelect(1)}
-                      />
-                    </div>
+                    {
+                      data && data.images.map((i,index) => (
+                        <div className={`${select ===  index? "border" : "null"} cursor-pointer`}>
+                          <img
+                            src={`${backend_url}/${data.images && data?.images[index]}`}
+                            alt='' className='h-[200px] overflow-hidden mr-3 mt-3'
+                            onClick={() => setSelect(index )}
+                          />
+                        </div>
+
+                      ))
+                    }
                   </div>
 
                 </div>
@@ -53,10 +78,10 @@ const ProductDetails = ({ data }) => {
                   <p>{data.description}</p>
                   <div className='flex pt-3'>
                     <h4 className={`${styles.productDiscountPrice}`}>
-                      Rs.{data.discount_price}
+                      Rs.{data.discountPrice}
                     </h4>
                     <h3 className={`${styles.price}`}>
-                      {data.price ? "Rs." + data.price : null}
+                      {data.originalPrice ? "Rs." + data.originalPrice : null}
                     </h3>
                   </div>
 
@@ -92,7 +117,9 @@ const ProductDetails = ({ data }) => {
                       )}
                     </div>
                   </div>
-                  <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}>
+                  <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`} 
+                  onClick={()=>addToCartHandler(data._id)}
+                  >
                     <span className='text-white flex items-center'>
                       Add to Cart <AiOutlineShoppingCart className='ml-1' />
                     </span>
@@ -110,7 +137,7 @@ const ProductDetails = ({ data }) => {
               </div>
 
             </div>
-            <ProductDetailsInfo data={data}/>
+            <ProductDetailsInfo data={data} />
           </div>
         ) : (
           null
@@ -157,7 +184,7 @@ const ProductDetailsInfo = ({
             <div className={`${styles.active_indicator}`} />
           ) : null}
         </div>
-        
+
       </div>
       {active === 1 ? (
         <>
@@ -172,7 +199,7 @@ const ProductDetailsInfo = ({
           <p>No Reviews Yet</p>
         </div>
       ) : null}
-     
+
     </div>
   );
 };
