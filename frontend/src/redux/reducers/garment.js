@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-    isGarment: false,
+    isLoading: true,
 }
 
 export const garmentReducer = createReducer(initialState, {

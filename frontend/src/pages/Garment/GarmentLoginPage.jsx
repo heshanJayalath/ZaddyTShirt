@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 
 const GarmentLoginPage = () => {
     const navigate = useNavigate();
-    const { isGarment, garment } = useSelector((state) => state.garment);
+    const { isGarment, garment, isLoading } = useSelector((state) => state.garment);
 
     useEffect(() => {
         if (isGarment === true) {
-            navigate(`/garment/${garment.id}`);
+            navigate(`/dashboard`);
         }
-    }, []);
+    }, [isLoading,isGarment]);
     
     return (
         <div>

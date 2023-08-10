@@ -24,9 +24,13 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 // imports
 const user = require("./controller/user");
 const garment = require("./controller/garment");
+const product = require('./controller/product');
+const event = require('./controller/event');
 
 app.use("/api/v2/user", user);
 app.use("/api/v2/garment", garment);
+app.use("/api/v2/product", product);
+app.use("/api/v2/event", event);
 
 // it's for ErrorHandling
 app.use(ErrorHandler);

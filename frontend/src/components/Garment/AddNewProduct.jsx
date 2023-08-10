@@ -10,6 +10,7 @@ const AddNewProduct = () => {
     const [colour, setColour]=useState("");
     const [thikness, setThikness]= useState("");
   
+
     const handleFileInputChange = (e) => {
       const file = e.target.files[0];
       setproductImage(file);
