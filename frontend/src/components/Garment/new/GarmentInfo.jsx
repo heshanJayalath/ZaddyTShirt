@@ -1,0 +1,100 @@
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { backend_url } from '../../../server'
+import Loader from '../../Loader';
+import { Link, useParams } from 'react-router-dom'
+import styles from '../../../Styles/Customer/styles';
+import axios from 'axios';
+import { server } from '../../../server';
+import { getAllProductsGarment } from '../../../redux/actions/product';
+
+const GarmentInfo = ({ isGarmentOwner }) => {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const {products} = useSelector((state)=>state.products);
+  const {id} = useParams();
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+    dispatch(getAllProductsGarment(id));
+    setIsLoading(true);
+    axios.get(`${server}/garment/get-garment-info/${id}`).then((res)=>{
+      console.log(res.data.garment);
+      setData(res.data.garment);
+      setIsLoading(false);
+    }).catch((error)=>{
+      console.log(error);
+      setIsLoading(false);
+    })
+  },[]);
+
+  const logoutHandler = async () => {
+    axios.get(`${server}/garment/logout`, { withCredentials: true });
+    window.location.reload();
+  }
+
+
+  return (
+    <>
+      {
+        isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <div className="w-full py-5">
+              <div className="w-full flex item-center justify-center">
+                <img
+                  src={`${backend_url}/${data?.avatar}`}
+                  alt=""
+                  className="w-[150px] h-[150px] object-cover rounded-full"
+                />
+              </div>
+              <h3 className="text-center py-2 text-[20px]">{data?.companyName}</h3>
+              <p className="text-[16px] text-center text-[#000000a6] p-[5px]  items-center">
+                {data?.companyEmail}
+              </p>
+            </div>
+            <div className="p-3">
+              <h5 className="font-[600]">Address</h5>
+              <h4 className="text-[#000000a6]">{data?.companyAddress}</h4>
+            </div>
+            <div className="p-3">
+              <h5 className="font-[600]">Phone Number</h5>
+              <h4 className="text-[#000000a6]">{data?.companyContact}</h4>
+            </div>
+            <div className="p-3">
+              <h5 className="font-[600]">Total Products</h5>
+              <h4 className="text-[#000000a6]">10</h4>
+            </div>
+            <div className="p-3">
+              <h5 className="font-[600]">Shop Ratings</h5>
+              <h4 className="text-[#000000b0]">12/5</h4>
+            </div>
+            <div className="p-3">
+              <h5 className="font-[600]">Joined On</h5>
+              <h4 className="text-[#000000b0]">{data?.createdAt.slice(0, 10)}</h4>
+            </div>
+            {isGarmentOwner && (
+              <div className="py-3 px-4">
+                <Link to="/settings">
+                  <div className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}>
+                    <span className="text-white">Edit Shop</span>
+                  </div>
+                </Link>
+                <div className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}
+                  onClick={logoutHandler}
+                >
+                  <span className="text-white">Log Out</span>
+                </div>
+              </div>
+            )}
+          </div>
+        )
+      }
+    </>
+
+  );
+}
+
+export default GarmentInfo

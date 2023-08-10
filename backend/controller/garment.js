@@ -151,4 +151,33 @@ router.get("/getgarment",isGarment, catchAsyncErrors(async (req, res, next) => {
     }
 }));
 
+
+// logout garment
+router.get("/logout", catchAsyncErrors(async (req, res, next) => {
+    try {
+        res.cookie("garment_token", null, {
+            expires: new Date(Date.now()),
+            httpOnly: true,
+        });
+        res.status(201).json({
+            success: true,
+            message: "Logout successful"
+        })
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500))
+    }
+}));
+
+// get Garment info
+router.get("/get-garment-info/:id", catchAsyncErrors(async(req,res,next)=>{
+    try{
+        const garment = await Garment.findById(req.params.id);
+        res.status(201).json({
+            success:true,
+            garment,
+        })
+    }catch(error){
+        return next(new ErrorHandler(error.message,500));
+    }
+}))
 module.exports = router;

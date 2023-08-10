@@ -3,11 +3,18 @@ import { RxCross1 } from 'react-icons/rx';
 import styles from '../../Styles/Customer/styles';
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { FaTshirt } from 'react-icons/fa'
+import { backend_url } from '../../server';
+import Logo from '../../Assets/Customer/CustomerHomePage/Logo.jpg'
+import { useDispatch, useSelector } from 'react-redux';
+import { addTocart } from '../../redux/actions/cart';
+import { toast } from 'react-toastify';
 
 const ProductDetailsCard = ({ setOpen, data }) => {
     const [count, setCount] = useState(1);
     const [click, setClick] = useState(false);
     const [select, setSelect] = useState(false);
+    const { cart } = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
 
     const handleMessageSubmit = () => {
 
@@ -22,6 +29,21 @@ const ProductDetailsCard = ({ setOpen, data }) => {
         setCount(count + 1)
 
     }
+
+    const addToCartHandler = (id) => {
+        const isItemExists = cart && cart.find((i) => i._id === id);
+        if (isItemExists) {
+            toast.error("Item already in cart")
+        } else {
+            if (data.stock > count) {
+                toast.error("Product stock limited!");
+            } else {
+                const cartData = { ...data, qty: count }
+                dispatch(addTocart(cartData));
+                toast.success("Item added to cart successfully")
+            }
+        }
+    }
     return (
         <div className='bg-[#fff]'>
             {
@@ -33,14 +55,14 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                             />
                             <div className='flex w-full 800px:flex'>
                                 <div className='w-full 800px:w-[50%]'>
-                                    <img src={data.image_Url[0].url} alt="" />
+                                    <img src={`${backend_url}/${data.images[0]}`} alt="" />
                                     <div className='flex'>
-                                        <img src={data.shop.shop_avatar.url} alt=''
+                                        <img src={Logo} alt=''
                                             className='w-[50px] h-[50px] rounded-full mr-2'
                                         />
                                         <div>
                                             <h5 className='pd-3 text-[15px]'>
-                                                ({data.shop.ratings}) Ratings
+                                                ({4 / 5}) Ratings
                                             </h5>
                                         </div>
                                     </div>
@@ -51,7 +73,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                                         </span>
                                     </div>
                                     <h5 className='text-[16px] text-[red] mt-5'>
-                                        ({data.total_sell}) Sold out
+                                        ({data.sold_out}) Sold out
                                     </h5>
                                 </div>
                                 <div className='w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]'>
@@ -62,9 +84,9 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
                                     <div className='flex pt-3'>
                                         <h4 className={`${styles.productDiscountPrice}`}>
-                                            Rs.{data.discount_price}
+                                            Rs.{data.discountPrice}
                                         </h4>
-                                        <h3 className={`${styles.price}`}>{data.price ? data.price + "Rs." : null}</h3>
+                                        <h3 className={`${styles.price}`}>{data.originalPrice ? "Rs." + data.originalPrice : null}</h3>
                                     </div>
 
                                     <div className='flex items-center mt-12 justify-between pr-3'>
@@ -100,16 +122,17 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                                         </div>
                                     </div>
                                     <div className='flex justify-between'>
-                                    <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}>
-                                        <span className='text-[#fff] flex items-center'>
-                                            Add to Cart  <AiOutlineShoppingCart className='ml-1' />
-                                        </span>
-                                    </div>
-                                    <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}>
-                                        <span className='text-[#fff] flex items-center'>
-                                            View 3D Model  <FaTshirt className='ml-1' />
-                                        </span>
-                                    </div>
+                                        <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}
+                                            onClick={() => addToCartHandler(data._id)}>
+                                            <span className='text-[#fff] flex items-center'>
+                                                Add to Cart  <AiOutlineShoppingCart className='ml-1' />
+                                            </span>
+                                        </div>
+                                        <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}>
+                                            <span className='text-[#fff] flex items-center'>
+                                                View 3D Model  <FaTshirt className='ml-1' />
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
