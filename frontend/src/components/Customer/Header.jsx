@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Logo from '../../Assets/Customer/CustomerHomePage/Logo.jpg'
+import Logo from '../../Assets/Customer/CustomerHomePage/logo_zaddy.svg'
 import { categoriesData, productData } from '../../Static/Customer/data';
 import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
@@ -56,7 +56,7 @@ const Header = ({ activeHeading }) => {
                         <div className='800px:h-[50px] 800px:my-[20px] 800px flex items-center justify-between'>
                             <div>
                                 <Link to="/">
-                                    <img src={Logo} alt='' className='w-[200px]' />
+                                    <img src={Logo} alt='' className='w-[100px]' />
                                 </Link>
                             </div>
                             <div className='w-[50%] relative'>

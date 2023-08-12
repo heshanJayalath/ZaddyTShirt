@@ -1,13 +1,19 @@
 import React from "react";
-import { IoCashOutline,IoBagHandle, IoPieChart, IoPeople, IoCart } from "react-icons/io5";
+import {
+  IoCashOutline,
+  IoBagHandle,
+  IoPieChart,
+  IoPeople,
+  IoCart,
+} from "react-icons/io5";
 import { GiDress } from "react-icons/gi";
 
 export default function AdminDashboardGrid() {
   return (
     <div className=" w-full mb-16">
- <div className=" w-full text-center mb-6">
-      <h1 className="font-bold text-cyan-900 text-xl">Dashboard </h1>
-    </div>
+      <div className=" w-full text-center mb-6">
+        <h1 className="font-bold text-cyan-900 text-xl">Dashboard </h1>
+      </div>
 
       <div className="md:flex gap-16 py-4 px-16 w-full">
         <BoxWrapper>
@@ -87,7 +93,7 @@ export default function AdminDashboardGrid() {
         </BoxWrapper>
       </div>
 
-	  <div className="md:flex gap-16 px-16 w-full">
+      <div className="md:flex gap-16 px-16 w-full">
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-orange-300">

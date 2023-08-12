@@ -52,4 +52,5 @@ export {
   GarmentAccountChangePassword,
   AddNewProduct,
   GarmentViewReport,
+  AdminPage,
 }
