@@ -16,10 +16,13 @@ import { backend_url } from '../../server';
 
 const Header = ({ activeHeading }) => {
     const { isAuthenticated, user, loading } = useSelector((state) => state.user);
-    const {allProducts} = useSelector((state)=>state.products)
-    console.log("isAuthenticated : ", isAuthenticated);
-    console.log("user : ", user);
-    console.log("loading : ", loading);
+    const { allProducts } = useSelector((state) => state.products)
+    const { cart } = useSelector((state) => state.cart)
+    const {isGarment} = useSelector((state)=>state.garment)
+
+    // console.log("isAuthenticated : ", isAuthenticated);
+    // console.log("user : ", user);
+    // console.log("loading : ", loading);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [searchData, setSearchData] = useState(null);
@@ -72,9 +75,6 @@ const Header = ({ activeHeading }) => {
                                     searchData && searchData.length !== 0 ? (
                                         <div className='absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4'>
                                             {searchData && searchData.map((i, index) => {
-                                                const d = i.name;
-
-                                                const Product_name = d.replace(/\s+/, "-");
                                                 return (
                                                     <Link to={`/product/${i._id}`}>
                                                         <div className='w-full flex items-start-py-3'>
@@ -92,14 +92,16 @@ const Header = ({ activeHeading }) => {
                                     )
                                 }
                             </div>
+                            
                             <div className={`${styles.button}`}>
-                                <Link to="/create-garment">
-                                    <h1 className='text-[#fff] flex items-center'>
-                                        Become a seller <IoIosArrowForward className="ml-1" />
+                                <Link to={`${isGarment ? "/garment-dashboard" : "/create-garment"}`}>
+                                    <h1 className="text-[#fff] flex items-center">
+                                        {isGarment ? "Go Dashboard" : "Become Seller"}{" "}
+                                        <IoIosArrowForward className="ml-1" />
                                     </h1>
                                 </Link>
-
                             </div>
+
                         </div>
                     </div>
                         <div className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null} transition 800px flex items-center justify-between w-full bg-[#3321cb] h-[70px]`}>
@@ -133,18 +135,7 @@ const Header = ({ activeHeading }) => {
                                 <Navbar active={activeHeading} />
                             </div>
                             <div className='flex'>
-                                <div className={`${styles.noramlFlex}`}>
-                                    <div className='relative cursor-pointer mr-[15px]'
-                                        onClick={() => setOpenWishlist(true)}>
-                                        <AiOutlineHeart
-                                            size={30}
-                                            className=' rgb(255 2555 255 / 83%)'
-                                        />
-                                        <span className='absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center'>
-                                            0
-                                        </span>
-                                    </div>
-                                </div>
+                                
                                 <div className={`${styles.noramlFlex}`}>
                                     <div className='relative cursor-pointer mr-[15px]'
                                         onClick={() => setOpenCart(true)}>
@@ -153,7 +144,7 @@ const Header = ({ activeHeading }) => {
                                             className=' rgb(255 2555 255 / 83%)'
                                         />
                                         <span className='absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center'>
-                                            1
+                                            {cart && cart.length}
                                         </span>
                                     </div>
                                 </div>
@@ -163,7 +154,6 @@ const Header = ({ activeHeading }) => {
                                         {isAuthenticated ? (
 
                                             <Link to="/profile">
-                                                {console.log(user)}
                                                 <img src={`${backend_url}/${user.avatar}`} className='w-[35px] h-[35px] rounded-full' alt='' />
                                             </Link>
                                         ) : (
@@ -186,13 +176,7 @@ const Header = ({ activeHeading }) => {
                                         null
                                     )
                                 }
-                                {
-                                    openWishlist ? (
-                                        <Wishlist setOpenWishlist={setOpenWishlist} />
-                                    ) : (
-                                        null
-                                    )
-                                }
+                               
                             </div>
                         </div>
                     </>

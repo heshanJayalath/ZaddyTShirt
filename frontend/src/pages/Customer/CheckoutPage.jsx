@@ -1,13 +1,20 @@
 import React from 'react'
+import Header from '../../components/Customer/Header'
+import CheckoutSteps from '../../components/Customer/CheckoutSteps'
+import Checkout from '../../components/Customer/Checkout'
+import Footer from '../../components/Customer/Footer'
 
 const CheckoutPage = () => {
     return (
-        <div className="w-full flex flex-col items-center py-8">
-            <div className="w-[90%] 1000px:w-[70%] block 800px:flex">
-                <div className="w-full 800px:w-[65%]">
-                    checkout
-                </div>
-            </div>
+        <div>
+            <Header />
+            <br />
+            <br />
+            <CheckoutSteps active={1} />
+            <Checkout />
+            <br />
+            <br />
+            <Footer />
         </div>
     )
 }

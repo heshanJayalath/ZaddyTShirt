@@ -24,7 +24,7 @@ import {
   // GarmentAccountChangePassword,
   // AddNewProduct,
   // GarmentViewReport,
-  AdminPage,
+  // AdminPage,
 
   // GarmentAddIniProduct,
   // GarmentAccount,
@@ -48,6 +48,10 @@ import {
   GarmentPreviewPage,
 } from './routes/GarmentRoutes.js';
 
+import {
+  AdminPage,
+} from './routes/AdminRoutes.js';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
@@ -55,9 +59,9 @@ import axios from 'axios';
 import { server } from './server.js';
 import Store from './redux/store.js';
 import { loadGarment, loadUser } from './redux/actions/user.js'
+import { getAllProducts } from './redux/actions/product.js';
 import ProtectedRoute from './routes/ProtectedRoute.js';
 import GarmentProtectedRoute from './routes/GarmentProtectedRoute.js';
-import { getAllProducts } from './redux/actions/product.js';
 
 const App = () => {
 
@@ -146,7 +150,7 @@ const App = () => {
                 <Route path='view-report' element={<GarmentViewReport />}></Route>
               </Route> */}
 
-        <Route path='/admin' element={<AdminPage />}></Route>
+        <Route path='/admin' element={<AdminPage />}/>
       </Routes>
       <ToastContainer
         position="bottom-right"

@@ -1,9 +1,10 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-    cart: localStorage.getItem("cartItems") ?
-        JSON.parse(localStorage.getItem("cartItems")) : [],
-}
+    cart: localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem("cartItems"))
+        : [],
+};
 
 export const cartReducer = createReducer(initialState, {
     addToCart: (state, action) => {
@@ -12,7 +13,7 @@ export const cartReducer = createReducer(initialState, {
         if (isItemExist) {
             return {
                 ...state,
-                cart: state.cart.map((i) => i._id === isItemExist._id ? item : i)
+                cart: state.cart.map((i) => (i._id === isItemExist._id ? item : i)),
             };
         } else {
             return {
@@ -21,10 +22,11 @@ export const cartReducer = createReducer(initialState, {
             };
         }
     },
+
     removeFromCart: (state, action) => {
         return {
             ...state,
             cart: state.cart.filter((i) => i._id !== action.payload),
-        }
-    }
-})
+        };
+    },
+});
