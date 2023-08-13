@@ -53,10 +53,10 @@ const Header = ({ activeHeading }) => {
                     null
                 ) : (
                     <> <div className={`${styles.section}`}>
-                        <div className='800px:h-[50px] 800px:my-[20px] 800px flex items-center justify-between'>
-                            <div>
+                        <div className='800px:h-[50px] 800px:my-[20px]  flex items-center justify-between'>
+                            <div className=''>
                                 <Link to="/">
-                                    <img src={Logo} alt='' className='w-[100px]' />
+                                    <img src={Logo} alt='' className=' w-[50px] md:w-[100px]' />
                                 </Link>
                             </div>
                             <div className='w-[50%] relative'>
@@ -92,10 +92,10 @@ const Header = ({ activeHeading }) => {
                                     )
                                 }
                             </div>
-                            <div className={`${styles.button}`}>
+                            <div className={`md:${styles.button} font-extralight md:font-normal ps-1`}>
                                 <Link to="/create-garment">
                                     <h1 className='text-[#fff] flex items-center'>
-                                        Become a seller <IoIosArrowForward className="ml-1" />
+                                        Become a seller <IoIosArrowForward className=" ml-1" />
                                     </h1>
                                 </Link>
 

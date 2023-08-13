@@ -7,8 +7,8 @@ import SellerProfilePieChart from "./SellerPieChart";
 const GarmentViewReport = () => {
   return (
     <div className="bg-gray-100 md:m-5 m-5 min-h-screen rounded-2xl shadow-lg max-w-full py-2  items-center">
-      <div className=" w-full text-center mt-12 mb-10">
-        <h1 className="font-bold text-cyan-900 text-xl"> ACCOUNT REPORT </h1>
+      <div className=" w-full text-center mt-12 mb-6">
+        <h1 className="font-bold text-cyan-900 text-xl"> Dashboard </h1>
       </div>
 
       <div className="w-full md:flex px-12 py-8">
@@ -93,7 +93,7 @@ const GarmentViewReport = () => {
         </div>
       </div>
 
-      <div className="w-full mb-12 space-x-6 px-16 flex">
+      <div className="w-full mb-12 space-x-6 px-2 md:px-16 md:flex">
         <div className=" md:w-9/12">
           <TransactionChart />
         </div>

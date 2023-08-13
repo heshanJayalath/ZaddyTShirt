@@ -25,6 +25,8 @@ import GarmentAccountChangePassword from "../components/Garment/GarmentAccountCh
 import AddNewProduct from "../components/Garment/AddNewProduct.jsx";
 import GarmentViewReport from "../components/Garment/GarmentViewReport.jsx";
 
+import AdminPage from '../pages/Admin/AdminPage.jsx';
+
 export {
   LoginPage,
   SignupPage,

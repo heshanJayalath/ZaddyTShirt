@@ -1,16 +1,22 @@
 import React from 'react'
 import GarmentDashboardHeader from '../../components/Garment/Layouts/GarmentDashboardHeader';
 import GarmentDashboardSideBar from '../../components/Garment/Layouts/GarmentDashboardSideBar';
+import GarmentViewReport from '../../components/Garment/GarmentViewReport';
 
 const GarmentDashboardPage = () => {
   return (
     <div>
       <GarmentDashboardHeader />
-      <div className="flex items-start justify-between w-full">
-        <div className="w-[80px] 800px:w-[330px]">
+      <div className="md:flex items-start justify-between w-full">
+        <div className="md:w-2/12 ">
           <GarmentDashboardSideBar active={1} />
+          
         </div>
         {/* <GarmentDashboardHero /> */}
+        <div className='w-10/12'>
+        <GarmentViewReport/>
+        </div>
+        
       </div>
     </div>
   )
