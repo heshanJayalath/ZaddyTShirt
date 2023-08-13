@@ -11,8 +11,8 @@ const AdminPage = () => {
     <div>
       <AdminHeader />
 
-      <div className="flex">
-      <div className="w-[335px] sticky 800px:mt-0 ms-4">
+      <div className="md:flex">
+      <div className="md:w-[335px] w-full sticky 800px:mt-0 ms-4">
           <AdminSideBar active={active} setActive={setActive} />
         </div>
       <div

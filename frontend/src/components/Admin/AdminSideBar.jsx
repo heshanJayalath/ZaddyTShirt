@@ -29,7 +29,7 @@ const AdminSideBar = ({ active, setActive }) => {
       });
   };
   return (
-    <div className="w-full bg-white shadow-sm rounded-[10px] h-88 pl-4 pt-8 overflow-y-scroll">
+    <div className="w-full bg-white shadow-sm rounded-[10px] h-60 pl-4 pt-8 overflow-y-scroll">
       <div
         className="flex  text-gray-600 items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(1)}

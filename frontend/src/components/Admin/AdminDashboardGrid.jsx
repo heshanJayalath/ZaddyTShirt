@@ -15,9 +15,10 @@ export default function AdminDashboardGrid() {
         <h1 className="font-bold text-cyan-900 text-xl">Dashboard </h1>
       </div>
       <div className="md:flex gap-16 py-4 px-16 w-full"></div>
-      <div className="md:flex gap-16 pb-16 px-16 w-full">
+      <div className="md:flex md:gap-16 pb-16 px-16 w-full">
+        <div className="py-16">
         <BoxWrapper>
-          <div className="flex w-full items-center rounded-md p-8 justify-center">
+          <div className="flex w-full items-center rounded-md  p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-yellow-400">
               <IoPeople className="text-2xl text-white" />
             </div>
@@ -34,6 +35,9 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+        
+        <div>
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-green-600">
@@ -52,9 +56,12 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+       
       </div>
 
       <div className="md:flex gap-16 px-16 w-full">
+        <div className="pb-16">
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-orange-300">
@@ -73,6 +80,8 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+        <div>
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-slate-400">
@@ -91,6 +100,9 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+        
+       
       </div>
     </div>
   );
