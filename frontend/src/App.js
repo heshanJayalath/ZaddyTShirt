@@ -15,26 +15,7 @@ import {
   GarmentRegisterPage,
   GarmentLoginPage,
   SellerActivationPage,
-  // GarmentAddIniProduct,
-  // GarmentAccount,
-  // GarmentAllProduct,
-  // GarmentAccountDetails,
-  // GarmetnAccountDetailsEdit,
-  // GarmentAccountPaymentDetails,
-  // GarmentAccountChangePassword,
-  // AddNewProduct,
-  // GarmentViewReport,
-  // AdminPage,
-
-  // GarmentAddIniProduct,
-  // GarmentAccount,
-  // GarmentAllProduct,
-  // GarmentAccountDetails,
-  // GarmetnAccountDetailsEdit,
-  // GarmentAccountPaymentDetails,
-  // GarmentAccountChangePassword,
-  // AddNewProduct,
-  // GarmentViewReport
+  PaymentPage
 }
   from './routes/Routes.js';
 
@@ -84,7 +65,8 @@ const App = () => {
         <Route path='/product/:id' element={<ProductDetailsPage />} />
         <Route path='/best-selling' element={<BestSellingPage />} />
         <Route path='/faq' element={<FAQPage />} />
-        <Route path='/checkout' element={<CheckoutPage />} /> {/* Not completed */}
+        <Route path='/checkout' element={<CheckoutPage />} /> 
+        {/* <Route path='/payment' element = {<PaymentPage/>}/> */}
         <Route path='/profile' element={
           <ProtectedRoute>
             <ProfilePage />
