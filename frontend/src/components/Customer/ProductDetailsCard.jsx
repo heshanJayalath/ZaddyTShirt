@@ -10,10 +10,10 @@ import { addTocart } from '../../redux/actions/cart';
 import { toast } from 'react-toastify';
 
 const ProductDetailsCard = ({ setOpen, data }) => {
+    const { cart } = useSelector((state) => state.cart);
     const [count, setCount] = useState(1);
     const [click, setClick] = useState(false);
     const [select, setSelect] = useState(false);
-    const { cart } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
 
     const handleMessageSubmit = () => {
@@ -27,7 +27,6 @@ const ProductDetailsCard = ({ setOpen, data }) => {
     }
     const incrementCount = () => {
         setCount(count + 1)
-
     }
 
     const addToCartHandler = (id) => {
@@ -35,7 +34,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
         if (isItemExists) {
             toast.error("Item already in cart")
         } else {
-            if (data.stock > count) {
+            if (data.stock < count) {
                 toast.error("Product stock limited!");
             } else {
                 const cartData = { ...data, qty: count }
@@ -101,25 +100,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                                                 +
                                             </button>
                                         </div>
-                                        <div>
-                                            {click ? (
-                                                <AiFillHeart
-                                                    className='cursor-pointer '
-                                                    size={30}
-                                                    onClick={() => setClick(!click)}
-                                                    color={click ? 'red' : "#333"}
-                                                    title='Remove from Wishlist'
-                                                />
-                                            ) : (
-                                                <AiOutlineHeart
-                                                    className='cursor-pointer '
-                                                    size={30}
-                                                    onClick={() => setClick(!click)}
-                                                    color={click ? "red" : "#333"}
-                                                    title='Add to Wishlist'
-                                                />
-                                            )}
-                                        </div>
+                                        
                                     </div>
                                     <div className='flex justify-between'>
                                         <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}

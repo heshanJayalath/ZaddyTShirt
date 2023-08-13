@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../../Styles/Customer/styles';
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { backend_url } from '../../server';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProductsGarment } from "../../redux/actions/product";
@@ -97,25 +97,7 @@ const ProductDetails = ({ data }) => {
                         +
                       </button>
                     </div>
-                    <div>
-                      {click ? (
-                        <AiFillHeart
-                          className='cursor-pointer '
-                          size={30}
-                          onClick={() => setClick(!click)}
-                          color={click ? 'red' : "#333"}
-                          title='Remove from Wishlist'
-                        />
-                      ) : (
-                        <AiOutlineHeart
-                          className='cursor-pointer '
-                          size={30}
-                          onClick={() => setClick(!click)}
-                          color={click ? "red" : "#333"}
-                          title='Add to Wishlist'
-                        />
-                      )}
-                    </div>
+                    
                   </div>
                   <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`} 
                   onClick={()=>addToCartHandler(data._id)}

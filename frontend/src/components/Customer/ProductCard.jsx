@@ -5,17 +5,30 @@ import { AiFillHeart, AiFillStar, AiOutlineEye, AiOutlineHeart, AiOutlineShoppin
 import ProductDetailsCard from './ProductDetailsCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { backend_url } from '../../server';
+import { toast } from 'react-toastify';
+import { addTocart } from '../../redux/actions/cart';
 
-const ProductCard = ({ data,isEvent }) => {
-    // console.log("images:", data.images[0]);
-    // const {wishlist} = useSelector((state)=>state.wishlist)
+const ProductCard = ({ data, isEvent }) => {
+    const{cart} = useSelector((state)=>state.cart)
     const [open, setOpen] = useState(false);
     const [click, setClick] = useState(false);
     const dispatch = useDispatch();
-    console.log("open", open);
-    // console.log("test1",data._id)
-    // const d = data.name;
-    // const product_name = d.replace(/[\s]+/g, "-");
+
+    const addToCartHandler = (id) => {
+        const isItemExists = cart && cart.find((i) => i._id === id);
+        if (isItemExists) {
+            toast.error("Item already in cart")
+        } else {
+            if (data.stock < 1) {
+                toast.error("Product stock limited!");
+            } else {
+                const cartData = { ...data, qty: 1 }
+                dispatch(addTocart(cartData));
+                toast.success("Item added to cart successfully")
+            }
+        }
+    }
+
     return (
         <>
             <div className='w-fulll h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer'>
@@ -66,7 +79,7 @@ const ProductCard = ({ data,isEvent }) => {
                                     ? data.originalPrice : data.discountPrice}
                             </h5>
                             <h4 className={`${styles.price}`}>
-                                {data.originalPrice ? "Rs."+data.originalPrice : null}
+                                {data.originalPrice ? "Rs." + data.originalPrice : null}
                             </h4>
                         </div>
                         <span className='font-[400] text-[17px] text-[#68d284]'>
@@ -75,23 +88,7 @@ const ProductCard = ({ data,isEvent }) => {
                     </div>
                 </Link>
                 <div>
-                    {click ? (
-                        <AiFillHeart
-                            className='cursor-pointer absolute right-2 top-5'
-                            size={22}
-                            onClick={() => setClick(!click)}
-                            color={click ? 'red' : "#333"}
-                            title='Remove from Wishlist'
-                        />
-                    ) : (
-                        <AiOutlineHeart
-                            className='cursor-pointer absolute right-2 top-5'
-                            size={22}
-                            onClick={() => setClick(!click)}
-                            color={click ? "red" : "#333"}
-                            title='Add to Wishlist'
-                        />
-                    )}
+                    
                     <AiOutlineEye
                         size={22}
                         className="cursor-pointer absolute right-2 top-14"
@@ -102,15 +99,15 @@ const ProductCard = ({ data,isEvent }) => {
                     <AiOutlineShoppingCart
                         size={22}
                         className="cursor-pointer absolute right-2 top-24"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => addToCartHandler(data._id)}
                         color='#333'
                         title='Add to Cart'
                     />
                     {
-                       
-                        open? (
+
+                        open ? (
                             <ProductDetailsCard open={open} setOpen={setOpen} data={data} />
-                        ):null
+                        ) : null
                     }
                 </div>
             </div>
