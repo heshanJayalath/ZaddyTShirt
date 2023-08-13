@@ -92,7 +92,7 @@ const Header = ({ activeHeading }) => {
                                     )
                                 }
                             </div>
-                            <div className={`md:${styles.button} font-extralight md:font-normal ps-1`}>
+                            <div className={`md:${styles.button}`}>
                                 <Link to="/create-garment">
                                     <h1 className='text-[#fff] flex items-center'>
                                         Become a seller <IoIosArrowForward className=" ml-1" />
