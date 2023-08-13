@@ -9,6 +9,7 @@ import BestSellingPage from '../components/Customer/BestSellingPage.jsx';
 import FAQPage from '../pages/Customer/FAQPage.jsx';
 import ProfilePage from '../pages/Customer/ProfilePage.jsx';
 import CheckoutPage from '../pages/Customer/CheckoutPage.jsx';
+import PaymentPage from '../pages/Customer/PaymentPage.jsx'
 
 import ThreeDmodel from '../pages/Customer/ThreeDmodel.jsx';
 
@@ -29,12 +30,12 @@ export {
   FAQPage,
   ProfilePage,
   CheckoutPage,
-
+  PaymentPage,
+  
   ThreeDmodel,
 
   SellerActivationPage,
   GarmentRegisterPage,
   GarmentLoginPage,
-  
   
 }
