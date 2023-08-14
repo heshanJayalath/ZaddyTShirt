@@ -16,6 +16,9 @@ import SellerActivationPage from '../src/pages/SellerActivationPage.jsx'
 import GarmentRegisterPage from './pages/Garment/GarmentRegisterPage.jsx';
 
 
+import Dashboard from './pages/Owner/Dashboard.jsx';
+
+
 export {
   LoginPage,
   SignupPage,
@@ -33,5 +36,8 @@ export {
 
   SellerActivationPage,
   GarmentRegisterPage,
+
+  Dashboard,
  
 }
+

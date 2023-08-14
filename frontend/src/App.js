@@ -15,7 +15,7 @@ import {
   GarmentRegisterPage,
   GarmentLoginPage,
   SellerActivationPage,
-  PaymentPage
+  PaymentPage,
   
 }
   from './routes/Routes.js';
@@ -44,6 +44,11 @@ import { loadGarment, loadUser } from './redux/actions/user.js'
 import { getAllProducts } from './redux/actions/product.js';
 import ProtectedRoute from './routes/ProtectedRoute.js';
 import GarmentProtectedRoute from './routes/GarmentProtectedRoute.js';
+
+import Layout from './components/Owner/shared/Layout.jsx';
+import OwnerDashboard  from './pages/Owner/Dashboard.jsx';
+import ManagerDashboard from './pages/Manager/Dashboard.jsx';
+
 
 const App = () => {
 
@@ -125,6 +130,14 @@ const App = () => {
        
 
         <Route path='/admin' element={<AdminPage />}/>
+
+        <Route path="/" element ={<Layout />}>
+              <Route path='ownerdashboard' element ={<OwnerDashboard/>}/>
+              <Route path='managerdashboard' element ={<ManagerDashboard/>}/>
+              
+              
+          </Route>
+
       </Routes>
       <ToastContainer
         position="bottom-right"
