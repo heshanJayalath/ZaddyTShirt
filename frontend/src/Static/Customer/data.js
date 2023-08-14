@@ -6,7 +6,7 @@ import polo from '../../Assets/Customer/categories/Navy-Blue-Mens-Polo-T-Shirt.j
 import hooded from '../../Assets/Customer/categories/hooded.jpg'
 import crew_long from '../../Assets/Customer/categories/crew_long.jpg'
 import polo_long from '../../Assets/Customer/categories/polo_long.JPG'
-import avatar from '../../Assets/Garment/accuont/avatargirl.png'
+import avatar from '../../Assets/Customer/avatar/nawe.png'
 
 export const navItems = [
   {
@@ -200,8 +200,8 @@ export const brandingData = [
 export const feedbacks = [
   {
     id:1,
-    name:"Mary",
-    product_name:"Mini Habib Blogger T shirt",
+    name:"Naween",
+    product_name:" Blogger polo T shirt",
     account_img:avatar,
     comment:"highly recomended product. good seller. Buy without any hesitate",
     

@@ -10,6 +10,7 @@ import FAQPage from '../pages/Customer/FAQPage.jsx';
 import ProfilePage from '../pages/Customer/ProfilePage.jsx';
 import CheckoutPage from '../pages/Customer/CheckoutPage.jsx';
 import PaymentPage from '../pages/Customer/PaymentPage.jsx'
+import CustomOrders from '../pages/Customer/CustomOrders.jsx';
 
 import ThreeDmodel from '../pages/Customer/ThreeDmodel.jsx';
 
@@ -17,8 +18,6 @@ import SellerActivationPage from '../pages/SellerActivationPage.jsx'
 import GarmentRegisterPage from '../pages/Garment/GarmentRegisterPage.jsx';
 import GarmentLoginPage from '../pages/Garment/GarmentLoginPage.jsx';
 
-
-import AdminPage from '../pages/Admin/AdminPage.jsx';
 
 export {
   LoginPage,
@@ -33,6 +32,7 @@ export {
   ProfilePage,
   CheckoutPage,
   PaymentPage,
+  CustomOrders,
   
   ThreeDmodel,
 
@@ -40,4 +40,5 @@ export {
   GarmentRegisterPage,
   GarmentLoginPage,
   
+ 
 }

@@ -547,7 +547,7 @@ const OwnerDetails = () => {
   const orders = [
     {
       _id: "asdbjb12ja",
-      ownerName: "Heshan",
+      ownerName: "Malinga Jayalath",
       editDetails: "",
     },
   ];

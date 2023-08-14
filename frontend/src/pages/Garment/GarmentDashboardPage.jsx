@@ -13,9 +13,9 @@ const GarmentDashboardPage = () => {
           
         </div>
         {/* <GarmentDashboardHero /> */}
-        {/* <div className='w-10/12'>
+        <div className='w-10/12'>
         <GarmentViewReport/>
-        </div> */}
+        </div>
         
       </div>
     </div>

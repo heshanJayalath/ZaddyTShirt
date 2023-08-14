@@ -16,6 +16,7 @@ import {
   GarmentLoginPage,
   SellerActivationPage,
   PaymentPage,
+  CustomOrders,
   
 }
   from './routes/Routes.js';
@@ -72,6 +73,7 @@ const App = () => {
         <Route path='/best-selling' element={<BestSellingPage />} />
         <Route path='/faq' element={<FAQPage />} />
         <Route path='/checkout' element={<CheckoutPage />} /> 
+        <Route path='/custom-orders' element={<CustomOrders/>}/>
         {/* <Route path='/payment' element = {<PaymentPage/>}/> */}
         <Route path='/profile' element={
           <ProtectedRoute>
