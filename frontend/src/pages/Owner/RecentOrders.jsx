@@ -5,7 +5,7 @@ import { getOrderStatus } from '../../lib/helpers/index.jsx'
 
 const recentOrderData = [
 	{
-		id: '1233',
+		id: '123321232',
 		product_id: '4324',
 		customer_id: '23143',
 		customer_name: 'Shirley A. Lape',
