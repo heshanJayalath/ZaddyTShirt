@@ -47,7 +47,7 @@ import ProtectedRoute from './routes/ProtectedRoute.js';
 import GarmentProtectedRoute from './routes/GarmentProtectedRoute.js';
 
 import Layout from './components/Owner/shared/Layout.jsx';
-import OwnerDashboard  from './pages/Owner/Dashboard.jsx';
+import OwnerDashboard from './pages/Owner/Dashboard.jsx';
 import ManagerDashboard from './pages/Manager/Dashboard.jsx';
 
 
@@ -129,16 +129,13 @@ const App = () => {
           </GarmentProtectedRoute>
         } />
 
-       
 
-        <Route path='/admin' element={<AdminPage />}/>
 
-        <Route path="/" element ={<Layout />}>
-              <Route path='ownerdashboard' element ={<OwnerDashboard/>}/>
-              <Route path='managerdashboard' element ={<ManagerDashboard/>}/>
-              
-              
-          </Route>
+        <Route path='/admin' element={<AdminPage />} />
+
+        <Route path="/owner" element={<Layout />} />
+        <Route path='/ownerdashboard' element={<OwnerDashboard />} />
+        <Route path='/managerdashboard' element={<ManagerDashboard />} />
 
       </Routes>
       <ToastContainer
