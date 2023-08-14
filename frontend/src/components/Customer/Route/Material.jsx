@@ -17,7 +17,7 @@ const Material = () => {
           return (
             <div
               className=" flex items-center justify-between cursor-pointer overflow-hidden mb-3"
-              key={i.id}
+              // key={i.id}
               //   onClick={() => handleSubmit(i)}
             >
               <div className="flex">
@@ -25,11 +25,11 @@ const Material = () => {
                   id={i.i}
                   type="checkbox"
                   value=""
-                  class="w-4 h-4 mt-0.5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 dark:bg-blue-700 dark:border-blue-800"
+                  class="w-4 h-4 mt-0.5 hover:text-blue-800 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 dark:bg-blue-700 dark:border-blue-800"
                 />
                 <label
                   for="default-checkbox"
-                  class="ml-4 text-sm font-medium text-gray-900 dark:text-gray-900"
+                  class="ml-4 text-sm font-medium text-gray-900 dark:text-gray-900 hover:text-blue-800"
                 >
                   {i.title}
                 </label>

@@ -14,49 +14,11 @@ export default function AdminDashboardGrid() {
       <div className=" w-full text-center mb-6">
         <h1 className="font-bold text-cyan-900 text-xl">Dashboard </h1>
       </div>
-
-      <div className="md:flex gap-16 py-4 px-16 w-full">
+      <div className="md:flex gap-16 py-4 px-16 w-full"></div>
+      <div className="md:flex md:gap-16 pb-16 px-16 w-full">
+        <div className="py-16">
         <BoxWrapper>
-          <div className="flex w-full items-center rounded-md p-8 justify-center">
-            <div className="rounded-full h-20 w-20 flex items-center justify-center bg-sky-500">
-              <IoCashOutline className="text-2xl text-white" />
-            </div>
-            <div className="pl-4 ">
-              <span className="text-2xl mt-8 text-gray-500 font-medium">
-                Total Sales
-              </span>
-              <div className="flex items-center">
-                <strong className="text-2xl mt-4 text-gray-700 font-semibold">
-                  $54232
-                </strong>
-                <span className="text-lg mt-4 text-green-500 pl-2">+343</span>
-              </div>
-            </div>
-          </div>
-        </BoxWrapper>
-        <BoxWrapper>
-          <div className="flex w-full items-center rounded-md p-8 justify-center">
-            <div className="rounded-full h-20 w-20 flex items-center justify-center bg-orange-600">
-              <IoPieChart className="text-2xl text-white" />
-            </div>
-            <div className="pl-4">
-              <span className="text-2xl mt-8 text-gray-500 font-medium">
-                Total Profit
-              </span>
-              <div className="flex items-center">
-                <strong className="text-2xl mt-4 text-gray-700 font-semibold">
-                  $3423
-                </strong>
-                <span className="text-lg mt-4 text-green-500 pl-2">+343</span>
-              </div>
-            </div>
-          </div>
-        </BoxWrapper>
-      </div>
-
-      <div className="md:flex gap-16 pb-16 px-16 w-full">
-        <BoxWrapper>
-          <div className="flex w-full items-center rounded-md p-8 justify-center">
+          <div className="flex w-full items-center rounded-md  p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-yellow-400">
               <IoPeople className="text-2xl text-white" />
             </div>
@@ -73,6 +35,9 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+        
+        <div>
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-green-600">
@@ -91,9 +56,12 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+       
       </div>
 
       <div className="md:flex gap-16 px-16 w-full">
+        <div className="pb-16">
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-orange-300">
@@ -112,6 +80,8 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+        <div>
         <BoxWrapper>
           <div className="flex w-full items-center rounded-md p-8 justify-center">
             <div className="rounded-full h-20 w-20 flex items-center justify-center bg-slate-400">
@@ -130,6 +100,9 @@ export default function AdminDashboardGrid() {
             </div>
           </div>
         </BoxWrapper>
+        </div>
+        
+       
       </div>
     </div>
   );

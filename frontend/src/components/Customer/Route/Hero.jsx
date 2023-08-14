@@ -6,7 +6,7 @@ const Hero = () => {
 
 
     return (
-        <div className={`relative min-h-[70vh] 800px:min-h[80vh] w-full bg-no-repeat flex ${styles.noramlFlex}`}
+        <div className={`relative min-h-[70vh] 800px:min-h[80vh]  hidden w-full bg-no-repeat md:flex ${styles.noramlFlex}`}
             style={{
                 backgroundImage: `url("https://d24ckpbeefupyb.cloudfront.net/images/Embroidery/custom-t-shirts-banner.jpg")`,
                 backgroundSize: 'cover',

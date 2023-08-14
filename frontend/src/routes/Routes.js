@@ -18,6 +18,8 @@ import GarmentRegisterPage from '../pages/Garment/GarmentRegisterPage.jsx';
 import GarmentLoginPage from '../pages/Garment/GarmentLoginPage.jsx';
 
 
+import AdminPage from '../pages/Admin/AdminPage.jsx';
+
 export {
   LoginPage,
   SignupPage,

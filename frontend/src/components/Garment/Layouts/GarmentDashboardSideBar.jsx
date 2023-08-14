@@ -11,7 +11,8 @@ import { HiOutlineReceiptRefund } from 'react-icons/hi'
 
 const GarmentDashboardSideBar = ({active}) => {
   return (
-    <div className="w-[15vw] h-[90vh] bg-white shadow-sm overflow-y-scroll sticky top-0 left-0 z-10">
+    <div className='w-full'>
+       <div className="md:w-full min-w-max w-full md:h-[70vh] h-[50vh] bg-white shadow-sm shadow-blue-200 overflow-y-scroll sticky top-0 left-0 z-10">
       {/* single item */}
       <div className="w-full flex items-center p-4">
         <Link to="/garment-dashboard" className="w-full flex items-center">
@@ -77,7 +78,7 @@ const GarmentDashboardSideBar = ({active}) => {
         </Link>
       </div>
 
-      <div className="w-full flex items-center p-4">
+      {/* <div className="w-full flex items-center p-4">
         <Link to="/garment-dashboard-events" className="w-full flex items-center">
           <MdOutlineLocalOffer
             size={30}
@@ -107,7 +108,7 @@ const GarmentDashboardSideBar = ({active}) => {
             Create Event
           </h5>
         </Link>
-      </div>
+      </div> */}
 
       <div className="w-full flex items-center p-4">
         <Link
@@ -144,7 +145,7 @@ const GarmentDashboardSideBar = ({active}) => {
         </Link>
       </div>
 
-      <div className="w-full flex items-center p-4">
+      {/* <div className="w-full flex items-center p-4">
         <Link to="/garment-dashboard-coupouns" className="w-full flex items-center">
           <AiOutlineGift
             size={30}
@@ -158,7 +159,7 @@ const GarmentDashboardSideBar = ({active}) => {
             Discount Codes
           </h5>
         </Link>
-      </div>
+      </div> */}
 
       <div className="w-full flex items-center p-4">
         <Link to="/garment-dashboard-refunds" className="w-full flex items-center">
@@ -192,6 +193,8 @@ const GarmentDashboardSideBar = ({active}) => {
         </Link>
       </div>
     </div>
+    </div>
+   
   )
 }
 

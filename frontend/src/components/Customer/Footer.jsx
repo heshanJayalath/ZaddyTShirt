@@ -2,6 +2,7 @@ import React from 'react'
 import { AiFillFacebook, AiFillInstagram, AiFillYoutube, AiOutlineTwitter } from 'react-icons/ai'
 import { footerProductLinks, footerSupportLinks, footercompanyLinks } from '../../Static/Customer/data'
 import { Link } from 'react-router-dom'
+import Logo from '../../Assets/Customer/CustomerHomePage/logo_zaddy.svg'
 
 const Footer = () => {
     return (
@@ -26,13 +27,23 @@ const Footer = () => {
             </div>
             <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
                 <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center">
+                   <div className='flex gap-4'>
+                    <div className='w-5/12 pt-2'>
                     <img
-                        src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+                    className='w-30 h-30 items-center justify-center'
+                        src={Logo}
                         alt=""
                         style={{ filter: "brightness(0) invert(1)" }}
                     />
-                    <br />
-                    <p>The home and elements needeed to create beatiful products.</p>
+                    </div>
+                    <div >
+                    <p className='m-4'>All the T-shirts needeed to be perfect look.</p>
+                    </div>
+                  
+                
+                    
+                   </div>
+                  
                     <div className="flex items-center mt-[15px]">
                         <AiFillFacebook size={25} className="cursor-pointer" />
                         <AiOutlineTwitter
@@ -64,7 +75,7 @@ const Footer = () => {
                     ))}
                 </ul>
                 <ul className="text-center sm:text-start">
-                    <h1 className="mb-1 font-semibold">Shop</h1>
+                    <h1 className="mb-1 font-semibold">Information</h1>
                     {footercompanyLinks.map((link, index) => (
                         <li key={index}>
                             <Link
