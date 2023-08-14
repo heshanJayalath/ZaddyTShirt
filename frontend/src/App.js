@@ -15,26 +15,7 @@ import {
   GarmentRegisterPage,
   GarmentLoginPage,
   SellerActivationPage,
-  // GarmentAddIniProduct,
-  // GarmentAccount,
-  // GarmentAllProduct,
-  // GarmentAccountDetails,
-  // GarmetnAccountDetailsEdit,
-  // GarmentAccountPaymentDetails,
-  // GarmentAccountChangePassword,
-  // AddNewProduct,
-  // GarmentViewReport,
-  // AdminPage,
-
-  // GarmentAddIniProduct,
-  // GarmentAccount,
-  // GarmentAllProduct,
-  // GarmentAccountDetails,
-  // GarmetnAccountDetailsEdit,
-  // GarmentAccountPaymentDetails,
-  // GarmentAccountChangePassword,
-  // AddNewProduct,
-  // GarmentViewReport
+  
 }
   from './routes/Routes.js';
 
@@ -139,16 +120,7 @@ const App = () => {
           </GarmentProtectedRoute>
         } />
 
-        {/* <Route path='/garment/adiniproducts' element={<GarmentAddIniProduct />} />
-              <Route path='/garment/account' element={<GarmentAccount />} >
-                <Route path='allproduct' element={<GarmentAllProduct />} />
-                <Route path='account-details' element={<GarmentAccountDetails />} />
-                <Route path='account-details/account-details-edit' element={<GarmetnAccountDetailsEdit />} />
-                <Route path='payment-details' element={<GarmentAccountPaymentDetails />} />
-                <Route path='change-password' element={<GarmentAccountChangePassword />}></Route>
-                <Route path='allproduct/add-new-product' element={<AddNewProduct />}></Route>
-                <Route path='view-report' element={<GarmentViewReport />}></Route>
-              </Route> */}
+       
 
         <Route path='/admin' element={<AdminPage />}/>
       </Routes>
