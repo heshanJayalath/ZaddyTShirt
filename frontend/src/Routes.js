@@ -14,18 +14,7 @@ import ThreeDmodel from './pages/Customer/ThreeDmodel.jsx';
 
 import SellerActivationPage from '../src/pages/SellerActivationPage.jsx'
 import GarmentRegisterPage from './pages/Garment/GarmentRegisterPage.jsx';
-import GarmentLoginPage from './pages/Garment/GarmentLoginPage.jsx';
-import GarmentAddIniProduct from './pages/Garment/AddIniProduct.jsx';
-import GarmentAccount from './pages/Garment/Account.jsx';
-import GarmentAllProduct from "./components/Garment/GarmentAllProduct.jsx";
-import GarmentAccountDetails from "./components/Garment/GarmentAccountDetails.jsx";
-import GarmetnAccountDetailsEdit from "./components/Garment/GarmetnAccountDetailsEdit.jsx";
-import GarmentAccountPaymentDetails from "./components/Garment/GarmentAccountPaymentDetails.jsx";
-import GarmentAccountChangePassword from "./components/Garment/GarmentAccountChangePassword.jsx";
-import AddNewProduct from "./components/Garment/AddNewProduct.jsx";
-import GarmentViewReport from "./components/Garment/GarmentViewReport.jsx";
 
-import AdminPage from './pages/Admin/AdminPage.jsx';
 
 export {
   LoginPage,
@@ -44,16 +33,5 @@ export {
 
   SellerActivationPage,
   GarmentRegisterPage,
-  GarmentLoginPage,
-  GarmentAddIniProduct,
-  GarmentAccount,
-  GarmentAllProduct,
-  GarmentAccountDetails,
-  GarmetnAccountDetailsEdit,
-  GarmentAccountPaymentDetails,
-  GarmentAccountChangePassword,
-  AddNewProduct,
-  GarmentViewReport,
-
-  AdminPage,
+ 
 }
