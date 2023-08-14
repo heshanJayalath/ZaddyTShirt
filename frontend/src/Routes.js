@@ -27,6 +27,9 @@ import GarmentViewReport from "./components/Garment/GarmentViewReport.jsx";
 
 import AdminPage from './pages/Admin/AdminPage.jsx';
 
+import Dashboard from './pages/Owner/Dashboard.jsx';
+
+
 export {
   LoginPage,
   SignupPage,
@@ -56,4 +59,8 @@ export {
   GarmentViewReport,
 
   AdminPage,
+
+  Dashboard,
+ 
 }
+
