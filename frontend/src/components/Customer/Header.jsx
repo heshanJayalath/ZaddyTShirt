@@ -9,6 +9,7 @@ import { CgProfile } from 'react-icons/cg'
 import styles from '../../Styles/Customer/styles';
 import DropDown from './DropDown';
 import Navbar from './Navbar';
+import ResponsiveNaveBar from './ResponsiveNaveBar';
 import Cart from './Cart';
 import Wishlist from './Wishlist';
 import { useSelector } from 'react-redux';
@@ -104,6 +105,8 @@ const Header = ({ activeHeading }) => {
 
                         </div>
                     </div>
+
+                    
                         <div className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null} transition 800px flex items-center justify-between w-full bg-[#3321cb] h-[70px]`}>
                             {/* categories */}
                             <div>
@@ -178,7 +181,13 @@ const Header = ({ activeHeading }) => {
                                 }
                                
                             </div>
-                        </div>
+                           
+                        </div> 
+
+                        {/* <div>
+                            <ResponsiveNaveBar/>
+                        </div> */}
+
                     </>
                 )
             }

@@ -9,11 +9,17 @@ import Footer from "../../components/Customer/Footer.jsx";
 import SpecialOpptions from "../../components/Customer/Route/SpecialOpptions.jsx";
 import Material from "../../components/Customer/Route/Material.jsx";
 import Feedbacks from "../../components/Customer/Route/Feedbacks.jsx";
+import ResponsiveHeader from "../../components/Customer/ResponsiveHeader.jsx";
 
 const CustomerHomePage = () => {
   return (
     <div>
+      <div className='md:block hidden'>
       <Header activeHeading={1} />
+      </div>
+      <div className='md:hidden block' >
+      <ResponsiveHeader/>
+      </div>
 
       <Hero />
 
