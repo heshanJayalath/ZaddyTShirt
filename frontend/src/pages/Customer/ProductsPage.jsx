@@ -7,6 +7,7 @@ import ProductCard from '../../components/Customer/ProductCard'
 import { useSelector } from 'react-redux'
 import Loader from '../../components/Loader'
 import Footer from '../../components/Customer/Footer'
+import ResponsiveHeader from '../../components/Customer/ResponsiveHeader'
 
 const ProductsPage = () => {
     const [searchParams] = useSearchParams();
@@ -33,7 +34,12 @@ const ProductsPage = () => {
       <Loader />
     ) : (
       <div>
+        <div className='md:block hidden'>
       <Header activeHeading={3} />
+      </div>
+      <div className='md:hidden block z-10' >
+      <ResponsiveHeader/>
+      </div>
       <br />
       <br />
       <div className={`${styles.section}`}>

@@ -7,6 +7,7 @@ import ProductCard from '../../components/Customer/ProductCard'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader'
 import Footer from './Footer'
+import ResponsiveHeader from './ResponsiveHeader'
 
 const BestSellingPage = () => {
     const [data, setData] = useState([]);
@@ -25,7 +26,14 @@ const BestSellingPage = () => {
       <Loader />
     ) : (
       <div>
+      
+      <div className='md:block hidden'>
       <Header activeHeading={2} />
+      </div>
+      <div className='md:hidden block z-10' >
+      <ResponsiveHeader/>
+      </div>
+
       <br />
       <br />
       <div className={`${styles.section}`}>
@@ -35,6 +43,8 @@ const BestSellingPage = () => {
       </div>
       <Footer />
     </div>
+
+
     )
    }
    </>

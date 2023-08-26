@@ -14,27 +14,30 @@ import ResponsiveHeader from "../../components/Customer/ResponsiveHeader.jsx";
 const CustomerHomePage = () => {
   return (
     <div>
+      
       <div className='md:block hidden'>
       <Header activeHeading={1} />
       </div>
-      <div className='md:hidden block' >
+      <div className='md:hidden block z-10' >
       <ResponsiveHeader/>
       </div>
+      
+      
 
       <Hero />
 
       <SpecialOpptions />
 
-      <div className="md:hidden mt-4">
+      <div className="md:hidden mt-4 relative z-0">
         <Material />
       </div>
 
       <div className="flex w-full">
-        <div className="w-2.5/12 hidden md:block">
+        <div className="w-2.5/12 hidden md:block z-0">
           <Categories />
           <Material />
         </div>
-        <div className="w-9.5/12">
+        <div className="w-9.5/12 z-0">
            <BestDeals />
           <FeaturedProduct />
         </div>

@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import Footer from "../../components/Customer/Footer";
 import Header from "../../components/Customer/Header";
 import styles from "../../Styles/Customer/styles";
+import ResponsiveHeader from "../../components/Customer/ResponsiveHeader";
 
 const FAQPage = () => {
   return (
     <div>
+        <div className='md:block hidden'>
       <Header activeHeading={5} />
+      </div>
+      <div className='md:hidden block z-10' >
+      <ResponsiveHeader />
+      </div>
       <Faq />
       <Footer />
     </div>
