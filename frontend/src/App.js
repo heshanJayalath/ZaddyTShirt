@@ -17,6 +17,7 @@ import {
   SellerActivationPage,
   PaymentPage,
   CustomOrders,
+  PricePredictor,
   
 }
   from './routes/Routes.js';
@@ -74,6 +75,7 @@ const App = () => {
         <Route path='/faq' element={<FAQPage />} />
         <Route path='/checkout' element={<CheckoutPage />} /> 
         <Route path='/custom-orders' element={<CustomOrders/>}/>
+        <Route path='/pricepredictor' element={<PricePredictor/>}></Route>
         {/* <Route path='/payment' element = {<PaymentPage/>}/> */}
         <Route path='/profile' element={
           <ProtectedRoute>
