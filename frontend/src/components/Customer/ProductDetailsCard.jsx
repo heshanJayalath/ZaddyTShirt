@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import styles from '../../Styles/Customer/styles';
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
+import {  AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { FaTshirt } from 'react-icons/fa'
 import { backend_url } from '../../server';
 import Logo from '../../Assets/Customer/CustomerHomePage/Logo.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { addTocart } from '../../redux/actions/cart';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const ProductDetailsCard = ({ setOpen, data }) => {
     const { cart } = useSelector((state) => state.cart);
@@ -109,11 +110,13 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                                                 Add to Cart  <AiOutlineShoppingCart className='ml-1' />
                                             </span>
                                         </div>
+                                        <Link to={`/product/three-d-model/${data._id}`}>
                                         <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}>
                                             <span className='text-[#fff] flex items-center'>
                                                 View 3D Model  <FaTshirt className='ml-1' />
                                             </span>
                                         </div>
+                                        </Link>
                                     </div>
                                 </div>
 

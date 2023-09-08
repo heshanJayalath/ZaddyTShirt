@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../../Assets/Customer/CustomerHomePage/logo_zaddy.svg'
 import { categoriesData, productData } from '../../Static/Customer/data';
-import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import { BiMenuAltLeft } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
@@ -30,7 +30,6 @@ const Header = ({ activeHeading }) => {
     const [active, setActive] = useState(false);
     const [dropDown, setDropDown] = useState(false);
     const [openCart, setOpenCart] = useState(false);
-    const [openWishlist, setOpenWishlist] = useState(false);
 
     const handleSearchChange = (e) => {
         const term = e.target.value;

@@ -17,7 +17,9 @@ import {
   SellerActivationPage,
   PaymentPage,
   CustomOrders,
-  
+  OrderSuccessPage,
+  ModelThree,
+  OrderDetailsPage,
 }
   from './routes/Routes.js';
 
@@ -29,6 +31,8 @@ import {
   GarmentCreateEvents,
   GarmentAllEvents,
   GarmentPreviewPage,
+  GarmentAllOrders,
+  GarmentOrderDetails,
 } from './routes/GarmentRoutes.js';
 
 import {
@@ -72,16 +76,28 @@ const App = () => {
         <Route path='/product/:id' element={<ProductDetailsPage />} />
         <Route path='/best-selling' element={<BestSellingPage />} />
         <Route path='/faq' element={<FAQPage />} />
-        <Route path='/checkout' element={<CheckoutPage />} /> 
-        <Route path='/custom-orders' element={<CustomOrders/>}/>
-        {/* <Route path='/payment' element = {<PaymentPage/>}/> */}
+        <Route path='/checkout' element={<CheckoutPage />} />
+        <Route path='/custom-orders' element={<CustomOrders />} />
+        <Route path='/payment' element={
+          <ProtectedRoute>
+            <PaymentPage />
+          </ProtectedRoute>
+        } />
+        <Route path='/order/success' element={<OrderSuccessPage />} />
         <Route path='/profile' element={
           <ProtectedRoute>
             <ProfilePage />
           </ProtectedRoute>
         } />
+
+        <Route path='/user/order/:id' element={
+          <ProtectedRoute>
+            <OrderDetailsPage />
+          </ProtectedRoute>
+        } />
         <Route path='/cutomize-tshirt' element={<CustomizeTShirt />} />
-        <Route path='/threed-model' element={<ThreeDmodel />} />
+        {/* <Route path='/threed-model' element={<ThreeDmodel />} /> */}
+        <Route path='/product/three-d-model/:id' element={<ModelThree />} />
 
         {/* garment Routes */}
         <Route path='/garment/activation/:activation_token' element={<SellerActivationPage />} />
@@ -104,6 +120,12 @@ const App = () => {
           </GarmentProtectedRoute>
         } />
 
+        <Route path='/garment-dashboard-orders' element={
+          <GarmentProtectedRoute>
+            <GarmentAllOrders />
+          </GarmentProtectedRoute>
+        } />
+
         <Route path='/garment-dashboard-create-product' element={
           <GarmentProtectedRoute>
             <GarmentCreateProducts />
@@ -116,6 +138,11 @@ const App = () => {
           </GarmentProtectedRoute>
         } />
 
+        <Route path='/order/:id' element={
+          <GarmentProtectedRoute>
+            <GarmentOrderDetails />
+          </GarmentProtectedRoute>
+        } />
 
         <Route path='/garment-dashboard-create-event' element={
           <GarmentProtectedRoute>

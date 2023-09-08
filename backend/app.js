@@ -25,12 +25,14 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 const user = require("./controller/user");
 const garment = require("./controller/garment");
 const product = require('./controller/product');
-const event = require('./controller/event');
+// const payment = require("./controller/payment");
+const order = require("./controller/order");
 
 app.use("/api/v2/user", user);
 app.use("/api/v2/garment", garment);
 app.use("/api/v2/product", product);
-app.use("/api/v2/event", event);
+// app.use("/api/v2/payment", payment);
+app.use("/api/v2/order", order);
 
 // it's for ErrorHandling
 app.use(ErrorHandler);
