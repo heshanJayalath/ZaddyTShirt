@@ -9,17 +9,21 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const fs = require('fs');
 
 // create product
-router.post("/create-product", upload.array("images"), catchAsyncErrors(async (req, res, next) => {
+router.post("/create-product", upload.fields([{name:"images", maxCount:5},{name:"model", maxCount:5}]), catchAsyncErrors(async (req, res, next) => {
     try {
         const garmentId = req.body.garmentId;
         const garment = await Garment.findById(garmentId);
         if (!garment) {
             return next(new ErrorHandler("Garment Id is invalid", 400));
         } else {
-            const files = req.files;
+            const files = req.files['images'];
             const imageUrls = files.map((file) => `${file.filename}`);
+            const modelFiles = req.files['model'];
+            const modelImageUrls = modelFiles.map((file)=>`${file.filename}`)
+            // console.log("model",modelFiles);
             const productData = req.body;
             productData.images = imageUrls;
+            productData.model = modelImageUrls;
             productData.garment = garment;
 
             const product = await Product.create(productData);

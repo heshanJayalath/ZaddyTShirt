@@ -5,6 +5,8 @@ import GarmentAllProducts from '../pages/Garment/GarmentAllProducts'
 import GarmentCreateEvents from '../pages/Garment/GarmentCreateEvents'
 import GarmentAllEvents from '../pages/Garment/GarmentAllEvents'
 import GarmentPreviewPage from '../pages/Garment/GarmentPreviewPage'
+import GarmentAllOrders from '../pages/Garment/GarmentAllOrders'
+import GarmentOrderDetails from '../pages/Garment/GarmentOrderDetails'
 
 export {
     GarmentDashboardPage,
@@ -14,4 +16,6 @@ export {
     GarmentCreateEvents,
     GarmentAllEvents,
     GarmentPreviewPage,
+    GarmentAllOrders,
+    GarmentOrderDetails,
 }

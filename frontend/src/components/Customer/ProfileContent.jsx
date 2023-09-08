@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { server } from '../../server';
 import { Country, State } from 'country-state-city';
+import { getAllOrdersOfUser } from '../../redux/actions/order';
 
 const ProfileContent = ({ active }) => {
 
@@ -187,18 +188,13 @@ const ProfileContent = ({ active }) => {
 }
 
 const AllOrders = () => {
-  const orders = [
-    {
-      _id: "asdbjb12jaskjdk1k2j3",
-      orderItems: [
-        {
-          name: "The basic half sleeve T shirt"
-        }
-      ],
-      totalPrice: 120,
-      orderStatus: "Processing",
-    },
-  ];
+  const { user } = useSelector((state) => state.user);
+  const { orders } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrdersOfUser(user._id))
+  },[])
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -256,11 +252,13 @@ const AllOrders = () => {
   orders && orders.forEach((item) => {
     row.push({
       id: item._id,
-      itemsQty: item.orderItems.length,
+      itemsQty: item.cart.length,
       total: "Rs." + item.totalPrice + ".00",
-      status: item.orderStatus,
+      status: item.status,
+     
     })
-  })
+  });
+  console.log(orders);
   return (
     <div className='pl-8 pt-1'>
       <DataGrid
