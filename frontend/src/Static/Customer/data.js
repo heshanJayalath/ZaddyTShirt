@@ -26,6 +26,10 @@ export const navItems = [
     url: "/custom-orders",
   },
   {
+    title: "Price Predictor",
+    url: "/pricepredictor",
+  },
+  {
     title: "FAQ",
     url: "/faq",
   },

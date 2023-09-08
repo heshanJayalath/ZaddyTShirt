@@ -20,6 +20,8 @@ import {
   OrderSuccessPage,
   ModelThree,
   OrderDetailsPage,
+  PricePredictor,
+  
 }
   from './routes/Routes.js';
 
@@ -84,6 +86,7 @@ const App = () => {
           </ProtectedRoute>
         } />
         <Route path='/order/success' element={<OrderSuccessPage />} />
+        <Route path='/pricepredictor' element={<PricePredictor/>}></Route>
         <Route path='/profile' element={
           <ProtectedRoute>
             <ProfilePage />

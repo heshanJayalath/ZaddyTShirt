@@ -20,6 +20,7 @@ import ModelThree from '../pages/Customer/ModelThree.jsx';
 import SellerActivationPage from '../pages/SellerActivationPage.jsx'
 import GarmentRegisterPage from '../pages/Garment/GarmentRegisterPage.jsx';
 import GarmentLoginPage from '../pages/Garment/GarmentLoginPage.jsx';
+import PricePredictor from '../pages/Customer/PricePredictor.jsx';
 
 
 export {
@@ -45,6 +46,8 @@ export {
   SellerActivationPage,
   GarmentRegisterPage,
   GarmentLoginPage,
+
+  PricePredictor,
   
  
 }
