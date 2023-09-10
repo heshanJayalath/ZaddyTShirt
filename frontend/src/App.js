@@ -22,6 +22,7 @@ import {
   OrderDetailsPage,
   PricePredictor,
   
+  
 }
   from './routes/Routes.js';
 
@@ -40,6 +41,14 @@ import {
 import {
   AdminPage,
 } from './routes/AdminRoutes.js';
+
+import {
+  ManagerPage,
+}from './routes/ManagerRoutes.js'
+
+import {
+  OwnerPage,
+}from './routes/OwnerRoutes.js'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -162,8 +171,8 @@ const App = () => {
 
 
         <Route path='/admin' element={<AdminPage />} />
-
-        <Route path="/owner" element={<Layout />} />
+        <Route path='/manager' element={<ManagerPage/>}/>
+        <Route path="/owner" element={<OwnerPage />} />
         <Route path='/ownerdashboard' element={<OwnerDashboard />} />
         <Route path='/managerdashboard' element={<ManagerDashboard />} />
 
