@@ -47,29 +47,29 @@ const productSchema = new mongoose.Schema({
       type:String
     }
   ],
-  // reviews: [
-  //   {
-  //     user: {
-  //       type: Object,
-  //     },
-  //     rating: {
-  //       type: Number,
-  //     },
-  //     comment: {
-  //       type: String,
-  //     },
-  //     productId: {
-  //       type: String,
-  //     },
-  //     createdAt:{
-  //       type: Date,
-  //       default: Date.now(),
-  //     }
-  //   },
-  // ],
-  // ratings: {
-  //   type: Number,
-  // },
+  reviews: [
+    {
+      user: {
+        type: Object,
+      },
+      rating: {
+        type: Number,
+      },
+      comment: {
+        type: String,
+      },
+      productId: {
+        type: String,
+      },
+      createdAt:{
+        type: Date,
+        default: Date.now(),
+      }
+    },
+  ],
+  ratings: {
+    type: Number,
+  },
   garmentId: {
     type: String,
     required: true,

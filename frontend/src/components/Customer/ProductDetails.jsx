@@ -5,8 +5,11 @@ import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { backend_url } from '../../server';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProductsGarment } from "../../redux/actions/product";
-import {toast} from 'react-toastify';
-import {addTocart} from "../../redux/actions/cart"
+import { toast } from 'react-toastify';
+import { addTocart } from "../../redux/actions/cart"
+import Ratings from './Ratings';
+import axios from 'axios';
+import { server } from '../../server';
 
 const ProductDetails = ({ data }) => {
   console.log("data:", data)
@@ -15,7 +18,8 @@ const ProductDetails = ({ data }) => {
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
 
-  const {cart} = useSelector((state)=>state.cart);
+  const { cart } = useSelector((state) => state.cart);
+  const { user, isAuthenticated } = useSelector((state) => state.user)
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -32,16 +36,34 @@ const ProductDetails = ({ data }) => {
     }
   }
 
-  const handleMessageSubmit = () => {
-    navigate("/index?coversation=506ebjverasd")
-  }
+  const handleMessageSubmit = async () => {
+    if (isAuthenticated) {
+      const groupTitle = data._id + user._id;
+      const userId = user._id;
+      const garmentId = data.garment._id;
+      await axios
+        .post(`${server}/conversation/create-new-conversation`, {
+          groupTitle,
+          userId,
+          garmentId,
+        })
+        .then((res) => {
+          navigate(`/conversation/${res.data.conversation._id}`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    } else {
+      toast.error("Please login to create a conversation");
+    }
+  };
 
-  const addToCartHandler = (id)=>{
-    const isItemExists = cart && cart.find((i)=>i._id === id);
-    if(isItemExists){
+  const addToCartHandler = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
       toast.error("Item already in cart")
-    }else{
-      const cartData = {...data, qty:count}
+    } else {
+      const cartData = { ...data, qty: count }
       dispatch(addTocart(cartData));
       toast.success("Item added to cart successfully")
     }
@@ -57,12 +79,12 @@ const ProductDetails = ({ data }) => {
                   <img src={`${backend_url}/${data.images && data?.images[select]}`} alt='' className='w-[80%]' />
                   <div className='w-full flex'>
                     {
-                      data && data.images.map((i,index) => (
-                        <div className={`${select ===  index? "border" : "null"} cursor-pointer`}>
+                      data && data.images.map((i, index) => (
+                        <div className={`${select === index ? "border" : "null"} cursor-pointer`}>
                           <img
                             src={`${backend_url}/${data.images && data?.images[index]}`}
                             alt='' className='h-[200px] overflow-hidden mr-3 mt-3'
-                            onClick={() => setSelect(index )}
+                            onClick={() => setSelect(index)}
                           />
                         </div>
 
@@ -97,10 +119,10 @@ const ProductDetails = ({ data }) => {
                         +
                       </button>
                     </div>
-                    
+
                   </div>
-                  <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`} 
-                  onClick={()=>addToCartHandler(data._id)}
+                  <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
+                    onClick={() => addToCartHandler(data._id)}
                   >
                     <span className='text-white flex items-center'>
                       Add to Cart <AiOutlineShoppingCart className='ml-1' />
@@ -178,7 +200,29 @@ const ProductDetailsInfo = ({
 
       {active === 2 ? (
         <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
-          <p>No Reviews Yet</p>
+          {data &&
+            data.reviews.map((item, index) => (
+              <div className="w-full flex my-2">
+                <img
+                  src={`${backend_url}/${item.user.avatar}`}
+                  alt=""
+                  className="w-[50px] h-[50px] rounded-full"
+                />
+                <div className="pl-2 ">
+                  <div className="w-full flex items-center">
+                    <h1 className="font-[500] mr-3">{item.user.name}</h1>
+                    <Ratings rating={data?.ratings} />
+                  </div>
+                  <p>{item.comment}</p>
+                </div>
+              </div>
+            ))}
+
+          <div className="w-full flex justify-center">
+            {data && data.reviews.length === 0 && (
+              <h5>No Reviews have for this product!</h5>
+            )}
+          </div>
         </div>
       ) : null}
 

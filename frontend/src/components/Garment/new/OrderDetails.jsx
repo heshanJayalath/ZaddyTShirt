@@ -39,9 +39,24 @@ const OrderDetails = () => {
       });
   };
 
-  const refundOrderUpdateHandler = () => {
-
+  const refundOrderUpdateHandler = async (e) => {
+    await axios
+    .put(
+      `${server}/order/order-refund-success/${id}`,
+      {
+        status,
+      },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      toast.success("Order updated!");
+      dispatch(getAllOrdersOfGarment(garment._id));
+    })
+    .catch((error) => {
+      toast.error(error.response.data.message);
+    });
   }
+
 
   const data = orders && orders.find((item) => item._id === id);
 

@@ -10,13 +10,13 @@ const GarmentDashboardPage = () => {
       <div className="md:flex items-start justify-between w-full">
         <div className="md:w-2/12 ">
           <GarmentDashboardSideBar active={1} />
-          
+
         </div>
-        {/* <GarmentDashboardHero /> */}
+
         <div className='w-10/12'>
-        <GarmentViewReport/>
+          <GarmentViewReport />
         </div>
-        
+
       </div>
     </div>
   )
