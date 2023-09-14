@@ -7,6 +7,8 @@ import GarmentAllEvents from '../pages/Garment/GarmentAllEvents'
 import GarmentPreviewPage from '../pages/Garment/GarmentPreviewPage'
 import GarmentAllOrders from '../pages/Garment/GarmentAllOrders'
 import GarmentOrderDetails from '../pages/Garment/GarmentOrderDetails'
+import GarmentAllRefunds from '../pages/Garment/GarmentAllRefunds.jsx'
+import GarmentInboxPage from '../pages/Garment/GarmentInboxPage.jsx';
 
 export {
     GarmentDashboardPage,
@@ -18,4 +20,6 @@ export {
     GarmentPreviewPage,
     GarmentAllOrders,
     GarmentOrderDetails,
+    GarmentAllRefunds,
+    GarmentInboxPage,
 }

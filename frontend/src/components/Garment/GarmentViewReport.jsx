@@ -1,215 +1,163 @@
-import React from "react";
-import uparrow from "../../Assets/Garment/report/uparrow.png";
-import { Link } from "react-router-dom";
-import TransactionChart from "./TransactionChart";
-import SellerProfilePieChart from "./SellerPieChart";
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllOrdersOfGarment } from '../../redux/actions/order';
+import { getAllProductsGarment } from '../../redux/actions/product';
+import { Link } from 'react-router-dom';
+import { AiOutlineArrowRight, AiOutlineMoneyCollect } from 'react-icons/ai';
+import { Button } from '@material-ui/core';
+import styles from '../../Styles/Customer/styles';
+import { MdBorderClear } from 'react-icons/md';
+import { DataGrid } from '@mui/x-data-grid';
 
 const GarmentViewReport = () => {
+  const dispatch = useDispatch();
+  const { orders } = useSelector((state) => state.order);
+  const { garment } = useSelector((state) => state.garment);
+  const { products } = useSelector((state) => state.products);
+  const [deliveredOrder, setDeliveredOrder] = useState(null);
+  useEffect(() => {
+    dispatch(getAllOrdersOfGarment(garment._id));
+    dispatch(getAllProductsGarment(garment._id));
+    const orderData = orders && orders.filter((item) => item.status === "Delivered");
+    setDeliveredOrder(orderData);
+  }, [dispatch]);
+
+  const totalEarnings = deliveredOrder && deliveredOrder.reduce((acc, item) => acc + item.totalPrice, 0);
+  // const serviceCharge = totalEarnings * 0.1;
+  const availableBalance = totalEarnings?.toFixed(2) || 0;
+
+  const columns = [
+    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+
+    {
+      field: "status",
+      headerName: "Status",
+      minWidth: 130,
+      flex: 0.7,
+      cellClassName: (params) => {
+        return params.getValue(params.id, "status") === "Delivered"
+          ? "greenColor"
+          : "redColor";
+      },
+    },
+    {
+      field: "itemsQty",
+      headerName: "Items Qty",
+      type: "number",
+      minWidth: 130,
+      flex: 0.7,
+    },
+
+    {
+      field: "total",
+      headerName: "Total",
+      type: "number",
+      minWidth: 130,
+      flex: 0.8,
+    },
+
+    {
+      field: " ",
+      flex: 1,
+      minWidth: 150,
+      headerName: "",
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/dashboard/order/${params.id}`}>
+              <Button>
+                <AiOutlineArrowRight size={20} />
+              </Button>
+            </Link>
+          </>
+        );
+      },
+    },
+  ];
+
+  const row = [];
+
+  orders && orders.forEach((item) => {
+    row.push({
+      id: item._id,
+      itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
+      total: "Rs. " + item.totalPrice,
+      status: item.status,
+    });
+  });
   return (
-    <div className="bg-gray-100 md:m-5 m-5 min-h-screen rounded-2xl shadow-lg max-w-full py-2  items-center">
-      <div className=" w-full text-center mt-12 mb-6">
-        <h1 className="font-bold text-cyan-900 text-xl"> Dashboard </h1>
-      </div>
-
-      <div className="w-full md:flex px-12 py-8">
-        <div className="w-full md:w-1/4  rounded-xl bg-white px-6 py-8  m-4">
-          <h2 className="text-slate-600 font-medium text-base mb-6">
-            Total Products Sales
-          </h2>
-          <h1 className="text-center text-green-600 font-semibold text-5xl mb-8">
-            132
-          </h1>
-          <div className="flex justify-start place-items-baseline mt-4">
-            <h2 className="text-start mt-2 ms-4 me-2">previous 30 days </h2>
-            <img
-              class="w-4 h-8 mt-1 me-4 object-cover rounded-full"
-              src={uparrow}
-              alt=""
+    <div className="w-full p-8">
+      <h3 className="text-[22px] font-Poppins pb-2">Overview</h3>
+      <div className="w-full flex items-center justify-between">
+        <div className="w-full mb-4 w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="flex items-center">
+            <AiOutlineMoneyCollect
+              size={30}
+              className="mr-2"
+              fill="#00000085"
             />
-            <h2 className="font-medium text-slate-600 text-center text-3xl">
-              12
-            </h2>
+            <h3
+              className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+            >
+              Account Balance{" "}
+              <span className="text-[16px]">(with 10% service charge)</span>
+            </h3>
           </div>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">Rs.{availableBalance}</h5>
+          <Link to="/dashboard-withdraw-money">
+            <h5 className="pt-4 pl-[2] text-[#077f9c]">Withdraw Money</h5>
+          </Link>
         </div>
 
-        <div className="w-full md:w-1/4 rounded-xl bg-white px-6 py-8  m-4">
-          <h2 className="text-slate-600 font-medium text-base mb-6">
-            Total Income
-          </h2>
-          <h1 className="text-center text-green-600 font-semibold text-5xl mb-8">
-            Rs.45000
-          </h1>
-          <div className="flex justify-start place-items-baseline mt-4">
-            <h2 className="text-start mt-2 ms-4 me-2">previous 30 days </h2>
-            <img
-              class="w-4 h-8 mt-1 me-4 object-cover rounded-full"
-              src={uparrow}
-              alt=""
-            />
-            <h2 className="font-medium text-slate-600 text-center text-2xl">
-              8000
-            </h2>
+        <div className="w-full mb-4 w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="flex items-center">
+            <MdBorderClear size={30} className="mr-2" fill="#00000085" />
+            <h3
+              className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+            >
+              All Orders
+            </h3>
           </div>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{orders && orders.length}</h5>
+          <Link to="/garment-dashboard-orders">
+            <h5 className="pt-4 pl-2 text-[#077f9c]">View Orders</h5>
+          </Link>
         </div>
 
-        <div className="w-full md:w-1/4 rounded-xl bg-white px-6 py-8  m-4">
-          <h2 className="text-slate-600 font-medium text-base mb-6">
-            Total Profit
-          </h2>
-          <h1 className="text-center text-green-600 font-semibold text-5xl mb-8">
-            Rs.40000
-          </h1>
-          <div className="flex justify-start place-items-baseline mt-4">
-            <h2 className="text-start mt-2 ms-4 me-2">previous 30 days </h2>
-            <img
-              class="w-4 h-8 mt-1 me-4 object-cover rounded-full"
-              src={uparrow}
-              alt=""
+        <div className="w-full mb-4 w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="flex items-center">
+            <AiOutlineMoneyCollect
+              size={30}
+              className="mr-2"
+              fill="#00000085"
             />
-            <h2 className="font-medium text-slate-600 text-center text-2xl">
-              7200
-            </h2>
+            <h3
+              className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+            >
+              All Products
+            </h3>
           </div>
-        </div>
-
-        <div className="w-full md:w-1/4 rounded-xl bg-white px-6 py-8  m-4">
-          <h2 className="text-slate-600 font-medium text-base mb-6">
-            Growth Rate
-          </h2>
-          <h1 className="text-center text-green-600 font-semibold text-5xl mb-8">
-            8.95%
-          </h1>
-          <div className="flex justify-start place-items-baseline mt-4">
-            <h2 className="text-start mt-2 ms-4 me-2">previous 30 days </h2>
-            <img
-              class="w-4 h-8 mt-1 me-4 object-cover rounded-full"
-              src={uparrow}
-              alt=""
-            />
-            <h2 className="font-medium text-slate-600 text-center text-2xl">
-              1.3%
-            </h2>
-          </div>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{products && products.length}</h5>
+          <Link to="/garment-dashboard-products">
+            <h5 className="pt-4 pl-2 text-[#077f9c]">View Products</h5>
+          </Link>
         </div>
       </div>
-
-      <div className="w-full mb-12 space-x-6 px-2 md:px-16 md:flex">
-        <div className=" md:w-9/12">
-          <TransactionChart />
-        </div>
-        <div className=" md:w-3/12 ">
-          <SellerProfilePieChart />
-        </div>
-
+      <br />
+      <h3 className="text-[22px] font-Poppins pb-2">Latest Orders</h3>
+      <div className="w-full min-h-[45vh] bg-white rounded">
+        <DataGrid
+          rows={row}
+          columns={columns}
+          pageSize={10}
+          disableSelectionOnClick
+          autoHeight
+        />
       </div>
-
-      <div className="w-full mb-12">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-16">
-          <h2 className="text-center mb-4 text-gray-700 font-medium">Total Seles of Each Category</h2>
-          <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase py-2 bg-white dark:text-gray-700">
-              <tr className="border-b dark:border-gray-300 my-2">
-                <th scope="col" class="px-6 py-3">
-                  Product Category
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Color
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Quantity sold
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Total Price
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class=" border-b bg-white dark:border-gray-300">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                >
-                  Men's Polo T Shirt
-                </th>
-                <td class="px-6 py-4">Blue</td>
-                <td class="ps-12 py-4">45</td>
-                <td class="px-6 py-4">85000</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr class=" border-b bg-white dark:border-gray-300">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                >
-                  Men's Polo T Shirt
-                </th>
-                <td class="px-6 py-4">Blue</td>
-                <td class="ps-12 py-4">45</td>
-                <td class="px-6 py-4">85000</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr class=" border-b bg-white dark:border-gray-300">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                >
-                  Men's Polo T Shirt
-                </th>
-                <td class="px-6 py-4">Blue</td>
-                <td class="ps-12 py-4">45</td>
-                <td class="px-6 py-4">85000</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-              <tr class=" border-b bg-white dark:border-gray-300">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                >
-                  Men's Polo T Shirt
-                </th>
-                <td class="px-6 py-4">Blue</td>
-                <td class="ps-12 py-4">45</td>
-                <td class="px-6 py-4">85000</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-     
     </div>
   );
-};
-export default GarmentViewReport;
+}
+
+export default GarmentViewReport

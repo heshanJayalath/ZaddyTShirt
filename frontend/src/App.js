@@ -21,8 +21,7 @@ import {
   ModelThree,
   OrderDetailsPage,
   PricePredictor,
-  
-  
+  TrackOrderPage,
 }
   from './routes/Routes.js';
 
@@ -31,11 +30,13 @@ import {
   GarmentDashboardPage,
   GarmentCreateProducts,
   GarmentAllProducts,
-  GarmentCreateEvents,
-  GarmentAllEvents,
+  // GarmentCreateEvents,
+  // GarmentAllEvents,
   GarmentPreviewPage,
   GarmentAllOrders,
   GarmentOrderDetails,
+  GarmentAllRefunds,
+  GarmentInboxPage,
 } from './routes/GarmentRoutes.js';
 
 import {
@@ -95,7 +96,7 @@ const App = () => {
           </ProtectedRoute>
         } />
         <Route path='/order/success' element={<OrderSuccessPage />} />
-        <Route path='/pricepredictor' element={<PricePredictor/>}></Route>
+        <Route path='/pricepredictor' element={<PricePredictor />}></Route>
         <Route path='/profile' element={
           <ProtectedRoute>
             <ProfilePage />
@@ -107,6 +108,13 @@ const App = () => {
             <OrderDetailsPage />
           </ProtectedRoute>
         } />
+
+        <Route path='/user/track/order/:id' element={
+          <ProtectedRoute>
+            <TrackOrderPage />
+          </ProtectedRoute>
+        } />
+
         <Route path='/cutomize-tshirt' element={<CustomizeTShirt />} />
         {/* <Route path='/threed-model' element={<ThreeDmodel />} /> */}
         <Route path='/product/three-d-model/:id' element={<ModelThree />} />
@@ -156,17 +164,29 @@ const App = () => {
           </GarmentProtectedRoute>
         } />
 
-        <Route path='/garment-dashboard-create-event' element={
+        <Route path='/garment-dashboard-refunds' element={
           <GarmentProtectedRoute>
-            <GarmentCreateEvents />
+            <GarmentAllRefunds />
           </GarmentProtectedRoute>
         } />
 
-        <Route path='/garment-dashboard-events' element={
+        <Route path='/garment-dashboard-messages' element={
+          <GarmentProtectedRoute>
+            <GarmentInboxPage />
+          </GarmentProtectedRoute>
+        } />
+
+        {/* <Route path='/garment-dashboard-create-event' element={
+          <GarmentProtectedRoute>
+            <GarmentCreateEvents />
+          </GarmentProtectedRoute>
+        } /> */}
+
+        {/* <Route path='/garment-dashboard-events' element={
           <GarmentProtectedRoute>
             <GarmentAllEvents />
           </GarmentProtectedRoute>
-        } />
+        } /> */}
 
 
 
