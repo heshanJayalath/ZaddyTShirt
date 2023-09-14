@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { productData } from '../../Static/Customer/data';
 import styles from '../../Styles/Customer/styles';
 import ProductCard from '../../components/Customer/ProductCard';
+import { useSelector } from 'react-redux';
 const SuggestedProduct = ({ data }) => {
-    const [products, setProducts] = useState(null);
+    const {allProducts} = useSelector((state) => state.products);
+    const [products, setProducts] = useState();
     useEffect(() => {
-        const d = productData && productData.filter((i) => i.category === data.category);
+        const d = allProducts && allProducts.filter((i) => i.category === data.category);
         setProducts(d);
     },[])
     return (

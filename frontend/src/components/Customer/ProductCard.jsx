@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { backend_url } from '../../server';
 import { toast } from 'react-toastify';
 import { addTocart } from '../../redux/actions/cart';
+import Ratings from './Ratings';
 
 const ProductCard = ({ data, isEvent }) => {
-    const{cart} = useSelector((state)=>state.cart)
+    const { cart } = useSelector((state) => state.cart)
     const [open, setOpen] = useState(false);
     const [click, setClick] = useState(false);
     const dispatch = useDispatch();
@@ -45,32 +46,8 @@ const ProductCard = ({ data, isEvent }) => {
                     <h4 className='pb-3 font-[500]'>
                         {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
                     </h4>
-                    <div className='flex'>
-                        <AiFillStar
-                            className='mr-2 cursor-pointer'
-                            size={20}
-                            color='#f6ba00'
-                        />
-                        <AiFillStar
-                            className='mr-2 cursor-pointer'
-                            size={20}
-                            color='#f6ba00'
-                        />
-                        <AiFillStar
-                            className='mr-2 cursor-pointer'
-                            size={20}
-                            color='#f6ba00'
-                        />
-                        <AiFillStar
-                            className='mr-2 cursor-pointer'
-                            size={20}
-                            color='#f6ba00'
-                        />
-                        <AiOutlineStar
-                            className='mr-2 cursor-pointer'
-                            size={20}
-                            color='#f6ba00'
-                        />
+                    <div className="flex">
+                        <Ratings rating={data?.ratings} />
                     </div>
                     <div className='py-2 flex items-center justify-between'>
                         <div className='flex'>
@@ -88,7 +65,7 @@ const ProductCard = ({ data, isEvent }) => {
                     </div>
                 </Link>
                 <div>
-                    
+
                     <AiOutlineEye
                         size={22}
                         className="cursor-pointer absolute right-2 top-14"
