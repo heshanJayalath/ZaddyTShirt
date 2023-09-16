@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isGarment, isAuthenticated } = require("../middleware/auth");
+const { isGarment, isAuthenticated, isAdmin } = require("../middleware/auth");
 const Product = require("../model/product");
 const Garment = require("../model/garment");
 const Order = require("../model/order");
@@ -154,6 +154,26 @@ router.put(
             });
         } catch (error) {
             return next(new ErrorHandler(error, 400));
+        }
+    })
+);
+
+// all products --- for admin
+router.get(
+    "/admin-all-products",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const products = await Product.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                products,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
         }
     })
 );

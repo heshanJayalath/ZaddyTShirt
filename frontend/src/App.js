@@ -40,16 +40,20 @@ import {
 } from './routes/GarmentRoutes.js';
 
 import {
-  AdminPage,
+  AdminDashboardPage,
+  AdminDashboardOrders,
+  AdminDashboardProducts,
+  AdminDashboardGarments,
+  AdminDashboardUsers,
 } from './routes/AdminRoutes.js';
 
 import {
   ManagerPage,
-}from './routes/ManagerRoutes.js'
+} from './routes/ManagerRoutes.js'
 
 import {
   OwnerPage,
-}from './routes/OwnerRoutes.js'
+} from './routes/OwnerRoutes.js'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,7 +65,7 @@ import { loadGarment, loadUser } from './redux/actions/user.js'
 import { getAllProducts } from './redux/actions/product.js';
 import ProtectedRoute from './routes/ProtectedRoute.js';
 import GarmentProtectedRoute from './routes/GarmentProtectedRoute.js';
-
+import ProtectedAdminRoute from './routes/ProtectedAdminRoute.js';
 import Layout from './components/Owner/shared/Layout.jsx';
 import OwnerDashboard from './pages/Owner/Dashboard.jsx';
 import ManagerDashboard from './pages/Manager/Dashboard.jsx';
@@ -190,8 +194,50 @@ const App = () => {
 
 
 
-        <Route path='/admin' element={<AdminPage />} />
-        <Route path='/manager' element={<ManagerPage/>}/>
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboardPage />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-orders"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboardOrders />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-products"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboardProducts />
+            </ProtectedAdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin-garments"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboardGarments />
+            </ProtectedAdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin-users"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboardUsers />
+            </ProtectedAdminRoute>
+          }
+        />
+
+        <Route path='/manager' element={<ManagerPage />} />
         <Route path="/owner" element={<OwnerPage />} />
         <Route path='/ownerdashboard' element={<OwnerDashboard />} />
         <Route path='/managerdashboard' element={<ManagerDashboard />} />
