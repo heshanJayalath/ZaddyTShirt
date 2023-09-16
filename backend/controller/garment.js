@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require('../utils/sendMail');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require("../utils/jwtToken");
-const { isAuthenticated, isGarment } = require('../middleware/auth');
+const { isAuthenticated, isGarment, isAdmin } = require('../middleware/auth');
 const sendGarmentToken = require('../utils/garmentToken');
 
 router.post("/create-garment", upload.single("file"), async (req, res, next) => {
@@ -179,5 +179,54 @@ router.get("/get-garment-info/:id", catchAsyncErrors(async(req,res,next)=>{
     }catch(error){
         return next(new ErrorHandler(error.message,500));
     }
-}))
+}));
+
+// all garment --- for admin
+router.get(
+    "/admin-all-garments",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+      try {
+        const garment = await Garment.find().sort({
+          createdAt: -1,
+        });
+        // console.log("garment_backend:",garment);
+        res.status(201).json({
+          success: true,
+          garment,
+        });
+      } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+      }
+    })
+  );
+
+  // delete Garment ---admin
+router.delete(
+    "/delete-garment/:id",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+      try {
+        const garment = await Garment.findById(req.params.id);
+  
+        if (!garment) {
+          return next(
+            new ErrorHandler("Garment is not available with this id", 400)
+          );
+        }
+  
+        await Garment.findByIdAndDelete(req.params.id);
+  
+        res.status(201).json({
+          success: true,
+          message: "Garment deleted successfully!",
+        });
+      } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+      }
+    })
+  );
+
 module.exports = router;

@@ -1,126 +1,119 @@
 import React from "react";
-import { AiOutlineLogout } from "react-icons/ai";
-import {
-  HiOutlineShoppingCart,
-  HiOutlineShoppingBag,
-  HiOutlineUserGroup,
-  HiOutlineUsers,
-} from "react-icons/hi";
-import { GiDress } from "react-icons/gi";
-import { RiUserSettingsLine } from "react-icons/ri";
-import { RxPerson } from "react-icons/rx";
-import { useNavigate } from "react-router-dom";
-import { server } from "../../server";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { FiShoppingBag } from "react-icons/fi";
+import {GrWorkshop} from "react-icons/gr";
+import { RxDashboard } from "react-icons/rx";
+import { CiMoneyBill, CiSettings } from "react-icons/ci";
+import { Link } from "react-router-dom";
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { BsHandbag } from "react-icons/bs";
+import { MdOutlineLocalOffer } from "react-icons/md";
+import { AiOutlineSetting } from "react-icons/ai";
 
-const AdminSideBar = ({ active, setActive }) => {
-  const navigate = useNavigate();
-  const logoutHandler = () => {
-    axios
-      .get(`${server}/user/logout`, { withCredentials: true })
-      .then((res) => {
-        toast.success(res.data.message);
-        window.location.reload(true);
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
-  };
+const AdminSideBar = ({ active }) => {
   return (
-    <div className="w-full md:w-2/12 md:mx-0 bg-white shadow-sm rounded-[10px] fixed md:h-auto h-60 pl-4 pt-8 overflow-y-scroll">
-      <div
-        className="flex  text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(1)}
-      >
-        <RxPerson size={30} color={active === 1 ? "red" : ""} />
-        <span
-          className={` text-lg pl-3 ${active === 1 ? " text-[red]" : ""} 800px:block`}
-        >
-          Dashboard
-        </span>
-      </div>
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(2)}
-      >
-        <HiOutlineShoppingBag size={30} color={active === 2 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 2 ? "text-[red]" : ""} 800px:block `}
-        >
-          All Orders
-        </span>
-      </div>
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(3)}
-      >
-        <HiOutlineShoppingCart size={30} color={active === 3 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 3 ? "text-[red]" : ""} 800px:block `}
-        >
-          All Products
-        </span>
-      </div>
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(4)}
-      >
-        <HiOutlineUserGroup size={30} color={active === 4 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 4 ? "text-[red]" : ""} 800px:block `}
-        >
-          All Customers
-        </span>
+    <div className="w-[300px] h-[90vh] bg-white shadow-sm overflow-y-scroll sticky top-0 left-0 z-10">
+      {/* single item */}
+      <div className="w-full flex items-center p-4">
+        <Link to="/admin/dashboard" className="w-full flex items-center">
+          <RxDashboard
+            size={30}
+            color={`${active === 1 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`block pl-2 text-[18px] font-[400] ${
+              active === 1 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            Dashboard
+          </h5>
+        </Link>
       </div>
 
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(5)}
-      >
-        <GiDress size={30} color={active === 5 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 5 ? "text-[red]" : ""} 800px:block `}
-        >
-          All Garments
-        </span>
+      <div className="w-full flex items-center p-4">
+        <Link to="/admin-orders" className="w-full flex items-center">
+          <FiShoppingBag
+            size={30}
+            color={`${active === 2 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`block pl-2 text-[18px] font-[400] ${
+              active === 2 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            All Orders
+          </h5>
+        </Link>
       </div>
 
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(6)}
-      >
-        <HiOutlineUsers size={30} color={active === 6 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 6 ? "text-[red]" : ""} 800px:block `}
-        >
-          System Users
-        </span>
+      <div className="w-full flex items-center p-4">
+        <Link to="/admin-garments" className="w-full flex items-center">
+          <GrWorkshop
+            size={30}
+            color={`${active === 3 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`block pl-2 text-[18px] font-[400] ${
+              active === 3 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            All Graments
+          </h5>
+        </Link>
       </div>
 
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(7)}
-      >
-        <RiUserSettingsLine  size={30} color={active === 7 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 7 ? "text-[red]" : ""} 800px:block `}
-        >
-          Settings
-        </span>
+      <div className="w-full flex items-center p-4">
+        <Link to="/admin-users" className="w-full flex items-center">
+          <HiOutlineUserGroup
+            size={30}
+            color={`${active === 4 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`block pl-2 text-[18px] font-[400] ${
+              active === 4 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            All Users
+          </h5>
+        </Link>
       </div>
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(8) || logoutHandler()}
-      >
-        <AiOutlineLogout size={30} color={active === 8 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 8 ? "text-[red]" : ""} 800px:block `}
-        >
-          Logout
-        </span>
+
+      <div className="w-full flex items-center p-4">
+        <Link to="/admin-products" className="w-full flex items-center">
+          <BsHandbag
+            size={30}
+            color={`${active === 5 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`block pl-2 text-[18px] font-[400] ${
+              active === 5 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            All Products
+          </h5>
+        </Link>
       </div>
+
+     
+
+      <div className="w-full flex items-center p-4">
+        <Link
+          to="/profile"
+          className="w-full flex items-center"
+        >
+          <AiOutlineSetting
+            size={30}
+            color={`${active === 8 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`block pl-2 text-[18px] font-[400] ${
+              active === 8 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            Settings
+          </h5>
+        </Link>
+      </div>
+
     </div>
   );
 };
