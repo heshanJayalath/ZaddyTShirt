@@ -48,7 +48,11 @@ import {
 } from './routes/AdminRoutes.js';
 
 import {
-  ManagerPage,
+  ManagerDashboardPage,
+  ManagerDashboardOrder,
+  ManagerDashboardProduct,
+  ManagerDashboardCustomer,
+  ManagerDashboardGarment,
 } from './routes/ManagerRoutes.js'
 
 import {
@@ -66,6 +70,7 @@ import { getAllProducts } from './redux/actions/product.js';
 import ProtectedRoute from './routes/ProtectedRoute.js';
 import GarmentProtectedRoute from './routes/GarmentProtectedRoute.js';
 import ProtectedAdminRoute from './routes/ProtectedAdminRoute.js';
+import ProtectedManagerRoute from './routes/ProtectedManagerRoute.js';
 import Layout from './components/Owner/shared/Layout.jsx';
 import OwnerDashboard from './pages/Owner/Dashboard.jsx';
 import ManagerDashboard from './pages/Manager/Dashboard.jsx';
@@ -180,20 +185,6 @@ const App = () => {
           </GarmentProtectedRoute>
         } />
 
-        {/* <Route path='/garment-dashboard-create-event' element={
-          <GarmentProtectedRoute>
-            <GarmentCreateEvents />
-          </GarmentProtectedRoute>
-        } /> */}
-
-        {/* <Route path='/garment-dashboard-events' element={
-          <GarmentProtectedRoute>
-            <GarmentAllEvents />
-          </GarmentProtectedRoute>
-        } /> */}
-
-
-
         <Route
           path="/admin/dashboard"
           element={
@@ -237,10 +228,56 @@ const App = () => {
           }
         />
 
-        <Route path='/manager' element={<ManagerPage />} />
+
+
+        <Route
+          path='/manager/dashboard'
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardPage />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/manager-orders"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardOrder />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/manager-products"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardProduct />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/manager-users"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardCustomer />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/manager-garments"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardGarment />
+            </ProtectedManagerRoute>
+          }
+        />
+
         <Route path="/owner" element={<OwnerPage />} />
         <Route path='/ownerdashboard' element={<OwnerDashboard />} />
-        <Route path='/managerdashboard' element={<ManagerDashboard />} />
+        {/* <Route path='/managerdashboard' element={<ManagerDashboard />} /> */}
 
       </Routes>
       <ToastContainer

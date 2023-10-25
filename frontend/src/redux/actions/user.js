@@ -160,3 +160,26 @@ export const getAllUsers = () => async (dispatch) => {
     });
   }
 };
+
+// get all users --- manager
+export const getAllManagerUsers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "getAllManagerUsersRequest",
+    });
+
+    const { data } = await axios.get(`${server}/user/manager-all-users`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "getAllManagerUsersSuccess",
+      payload: data.users,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getAllManagerUsersFailed",
+      payload: error.response.data.message,
+    });
+  }
+};

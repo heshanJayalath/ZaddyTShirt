@@ -6,6 +6,7 @@ import axios from 'axios';
 import { server } from '../../server';
 import FormData from "form-data";
 import { toast } from 'react-toastify';
+import { BiHomeAlt2 } from 'react-icons/bi';
 
 
 const Signup = () => {
@@ -35,8 +36,8 @@ const Signup = () => {
 
     axios.post(`${server}/user/create-user`, newForm, config)
       .then((res) => {
-        
-        console.log("user data:",res.data);
+
+        console.log("user data:", res.data);
 
         toast.success(res.data.message);
         setName("");
@@ -181,6 +182,12 @@ const Signup = () => {
           <img className="rounded-2xl" src="https://img.freepik.com/premium-vector/never-give-up-t-shirt-design_832611-3.jpg" />
         </div>
 
+      </div>
+      <div style={{ position: 'absolute', left: '0', top: '0', margin: '10px', color: "#fff", background: "#000", padding: "10px", borderRadius:"10px" }}>
+        <Link to="/" className='flex'>
+          <BiHomeAlt2 size={20} />
+          Home
+        </Link>
       </div>
     </section>
   )

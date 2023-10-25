@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require('../utils/sendMail');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require("../utils/jwtToken");
-const { isAuthenticated,isAdmin } = require('../middleware/auth');
+const { isAuthenticated,isAdmin, isManager } = require('../middleware/auth');
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
     try {
@@ -342,6 +342,57 @@ router.delete(
   "/delete-user/:id",
   isAuthenticated,
   isAdmin("Admin"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const user = await User.findById(req.params.id);
+
+      if (!user) {
+        return next(
+          new ErrorHandler("User is not available with this id", 400)
+        );
+      }
+
+      // const imageId = user.avatar.public_id;
+
+      // await cloudinary.v2.uploader.destroy(imageId);
+
+      await User.findByIdAndDelete(req.params.id);
+
+      res.status(201).json({
+        success: true,
+        message: "User deleted successfully!",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// all users --- for manager
+router.get(
+  "/manager-all-users",
+  isAuthenticated,
+  isManager("manager"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const users = await User.find().sort({
+        createdAt: -1,
+      });
+      res.status(201).json({
+        success: true,
+        users,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// delete users --- manager
+router.delete(
+  "/delete-manager-user/:id",
+  isAuthenticated,
+  isManager("manager"),
   catchAsyncErrors(async (req, res, next) => {
     try {
       const user = await User.findById(req.params.id);
