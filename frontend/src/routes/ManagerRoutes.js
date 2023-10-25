@@ -1,5 +1,13 @@
-import ManagerPage from '../pages/Manager/ManagerPage';
+import ManagerDashboardPage from '../pages/Manager/ManagerDashboardPage';
+import ManagerDashboardOrder from '../pages/Manager/ManagerDashboardOrder';
+import ManagerDashboardProduct from '../pages/Manager/ManagerDashboardProduct';
+import ManagerDashboardCustomer from '../pages/Manager/ManagerDashboardCustomer';
+import ManagerDashboardGarment from '../pages/Manager/ManagerDashboardGarment';
 
 export {
-    ManagerPage
+    ManagerDashboardPage,
+    ManagerDashboardOrder,
+    ManagerDashboardProduct,
+    ManagerDashboardCustomer,
+    ManagerDashboardGarment
 }

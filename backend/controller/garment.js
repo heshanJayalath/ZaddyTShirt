@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require('../utils/sendMail');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require("../utils/jwtToken");
-const { isAuthenticated, isGarment, isAdmin } = require('../middleware/auth');
+const { isAuthenticated, isGarment, isAdmin, isManager } = require('../middleware/auth');
 const sendGarmentToken = require('../utils/garmentToken');
 
 router.post("/create-garment", upload.single("file"), async (req, res, next) => {
@@ -222,6 +222,26 @@ router.delete(
         res.status(201).json({
           success: true,
           message: "Garment deleted successfully!",
+        });
+      } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+      }
+    })
+  );
+
+  // all garment --- for manager
+router.get(
+    "/manager-all-garments",
+    isAuthenticated,
+    isManager("manager"),
+    catchAsyncErrors(async (req, res, next) => {
+      try {
+        const garment = await Garment.find().sort({
+          createdAt: -1,
+        });
+        res.status(201).json({
+          success: true,
+          garment,
         });
       } catch (error) {
         return next(new ErrorHandler(error.message, 500));
