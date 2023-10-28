@@ -4,6 +4,7 @@ import ActivationPage from "../pages/ActivationPage.jsx";
 import CustomerHomePage from "../pages/Customer/CustomerHomePage.jsx";
 import CustomizeTShirt from '../pages/Customer/CustomizeTShirt.jsx';
 import ProductsPage from "../pages/Customer/ProductsPage.jsx"
+import ProductsPage2 from '../pages/Customer/ProductsPage2.jsx';
 import ProductDetailsPage from "../pages/Customer/ProductDetailsPage.jsx"
 import BestSellingPage from '../components/Customer/BestSellingPage.jsx';
 import FAQPage from '../pages/Customer/FAQPage.jsx';
@@ -31,6 +32,7 @@ export {
   CustomerHomePage,
   CustomizeTShirt,
   ProductsPage,
+  ProductsPage2,
   ProductDetailsPage,
   BestSellingPage,
   FAQPage,

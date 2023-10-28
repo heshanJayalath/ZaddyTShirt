@@ -6,6 +6,7 @@ import {
   CustomerHomePage,
   CustomizeTShirt,
   ProductsPage,
+  ProductsPage2,
   ProductDetailsPage,
   CheckoutPage,
   ThreeDmodel,
@@ -94,6 +95,7 @@ const App = () => {
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/activation/:activation_token' element={<ActivationPage />} />
         <Route path='/products' element={<ProductsPage />} />
+        <Route path='/products2' element={<ProductsPage2 />} />
         <Route path='/product/:id' element={<ProductDetailsPage />} />
         <Route path='/best-selling' element={<BestSellingPage />} />
         <Route path='/faq' element={<FAQPage />} />

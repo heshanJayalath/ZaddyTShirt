@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/Customer/Header.jsx";
 import Hero from "../../components/Customer/Route/Hero.jsx";
 import Categories from "../../components/Customer/Route/Categories.jsx";
@@ -11,7 +11,10 @@ import Material from "../../components/Customer/Route/Material.jsx";
 import Feedbacks from "../../components/Customer/Route/Feedbacks.jsx";
 import ResponsiveHeader from "../../components/Customer/ResponsiveHeader.jsx";
 
+
+
 const CustomerHomePage = () => {
+  const [material, setMaterial]=useState('All')
   return (
     <div>
       
@@ -34,8 +37,8 @@ const CustomerHomePage = () => {
 
       <div className="flex w-full">
         <div className="w-2.5/12 hidden md:block z-0">
-          <Categories />
-          <Material />
+          <Categories material={material}/>
+          <Material setMaterial={setMaterial} />
         </div>
         <div className="w-9.5/12 z-0">
            <BestDeals />

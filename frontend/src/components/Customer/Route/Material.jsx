@@ -1,35 +1,67 @@
 import React from "react";
 import styles from "../../../Styles/Customer/styles";
 import { materialData } from "../../../Static/Customer/data";
+import { useNavigate } from "react-router-dom";
+import { Radio } from "@material-ui/core";
 
-const Material = () => {
+const Material = ({ setMaterial }) => {
+  const navigate = useNavigate();
+
+  const matCheckall = () => {
+    setMaterial("All");
+  };
   return (
     <div className={`${styles.section} bg-blue-50 p-6 rounded-lg mb-12`}>
       <div className="font-medium text-2xl mb-3">
         <h2>Materials</h2>
       </div>
-
+      <div className="mb-2">
+      <input
+        type="radio"
+        id="all"
+        name="material"
+      
+        onChange={matCheckall}
+        className="hover:text-gray-800 mr-2 text-blue-900 dark:text-blue-900"
+      ></input>
+      <label
+        for="all"
+        id="all"
+        className=" cursor-pointer text-[14px] leading-[1.3] text-base font-medium hover:text-lg text-blue-900 dark:text-blue-900 hover:text-gray-800"
+      >
+        All
+      </label>
+      </div>
+     
       {materialData &&
         materialData.map((i) => {
-          //   const handleSubmit = (i) => {
-          //     navigate(`/products?category=${i.title}`);
-          //   };
+          const handleSubmit = (i) => {
+            // setMaterial(i.title)
+            // navigate(`/products2?category=${i.title}`);
+          };
+
+          const matCheck = () => {
+            setMaterial(i.title);
+          };
           return (
             <div
               className=" flex items-center justify-between cursor-pointer overflow-hidden mb-3"
-              // key={i.id}
-              //   onClick={() => handleSubmit(i)}
+              key={i.id}
+              onClick={() => handleSubmit(i)}
             >
-              <div className="flex">
+              {/* hover:text-gray-800 text-blue-900 dark:text-blue-900 */}
+              <div className="flex ">
                 <input
-                  id={i.i}
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 mt-0.5 hover:text-blue-800 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 dark:bg-blue-700 dark:border-blue-800"
-                />
+                  type="radio"
+                  id={i.id}
+                  name="material"
+                  onChange={matCheck}
+                  className="hover:text-gray-800 mr-2 text-blue-900 dark:text-blue-900"
+                ></input>
                 <label
-                  for="default-checkbox"
-                  class="ml-4 text-sm font-medium text-gray-900 dark:text-gray-900 hover:text-blue-800"
+                  for={i.id}
+                  id={i.i}
+                  className=" cursor-pointer text-[14px] leading-[1.3] text-base font-medium hover:text-lg text-blue-900 dark:text-blue-900 hover:text-gray-800"
                 >
                   {i.title}
                 </label>
