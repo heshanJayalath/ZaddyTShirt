@@ -26,12 +26,16 @@ const PricePredict = () => {
   const [pipping, setPipping] = useState("");
   const [screen, setscreen] = useState("");
   const [generatedPrice, setGeneratedPrice] = useState(0);
+  const [loading,setloading]=useState('Genarate Price')
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setloading('Generating Price.....')
   };
 
   const handleClick = () => {
+      
+      
     axios
       .post("http://127.0.0.1:5000/pricepredictor", {
         name: "Heshan",
@@ -48,9 +52,11 @@ const PricePredict = () => {
         doublesleeve: doublesleeve,
         pipping: pipping,
         screen: screen,
+        
       })
       .then((response) => {
         setGeneratedPrice(response.data.payload);
+        setloading('Genarate Price')
       })
       .catch((err) => console.log(err));
   };
@@ -70,6 +76,7 @@ const PricePredict = () => {
             className="w-full mt-2 border h-[35px] rounded-[5px]"
             name="meterial"
             id="meterial"
+            required
             onChange={(e) => setMaterial(e.target.value)}
             value={material}
           >
@@ -88,6 +95,7 @@ const PricePredict = () => {
           <input
             type="number"
             name="name"
+            required
             value={productcount}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setproductcount(e.target.value)}
@@ -105,6 +113,7 @@ const PricePredict = () => {
               <input
                 type="number"
                 name="name"
+                required
                 value={button}
                 className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 onChange={(e) => setbutton(e.target.value)}
@@ -352,7 +361,7 @@ const PricePredict = () => {
         <div className="pb-24">
           <input
             type="submit"
-            value="Genarate Price"
+            value={loading}
             onClick={handleClick}
             className="mt-2 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 hover:border-blue-200 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 hover:bg-blue-50 hover:text-blue-600 focus:border-blue-500 sm:text-sm"
           />

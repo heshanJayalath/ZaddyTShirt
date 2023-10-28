@@ -17,10 +17,10 @@ export const navItems = [
     title: "Best Selling",
     url: "/best-selling",
   },
-  {
-    title: "Products",
-    url: "/products",
-  },
+  // {
+  //   title: "Products",
+  //   url: "/products",
+  // },
   {
     title: "Custom-Orders",
     url: "/custom-orders",
