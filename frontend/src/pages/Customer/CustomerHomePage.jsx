@@ -32,7 +32,7 @@ const CustomerHomePage = () => {
       <SpecialOpptions />
 
       <div className="md:hidden mt-4 relative z-0">
-        <Material />
+      <Material setMaterial={setMaterial}/>
       </div>
 
       <div className="flex w-full">

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Radio } from "@material-ui/core";
 
 const Material = ({ setMaterial }) => {
-  const navigate = useNavigate();
+ 
 
   const matCheckall = () => {
     setMaterial("All");
