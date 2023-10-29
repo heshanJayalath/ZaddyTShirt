@@ -18,6 +18,7 @@ const CreateProduct = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
+    const [size, setSize] =useState("")
     const [material, setMaterial] = useState("");
     const [colour, setColour] = useState("");
     const [thickness, setThickness] = useState("");
@@ -54,7 +55,7 @@ const CreateProduct = () => {
         images.forEach((image) => {
             newForm.append("images", image);
         });
-        newForm.append("name", name);
+        newForm.append("name", name+" "+size);
         newForm.append("description", description);
         newForm.append("category", category);
         newForm.append("material", material);
@@ -119,6 +120,27 @@ const CreateProduct = () => {
                             ))}
                     </select>
                 </div>
+                <br />
+                <div>
+                    <label className="pb-2">
+                        Size <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                        className="w-full mt-2 border h-[35px] rounded-[5px]"
+                        value={size}
+                        onChange={(e) => setSize(e.target.value)}
+                    >
+                        <option value="Choose a category">Choose Size</option>
+                        <option value="Extra Small">Extra Small</option>
+                        <option value="Smallm"> Small</option>
+                        <option value="Medium">Medium </option>
+                        <option value="Large"> Large</option>
+                        <option value="Extra Large"> Extra Large</option>
+                        
+            
+                    </select>
+                </div>
+
                 <br />
                 <div>
                     <label className="pb-2">

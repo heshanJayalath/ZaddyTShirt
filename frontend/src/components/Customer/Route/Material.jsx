@@ -27,7 +27,7 @@ const Material = ({ setMaterial }) => {
       <label
         for="all"
         id="all"
-        className=" cursor-pointer text-[14px] leading-[1.3] text-base font-medium hover:text-lg text-blue-900 dark:text-blue-900 hover:text-gray-800"
+        className=" cursor-pointer text-[14px] leading-[1.3] text-base font-medium text-blue-900 dark:text-blue-900 hover:text-gray-800"
       >
         All
       </label>
@@ -56,12 +56,12 @@ const Material = ({ setMaterial }) => {
                   id={i.id}
                   name="material"
                   onChange={matCheck}
-                  className="hover:text-gray-800 mr-2 text-blue-900 dark:text-blue-900"
+                  className="hover:text-gray-800 mr-2 cursor-pointer text-blue-900 dark:text-blue-900"
                 ></input>
                 <label
                   for={i.id}
                   id={i.i}
-                  className=" cursor-pointer text-[14px] leading-[1.3] text-base font-medium hover:text-lg text-blue-900 dark:text-blue-900 hover:text-gray-800"
+                  className="  text-[14px] leading-[1.3] text-base font-medium  text-blue-900 dark:text-blue-900 hover:text-gray-800"
                 >
                   {i.title}
                 </label>

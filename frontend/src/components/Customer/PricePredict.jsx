@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineCloseCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { categoriesData, materialData } from "../../Static/Customer/data";
 import { toast } from "react-toastify";
+import cuf from "../../Assets/predictor/cuff.webp";
+import scprint from "../../Assets/predictor/print.jpeg"
 import { createProduct } from "../../redux/actions/product";
 import axios from "axios";
 
@@ -26,16 +28,15 @@ const PricePredict = () => {
   const [pipping, setPipping] = useState("");
   const [screen, setscreen] = useState("");
   const [generatedPrice, setGeneratedPrice] = useState(0);
-  const [loading,setloading]=useState('Genarate Price')
+  const [loading, setloading] = useState("Genarate Price");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setloading('Generating Price.....')
+    setloading("Generating Price.....");
+    setDoubleSleave("No");
   };
 
   const handleClick = () => {
-      
-      
     axios
       .post("http://127.0.0.1:5000/pricepredictor", {
         name: "Heshan",
@@ -52,11 +53,10 @@ const PricePredict = () => {
         doublesleeve: doublesleeve,
         pipping: pipping,
         screen: screen,
-        
       })
       .then((response) => {
         setGeneratedPrice(response.data.payload);
-        setloading('Genarate Price')
+        setloading("Genarate Price");
       })
       .catch((err) => console.log(err));
   };
@@ -205,9 +205,9 @@ const PricePredict = () => {
 
         <br />
 
-        <div className="md:flex w-full">
-          <div className="flex md:w-1/2 w-full">
-            <div className="w-1/2">
+        <div className=" w-full px-10 ">
+          <div className="md:flex w-full content-between place-content-between ">
+            <div className="md:w-1/3 w-full items-center mb-4 ">
               <h3 className="mb-1">Cuff</h3>
               <div class="flex items-center mb-4">
                 <input
@@ -243,45 +243,7 @@ const PricePredict = () => {
               </div>
             </div>
 
-            <div className="w-1/2">
-              <h3 className="mb-1">Double Sleeve</h3>
-              <div class="flex items-center mb-4">
-                <input
-                  id="double_sleeve_yes"
-                  type="radio"
-                  name="double sleeve"
-                  value="Yes"
-                  onChange={(e) => setDoubleSleave(e.target.value)}
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  for="cuff"
-                  class="ml-2 text-sm font-medium text-gray-800 dark:text-gray-800"
-                >
-                  Yes
-                </label>
-              </div>
-              <div class="flex items-center">
-                <input
-                  id="double_sleeve_no"
-                  type="radio"
-                  value="No"
-                  onChange={(e) => setDoubleSleave(e.target.value)}
-                  name="double sleeve"
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  for="cuff"
-                  class="ml-2 text-sm font-medium text-gray-800 dark:text-gray-800"
-                >
-                  No
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex md:w-1/2 w-full md:mt-0 mt-2">
-            <div className="w-1/2">
+            <div className="md:w-1/3 w-full mb-4">
               <h3 className="mb-1">Pipping</h3>
               <div class="flex items-center mb-4">
                 <input
@@ -317,7 +279,7 @@ const PricePredict = () => {
               </div>
             </div>
 
-            <div className="w-1/2">
+            <div className="md:w-1/3 w-full mb-4">
               <h3 className="mb-1">Screen Print</h3>
               <div class="flex items-center mb-4">
                 <input
@@ -352,13 +314,49 @@ const PricePredict = () => {
                 </label>
               </div>
             </div>
+
+            {/* <div className="w-1/2">
+              <h3 className="mb-1">Double Sleeve</h3>
+              <div class="flex items-center mb-4">
+                <input
+                  id="double_sleeve_yes"
+                  type="radio"
+                  name="double sleeve"
+                  value="Yes"
+                  onChange={(e) => setDoubleSleave(e.target.value)}
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  for="cuff"
+                  class="ml-2 text-sm font-medium text-gray-800 dark:text-gray-800"
+                >
+                  Yes
+                </label>
+              </div>
+              <div class="flex items-center">
+                <input
+                  id="double_sleeve_no"
+                  type="radio"
+                  value="No"
+                  onChange={(e) => setDoubleSleave(e.target.value)}
+                  name="double sleeve"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  for="cuff"
+                  class="ml-2 text-sm font-medium text-gray-800 dark:text-gray-800"
+                >
+                  No
+                </label>
+              </div>
+            </div> */}
           </div>
         </div>
 
         <br />
 
         <br />
-        <div className="pb-24">
+        <div className="pb-10">
           <input
             type="submit"
             value={loading}
@@ -370,6 +368,24 @@ const PricePredict = () => {
           </div>
         </div>
       </form>
+      <div className="  mx-auto  w-full flex">
+        <div className="w-1/2 mt-4">
+        <img src={cuf} alt="" className=" mx-auto w-[100px] md:w-[250px]" />
+        <p className="text-center text-sm">
+          A cuff is a layer of fabric at the lower <br /> edge of the sleeve of
+          a T-shirt,
+        </p>
+        <p className="font-bold  text-center">Cuff</p>
+        </div>
+        <div className="w-1/2" >
+        <img src={scprint} alt="" className=" mx-auto w-[100px] md:w-[140px]" />
+        <p className="text-center text-sm">
+          Screen printing is printing  <br/> designs or graphics on a t-shirt
+        </p>
+        <p className="font-bold  text-center">Screen Print</p>
+        </div>
+        
+      </div>
     </div>
   );
 };
