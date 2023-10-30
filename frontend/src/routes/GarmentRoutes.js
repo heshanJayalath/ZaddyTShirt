@@ -9,6 +9,7 @@ import GarmentAllOrders from '../pages/Garment/GarmentAllOrders'
 import GarmentOrderDetails from '../pages/Garment/GarmentOrderDetails'
 import GarmentAllRefunds from '../pages/Garment/GarmentAllRefunds.jsx'
 import GarmentInboxPage from '../pages/Garment/GarmentInboxPage.jsx';
+import GarmentUpdateProduct from '../pages/Garment/GarmentUpdateProducts.jsx'
 
 export {
     GarmentDashboardPage,
@@ -22,4 +23,5 @@ export {
     GarmentOrderDetails,
     GarmentAllRefunds,
     GarmentInboxPage,
+    GarmentUpdateProduct
 }

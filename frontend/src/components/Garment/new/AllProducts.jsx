@@ -4,6 +4,7 @@ import { getAllProductsGarment,deleteProduct } from '../../../redux/actions/prod
 import Loader from '../../Loader';
 import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
+import {GiClothespin} from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import ConfirmationDialog from '../../ConfirmationDialog';
@@ -38,7 +39,7 @@ const AllProducts = () => {
   };
   
   const columns = [
-    { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
+    // { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
     {
       field: "name",
       headerName: "Name",
@@ -79,6 +80,25 @@ const AllProducts = () => {
             <Link to={`/product/${params.id}`}>
               <Button>
                 <AiOutlineEye size={20} />
+              </Button>
+            </Link>
+          </>
+        );
+      },
+    },
+    {
+      field: "Edit",
+      flex: 0.8,
+      minWidth: 100,
+      headerName: "",
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/garment-dashboard-update-product/${params.id}`}>
+              <Button>
+                <GiClothespin size={20} />
               </Button>
             </Link>
           </>

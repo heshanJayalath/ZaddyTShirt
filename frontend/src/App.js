@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   LoginPage,
   SignupPage,
@@ -24,13 +24,13 @@ import {
   PricePredictor,
   TrackOrderPage,
   UserInbox,
-}
-  from './routes/Routes.js';
+} from "./routes/Routes.js";
 
 import {
   GarmentHomePage,
   GarmentDashboardPage,
   GarmentCreateProducts,
+  GarmentUpdateProduct,
   GarmentAllProducts,
   // GarmentCreateEvents,
   // GarmentAllEvents,
@@ -39,8 +39,7 @@ import {
   GarmentOrderDetails,
   GarmentAllRefunds,
   GarmentInboxPage,
-  
-} from './routes/GarmentRoutes.js';
+} from "./routes/GarmentRoutes.js";
 
 import {
   AdminDashboardPage,
@@ -48,7 +47,7 @@ import {
   AdminDashboardProducts,
   AdminDashboardGarments,
   AdminDashboardUsers,
-} from './routes/AdminRoutes.js';
+} from "./routes/AdminRoutes.js";
 
 import {
   ManagerDashboardPage,
@@ -56,31 +55,27 @@ import {
   ManagerDashboardProduct,
   ManagerDashboardCustomer,
   ManagerDashboardGarment,
-} from './routes/ManagerRoutes.js'
+} from "./routes/ManagerRoutes.js";
 
-import {
-  OwnerPage,
-} from './routes/OwnerRoutes.js'
+import { OwnerPage } from "./routes/OwnerRoutes.js";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { server } from './server.js';
-import Store from './redux/store.js';
-import { loadGarment, loadUser } from './redux/actions/user.js'
-import { getAllProducts } from './redux/actions/product.js';
-import ProtectedRoute from './routes/ProtectedRoute.js';
-import GarmentProtectedRoute from './routes/GarmentProtectedRoute.js';
-import ProtectedAdminRoute from './routes/ProtectedAdminRoute.js';
-import ProtectedManagerRoute from './routes/ProtectedManagerRoute.js';
-import Layout from './components/Owner/shared/Layout.jsx';
-import OwnerDashboard from './pages/Owner/Dashboard.jsx';
-import ManagerDashboard from './pages/Manager/Dashboard.jsx';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import axios from "axios";
+import { server } from "./server.js";
+import Store from "./redux/store.js";
+import { loadGarment, loadUser } from "./redux/actions/user.js";
+import { getAllProducts } from "./redux/actions/product.js";
+import ProtectedRoute from "./routes/ProtectedRoute.js";
+import GarmentProtectedRoute from "./routes/GarmentProtectedRoute.js";
+import ProtectedAdminRoute from "./routes/ProtectedAdminRoute.js";
+import ProtectedManagerRoute from "./routes/ProtectedManagerRoute.js";
+import Layout from "./components/Owner/shared/Layout.jsx";
+import OwnerDashboard from "./pages/Owner/Dashboard.jsx";
+import ManagerDashboard from "./pages/Manager/Dashboard.jsx";
 
 const App = () => {
-
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadGarment());
@@ -88,112 +83,163 @@ const App = () => {
   }, []);
 
   return (
-
-
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<CustomerHomePage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignupPage />} />
-        <Route path='/activation/:activation_token' element={<ActivationPage />} />
-        <Route path='/products' element={<ProductsPage />} />
-        <Route path='/products2' element={<ProductsPage2 />} />
-        <Route path='/product/:id' element={<ProductDetailsPage />} />
-        <Route path='/best-selling' element={<BestSellingPage />} />
-        <Route path='/faq' element={<FAQPage />} />
-        <Route path='/checkout' element={<CheckoutPage />} />
-        <Route path='/custom-orders' element={<CustomOrders />} />
-        <Route path='/payment' element={
-          <ProtectedRoute>
-            <PaymentPage />
-          </ProtectedRoute>
-        } />
-        <Route path='/order/success' element={<OrderSuccessPage />} />
-        <Route path='/pricepredictor' element={<PricePredictor />}></Route>
-        <Route path='/profile' element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        } />
+        <Route path="/" element={<CustomerHomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route
+          path="/activation/:activation_token"
+          element={<ActivationPage />}
+        />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products2" element={<ProductsPage2 />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
+        <Route path="/best-selling" element={<BestSellingPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/custom-orders" element={<CustomOrders />} />
+        <Route
+          path="/payment"
+          element={
+            <ProtectedRoute>
+              <PaymentPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/order/success" element={<OrderSuccessPage />} />
+        <Route path="/pricepredictor" element={<PricePredictor />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path='/inbox' element={
-          <ProtectedRoute>
-            <UserInbox />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/inbox"
+          element={
+            <ProtectedRoute>
+              <UserInbox />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path='/user/order/:id' element={
-          <ProtectedRoute>
-            <OrderDetailsPage />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/user/order/:id"
+          element={
+            <ProtectedRoute>
+              <OrderDetailsPage />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path='/user/track/order/:id' element={
-          <ProtectedRoute>
-            <TrackOrderPage />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/user/track/order/:id"
+          element={
+            <ProtectedRoute>
+              <TrackOrderPage />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path='/cutomize-tshirt' element={<CustomizeTShirt />} />
+        <Route path="/cutomize-tshirt" element={<CustomizeTShirt />} />
         {/* <Route path='/threed-model' element={<ThreeDmodel />} /> */}
-        <Route path='/product/three-d-model/:id' element={<ModelThree />} />
+        <Route path="/product/three-d-model/:id" element={<ModelThree />} />
 
         {/* garment Routes */}
-        <Route path='/garment/activation/:activation_token' element={<SellerActivationPage />} />
+        <Route
+          path="/garment/activation/:activation_token"
+          element={<SellerActivationPage />}
+        />
 
-        <Route path='/create-garment' element={<GarmentRegisterPage />} />
+        <Route path="/create-garment" element={<GarmentRegisterPage />} />
 
-        <Route path='/login-garment' element={<GarmentLoginPage />} />
+        <Route path="/login-garment" element={<GarmentLoginPage />} />
 
-        <Route path='/garment/:id' element={
-          <GarmentProtectedRoute>
-            <GarmentHomePage />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment/:id"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentHomePage />
+            </GarmentProtectedRoute>
+          }
+        />
 
         <Route path="/garment/preview/:id" element={<GarmentPreviewPage />} />
 
-        <Route path='/garment-dashboard' element={
-          <GarmentProtectedRoute>
-            <GarmentDashboardPage />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment-dashboard"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentDashboardPage />
+            </GarmentProtectedRoute>
+          }
+        />
 
-        <Route path='/garment-dashboard-orders' element={
-          <GarmentProtectedRoute>
-            <GarmentAllOrders />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment-dashboard-orders"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentAllOrders />
+            </GarmentProtectedRoute>
+          }
+        />
 
-        <Route path='/garment-dashboard-create-product' element={
-          <GarmentProtectedRoute>
-            <GarmentCreateProducts />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment-dashboard-create-product"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentCreateProducts />
+            </GarmentProtectedRoute>
+          }
+        />
+        <Route
+          path="/garment-dashboard-update-product/:id"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentUpdateProduct />
+            </GarmentProtectedRoute>
+          }
+        />
 
-        <Route path='/garment-dashboard-products' element={
-          <GarmentProtectedRoute>
-            <GarmentAllProducts />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment-dashboard-products"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentAllProducts />
+            </GarmentProtectedRoute>
+          }
+        />
 
-        <Route path='/order/:id' element={
-          <GarmentProtectedRoute>
-            <GarmentOrderDetails />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/order/:id"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentOrderDetails />
+            </GarmentProtectedRoute>
+          }
+        />
 
-        <Route path='/garment-dashboard-refunds' element={
-          <GarmentProtectedRoute>
-            <GarmentAllRefunds />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment-dashboard-refunds"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentAllRefunds />
+            </GarmentProtectedRoute>
+          }
+        />
 
-        <Route path='/garment-dashboard-messages' element={
-          <GarmentProtectedRoute>
-            <GarmentInboxPage />
-          </GarmentProtectedRoute>
-        } />
+        <Route
+          path="/garment-dashboard-messages"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentInboxPage />
+            </GarmentProtectedRoute>
+          }
+        />
 
         <Route
           path="/admin/dashboard"
@@ -238,10 +284,8 @@ const App = () => {
           }
         />
 
-
-
         <Route
-          path='/manager/dashboard'
+          path="/manager/dashboard"
           element={
             <ProtectedManagerRoute>
               <ManagerDashboardPage />
@@ -286,9 +330,8 @@ const App = () => {
         />
 
         <Route path="/owner" element={<OwnerPage />} />
-        <Route path='/ownerdashboard' element={<OwnerDashboard />} />
+        <Route path="/ownerdashboard" element={<OwnerDashboard />} />
         {/* <Route path='/managerdashboard' element={<ManagerDashboard />} /> */}
-
       </Routes>
       <ToastContainer
         position="bottom-right"
@@ -303,13 +346,7 @@ const App = () => {
         theme="colored"
       />
     </BrowserRouter>
-
-
-
-
-  )
-}
-
-
+  );
+};
 
 export default App;
