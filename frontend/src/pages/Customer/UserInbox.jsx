@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { server } from '../../server'
-import axios from 'axios'
+import Header from '../../components/Customer/Header'
+import { useSelector } from 'react-redux';
 import socketIO from 'socket.io-client'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { AiOutlineArrowRight, AiOutlineSend } from 'react-icons/ai'
-import { TfiGallery } from 'react-icons/tfi'
-import styles from '../../Styles/Customer/styles'
 import { format } from 'timeago.js'
-import { backend_url } from '../../server'
+import axios from 'axios';
+import { server } from '../../server';
+import { backend_url } from '../../server';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlineArrowRight, AiOutlineSend } from 'react-icons/ai';
+import { TfiGallery } from 'react-icons/tfi';
+import styles from '../../Styles/Customer/styles';
 
 const ENDPOINT = "http://localhost:4000/"
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 
-const DashboardMessages = () => {
-    const { garment } = useSelector((state) => state.garment);
+const UserInbox = () => {
+    const { user } = useSelector((state) => state.user);
     const [conversations, setConversations] = useState([]);
     const [open, setOpen] = useState(false);
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -26,85 +27,103 @@ const DashboardMessages = () => {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [activeStatus, setActiveStatus] = useState(false);
 
-    // connect socket
+
     useEffect(() => {
         socketId.on("getMessage", (data) => {
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
                 createdAt: Date.now(),
-            })
+            });
         });
     }, []);
 
     useEffect(() => {
-        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages((prev) => [...prev, arrivalMessage]);
-    }, [arrivalMessage, currentChat])
+        arrivalMessage &&
+            currentChat?.members.includes(arrivalMessage.sender) &&
+            setMessages((prev) => [...prev, arrivalMessage]);
+    }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
-        axios.get(`${server}/conversation/get-all-conversation-garment/${garment?._id}`, { withCredentials: true }).then((res) => {
-            setConversations(res.data.conversations);
-        }).catch((error) => {
-            console.log(error);
-        });
+        const getConversation = async () => {
+            try {
+                const resonse = await axios.get(
+                    `${server}/conversation/get-all-conversation-user/${user?._id}`,
+                    {
+                        withCredentials: true,
+                    }
+                );
 
-    }, [garment]);
+                setConversations(resonse.data.conversations);
+            } catch (error) {
+                // console.log(error);
+            }
+        };
+        getConversation();
+    }, [user, messages]);
 
     useEffect(() => {
-        if (garment) {
-            const garmentId = garment?._id;
-            socketId.emit("addUser", garmentId);
+        if (user) {
+            const sellerId = user?._id;
+            socketId.emit("addUser", sellerId);
             socketId.on("getUsers", (data) => {
                 setOnlineUsers(data);
-            })
+            });
         }
-    }, [garment]);
+    }, [user]);
 
     const onlineCheck = (chat) => {
-        const chatMembers = chat.members.find((member) => member !== garment._id)
+        const chatMembers = chat.members.find((member) => member !== user?._id);
         const online = onlineUsers.find((user) => user.userId === chatMembers);
 
         return online ? true : false;
-
-    }
+    };
 
     // get messages
     useEffect(() => {
         const getMessage = async () => {
             try {
-                const response = await axios.get(`${server}/message/get-all-messages/${currentChat?._id}`)
+                const response = await axios.get(
+                    `${server}/message/get-all-messages/${currentChat?._id}`
+                );
                 setMessages(response.data.messages);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-        }
+        };
         getMessage();
-    }, [currentChat])
+    }, [currentChat]);
 
-    // create message
+    // create new message
     const sendMessageHandler = async (e) => {
         e.preventDefault();
 
         const message = {
-            sender: garment._id,
+            sender: user._id,
             text: newMessage,
             conversationId: currentChat._id,
-        }
-        const receiverId = currentChat.members.find((member) => member.id !== garment._id);
+        };
+        const receiverId = currentChat.members.find(
+            (member) => member !== user?._id
+        );
 
         socketId.emit("sendMessage", {
-            senderId: garment._id,
+            senderId: user?._id,
             receiverId,
             text: newMessage,
         });
+
         try {
             if (newMessage !== "") {
-                await axios.post(`${server}/message/create-new-message`, message).then((res) => {
-                    setMessages([...messages, res.data.message])
-                    updateLastMessage();
-                }).catch((error) => {
-                    console.log(error);
-                });
+                await axios
+                    .post(`${server}/message/create-new-message`, message)
+                    .then((res) => {
+                        setMessages([...messages, res.data.message]);
+                        updateLastMessage();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             }
         } catch (error) {
             console.log(error);
@@ -114,22 +133,25 @@ const DashboardMessages = () => {
     const updateLastMessage = async () => {
         socketId.emit("updateLastMessage", {
             lastMessage: newMessage,
-            lastMessageId: garment._id,
+            lastMessageId: user._id,
         });
-        await axios.put(`${server}/conversation/update-last-message/${currentChat._id}`, {
-            lastMessage: newMessage,
-            lastMessageId: garment._id,
-        })
-            .then((res) => {
-                console.log(res.data.conversation);
-                setNewMessage("");
-            }).catch((error) => {
-                console.log(error)
+
+        await axios
+            .put(`${server}/conversation/update-last-message/${currentChat._id}`, {
+                lastMessage: newMessage,
+                lastMessageId: user._id,
             })
-    }
+            .then((res) => {
+                setNewMessage("");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
-        <div className='w-[83%] bg-[#efefef] m-5 h-[85vh] overflow-y-scroll rounded'>
+        <div className='w-full'>
+            <Header />
             {
                 !open && (
                     <>
@@ -144,7 +166,7 @@ const DashboardMessages = () => {
                                     index={index}
                                     setOpen={setOpen}
                                     setCurrentChat={setCurrentChat}
-                                    me={garment._id}
+                                    me={user?._id}
                                     setUserData={setUserData}
                                     userData={userData}
                                     online={onlineCheck(item)}
@@ -156,41 +178,39 @@ const DashboardMessages = () => {
                     </>
                 )
             }
-
-            {
-                open && (
-                    <GarmentInbox
-                        setOpen={setOpen}
-                        newMessage={newMessage}
-                        setNewMessage={setNewMessage}
-                        sendMessageHandler={sendMessageHandler}
-                        messages={messages}
-                        garmentId={garment._id}
-                        userData={userData}
-                        activeStatus={activeStatus}
-                    />
-                )
-            }
+            {open && (
+                <GarmentInbox
+                    setOpen={setOpen}
+                    newMessage={newMessage}
+                    setNewMessage={setNewMessage}
+                    sendMessageHandler={sendMessageHandler}
+                    messages={messages}
+                    garmentId={user._id}
+                    userData={userData}
+                    activeStatus={activeStatus}
+                />
+            )}
         </div>
     )
 }
 
 const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, userData, online, setActiveStatus, isLoading }) => {
+    const [active, setActive] = useState(0);
+    const [user, setUser] = useState([]);
     const navigate = useNavigate();
+
     const handleClick = (id) => {
-        navigate(`?${id}`);
+        navigate(`/inbox?${id}`);
         setOpen(true);
     }
-    const [active, setActive] = useState(0);
-
 
     useEffect(() => {
         setActiveStatus(online);
-        const userId = data.members.find((user) => user != me);
+        const userId = data.members.find((user) => user !== me);
         const getUser = async () => {
             try {
-                const res = await axios.get(`${server}/user/user-info/${userId}`);
-                setUserData(res.data.user);
+                const res = await axios.get(`${server}/garment/get-garment-info/${userId}`);
+                setUser(res.data.garment);
             } catch (error) {
                 console.log(error);
             }
@@ -200,9 +220,19 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
 
     return (
         <div className={`w-full flex p-4 px-3 ${active === index ? 'bg-[#00000010]' : 'bg-transparent'} cursor-pointer`}
-            onClick={(e) => setActive(index) || handleClick(data._id) || setCurrentChat(data)}>
+            onClick={(e) =>
+                setActive(index) ||
+                handleClick(data._id) ||
+                setCurrentChat(data) ||
+                setUserData(user) ||
+                setActiveStatus(online)
+            }
+        >
             <div className='relative'>
-                <img src={`${backend_url}/${userData?.avatar}`} alt=''
+                {console.log("user", user)}
+                <img
+                    src={`${backend_url}/${user?.avatar}`}
+                    alt=''
                     className='w-[50px] h-[50px] rounded-full'
                 />
                 {
@@ -215,16 +245,31 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
             </div>
 
             <div className='pl-3'>
-                <h1 className='text-[18px]'>{userData?.name}</h1>
-                <p className='text-[16px] text-[#000]'>{
-                    data.lastMessageId !== userData?._id ? "You:" : userData?.name.split(" ")[0] + ": "
-                } {data?.lastMessage}</p>
+                <h1 className='text-[18px]'>{user?.companyName}</h1>
+                <p className='text-[16px] text-[#000]'>
+                    {
+                        data?.lastMessageId !== userData?._id ?
+                            "You:"
+                            : userData?.name?.split(" ")[0] + ": "}
+                    {data?.lastMessage}
+                </p>
             </div>
         </div>
     )
 }
 
-const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, messages, garmentId, userData, activeStatus, hadleImageUpload, }) => {
+
+const GarmentInbox = ({
+    setOpen,
+    newMessage,
+    setNewMessage,
+    sendMessageHandler,
+    messages,
+    garmentId,
+    userData,
+    activeStatus,
+    hadleImageUpload,
+}) => {
     return (
         <div className='w-full min-h-full flex flex-col justify-between'>
             {/* message header */}
@@ -233,8 +278,9 @@ const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, 
                     <img src={`${backend_url}/${userData?.avatar}`} alt=''
                         className='w-[60px] h-[60px] rounded-full'
                     />
+                    {console.log("active:", activeStatus)}
                     <div className='pl-3'>
-                        <h1 className='text-[18px] font-[600]'>{userData?.name}</h1>
+                        <h1 className='text-[18px] font-[600]'>{userData?.companyName}</h1>
                         <h1>{activeStatus ? "Active Now" : ""}</h1>
                     </div>
                 </div>
@@ -247,13 +293,13 @@ const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, 
                     messages && messages.map((item, index) => (
 
                         <div className={`flex w-full my-2 ${item.sender === garmentId ? 'justify-end' : 'justify-start'}`}>
-                            {
-                                item.sender !== garmentId && (
-                                    <img src='https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg'
-                                        className='w-[48px] h-[48px] mr-3 rounded-full'
-                                    />
-                                )
-                            }
+                            {item.sender !== garmentId && (
+                                <img
+                                    src={`${backend_url}/${userData?.avatar}`}
+                                    className="w-[40px] h-[40px] rounded-full mr-3"
+                                    alt=""
+                                />
+                            )}
                             <div>
                                 <div className='w-max p-2 rounded bg-[#3292dc] h-min text-[#fff]'>
                                     <p>{item.text}</p>
@@ -297,4 +343,5 @@ const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, 
         </div>
     )
 }
-export default DashboardMessages
+
+export default UserInbox

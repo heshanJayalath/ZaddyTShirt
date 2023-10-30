@@ -23,6 +23,7 @@ import {
   OrderDetailsPage,
   PricePredictor,
   TrackOrderPage,
+  UserInbox,
 }
   from './routes/Routes.js';
 
@@ -38,6 +39,7 @@ import {
   GarmentOrderDetails,
   GarmentAllRefunds,
   GarmentInboxPage,
+  
 } from './routes/GarmentRoutes.js';
 
 import {
@@ -111,6 +113,12 @@ const App = () => {
         <Route path='/profile' element={
           <ProtectedRoute>
             <ProfilePage />
+          </ProtectedRoute>
+        } />
+
+        <Route path='/inbox' element={
+          <ProtectedRoute>
+            <UserInbox />
           </ProtectedRoute>
         } />
 
