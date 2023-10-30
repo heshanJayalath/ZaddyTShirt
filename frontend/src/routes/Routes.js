@@ -14,7 +14,9 @@ import PaymentPage from '../pages/Customer/PaymentPage.jsx'
 import CustomOrders from '../pages/Customer/CustomOrders.jsx';
 import OrderSuccessPage from '../pages/Customer/OrderSuccessPage.jsx';
 import OrderDetailsPage from '../pages/Customer/OrderDetailsPage.jsx';
+import UserInbox from '../pages/Customer/UserInbox.jsx'
 // import ThreeDmodel from '../pages/Customer/ThreeDmodel.jsx';
+
 
 import ModelThree from '../pages/Customer/ModelThree.jsx';
 
@@ -42,6 +44,7 @@ export {
   CustomOrders,
   OrderSuccessPage,
   OrderDetailsPage,
+  UserInbox,
   
   ModelThree,
   // ThreeDmodel,
