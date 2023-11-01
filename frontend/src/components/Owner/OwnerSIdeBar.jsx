@@ -55,7 +55,7 @@ const OwnerSIdeBar = ({ active }) => {
       </div>
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8">
-        <Link to="/manager-products" className="w-full flex items-center">
+        <Link to="/owner-products" className="w-full flex items-center">
           <HiOutlineShoppingCart size={30} color={active === 3 ? "red" : ""} />
           <span
             className={`pl-3 text-lg ${active === 3 ? "text-[red]" : ""} 800px:block `}

@@ -60,6 +60,7 @@ import {
 import {
   OwnerDashboardPage,
   OwnerAllOrdersPage,
+  OwnerDashBoardProducts,
 } from "./routes/OwnerRoutesNew.js";
 
 // import { OwnerPage } from "./routes/OwnerRoutes.js";
@@ -348,6 +349,15 @@ const App = () => {
           element={
             <ProtectedManagerRoute>
               <OwnerAllOrdersPage />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/owner-products"
+          element={
+            <ProtectedManagerRoute>
+              <OwnerDashBoardProducts />
             </ProtectedManagerRoute>
           }
         />
