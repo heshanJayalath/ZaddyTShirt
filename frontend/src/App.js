@@ -57,7 +57,12 @@ import {
   ManagerDashboardGarment,
 } from "./routes/ManagerRoutes.js";
 
-import { OwnerPage } from "./routes/OwnerRoutes.js";
+import {
+  OwnerDashboardPage,
+  OwnerAllOrdersPage,
+} from "./routes/OwnerRoutesNew.js";
+
+// import { OwnerPage } from "./routes/OwnerRoutes.js";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -72,7 +77,7 @@ import GarmentProtectedRoute from "./routes/GarmentProtectedRoute.js";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute.js";
 import ProtectedManagerRoute from "./routes/ProtectedManagerRoute.js";
 import Layout from "./components/Owner/shared/Layout.jsx";
-import OwnerDashboard from "./pages/Owner/Dashboard.jsx";
+// import OwnerDashboard from "./pages/Owner/Dashboard.jsx";
 import ManagerDashboard from "./pages/Manager/Dashboard.jsx";
 
 const App = () => {
@@ -329,9 +334,23 @@ const App = () => {
           }
         />
 
-        <Route path="/owner" element={<OwnerPage />} />
-        <Route path="/ownerdashboard" element={<OwnerDashboard />} />
-        {/* <Route path='/managerdashboard' element={<ManagerDashboard />} /> */}
+        <Route
+          path="/owner/dashboard"
+          element={
+            <ProtectedManagerRoute>
+              <OwnerDashboardPage />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/owner-orders"
+          element={
+            <ProtectedManagerRoute>
+              <OwnerAllOrdersPage />
+            </ProtectedManagerRoute>
+          }
+        />
       </Routes>
       <ToastContainer
         position="bottom-right"
