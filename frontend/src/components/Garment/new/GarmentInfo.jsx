@@ -42,16 +42,16 @@ const GarmentInfo = ({ isGarmentOwner }) => {
           <Loader />
         ) : (
           <div>
-            <div className="w-full py-5">
-              <div className="w-full flex item-center justify-center">
+            <div className="w-full p-4 py-5">
+              <div className="w-full p-2">
                 <img
                   src={`${backend_url}/${data?.avatar}`}
                   alt=""
                   className="w-[150px] h-[150px] object-cover rounded-full"
                 />
               </div>
-              <h3 className="text-center py-2 text-[20px]">{data?.companyName}</h3>
-              <p className="text-[16px] text-center text-[#000000a6] p-[5px]  items-center">
+              <h3 className=" py-2 text-[20px]">{data?.companyName}</h3>
+              <p className="text-[16px] text-[#000000a6] p-[5px]  items-center">
                 {data?.companyEmail}
               </p>
             </div>

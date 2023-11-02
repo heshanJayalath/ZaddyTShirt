@@ -21,6 +21,9 @@ const ResponsiveHeader = ({ activeHeading }) => {
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
 
+
+ 
+
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -36,6 +39,7 @@ const ResponsiveHeader = ({ activeHeading }) => {
   window.addEventListener("scroll", () => {
     if (window.scrollY > 70) {
       setActive(true);
+   
     } else {
       setActive(false);
     }

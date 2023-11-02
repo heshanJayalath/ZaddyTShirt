@@ -15,7 +15,7 @@ import Wishlist from './Wishlist';
 import { useSelector } from 'react-redux';
 import { backend_url } from '../../server';
 
-const Header = ({ activeHeading }) => {
+const Header = ({ activeHeading, visibility=true }) => {
     const { isAuthenticated, user, loading } = useSelector((state) => state.user);
     const { allProducts } = useSelector((state) => state.products)
     const { cart } = useSelector((state) => state.cart)
@@ -30,6 +30,7 @@ const Header = ({ activeHeading }) => {
     const [active, setActive] = useState(false);
     const [dropDown, setDropDown] = useState(false);
     const [openCart, setOpenCart] = useState(false);
+   
 
     const handleSearchChange = (e) => {
         const term = e.target.value;
@@ -62,7 +63,8 @@ const Header = ({ activeHeading }) => {
                                     <img src={Logo} alt='' className=' w-[50px] md:w-[100px]' />
                                 </Link>
                             </div>
-                            <div className='w-[50%] relative'>
+                           <div className='w-full flex content-start justify-center'>
+                           <div className='w-[50%] relative'>
                                 <input
                                     type='text'
                                     placeholder='Search Product...'
@@ -92,7 +94,9 @@ const Header = ({ activeHeading }) => {
                                     )
                                 }
                             </div>
+                           </div>
                             
+                           {visibility&&<div>
                             <div className={`${styles.button}`}>
                                 <Link to={`${isGarment ? "/garment-dashboard" : "/create-garment"}`}>
                                     <h1 className="text-[#fff] flex items-center">
@@ -101,6 +105,8 @@ const Header = ({ activeHeading }) => {
                                     </h1>
                                 </Link>
                             </div>
+                            </div>}
+                           
 
                         </div>
                     </div>
