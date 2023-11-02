@@ -39,7 +39,7 @@ import {
   GarmentOrderDetails,
   GarmentAllRefunds,
   GarmentInboxPage,
-  
+
 } from './routes/GarmentRoutes.js';
 
 import {
@@ -102,7 +102,13 @@ const App = () => {
         <Route path='/best-selling' element={<BestSellingPage />} />
         <Route path='/faq' element={<FAQPage />} />
         <Route path='/checkout' element={<CheckoutPage />} />
-        <Route path='/custom-orders' element={<CustomOrders />} />
+        
+        <Route path='/custom-orders' element={
+          <ProtectedRoute>
+            <CustomOrders />
+          </ProtectedRoute>
+
+        } />
         <Route path='/payment' element={
           <ProtectedRoute>
             <PaymentPage />
