@@ -91,38 +91,35 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CustomerHomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route
-          path="/activation/:activation_token"
-          element={<ActivationPage />}
-        />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products2" element={<ProductsPage2 />} />
-        <Route path="/product/:id" element={<ProductDetailsPage />} />
-        <Route path="/best-selling" element={<BestSellingPage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/custom-orders" element={<CustomOrders />} />
-        <Route
-          path="/payment"
-          element={
-            <ProtectedRoute>
-              <PaymentPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/order/success" element={<OrderSuccessPage />} />
-        <Route path="/pricepredictor" element={<PricePredictor />}></Route>
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path='/' element={<CustomerHomePage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/activation/:activation_token' element={<ActivationPage />} />
+        <Route path='/products' element={<ProductsPage />} />
+        <Route path='/products2' element={<ProductsPage2 />} />
+        <Route path='/product/:id' element={<ProductDetailsPage />} />
+        <Route path='/best-selling' element={<BestSellingPage />} />
+        <Route path='/faq' element={<FAQPage />} />
+        <Route path='/checkout' element={<CheckoutPage />} />
+        
+        <Route path='/custom-orders' element={
+          <ProtectedRoute>
+            <CustomOrders />
+          </ProtectedRoute>
+
+        } />
+        <Route path='/payment' element={
+          <ProtectedRoute>
+            <PaymentPage />
+          </ProtectedRoute>
+        } />
+        <Route path='/order/success' element={<OrderSuccessPage />} />
+        <Route path='/pricepredictor' element={<PricePredictor />}></Route>
+        <Route path='/profile' element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
 
         <Route
           path="/inbox"

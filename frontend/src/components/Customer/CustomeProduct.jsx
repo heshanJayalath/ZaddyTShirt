@@ -2,32 +2,34 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineCloseCircle, AiOutlinePlusCircle } from "react-icons/ai";
-import { categoriesData, materialData } from "../../Static/Customer/data";
+import {  materialData } from "../../Static/Customer/data";
 import { toast } from "react-toastify";
-import { createProduct } from "../../redux/actions/product";
+import { createCustomOrder } from "../../redux/actions/customorder";
+import FormData from "form-data";
+
+
 
 const CustomProduct = () => {
-  const { garment } = useSelector((state) => state.garment);
-  const { success, error } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.user);
+  // const { garment } = useSelector((state) => state.garment);
+  const { success, error } = useSelector((state) => state.customorder);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [images, setImages] = useState([]);
+  
   const [name, setName] = useState("");
+  const [images, setImages] = useState([]);
+  const [productCount, setProductCount] = useState();
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
   const [material, setMaterial] = useState("");
   const [colour, setColour] = useState("");
-  const [xscount, setxscount] = useState("");
-  const [scount, setscount] = useState("");
-  const [mcount, setmcount] = useState("");
-  const [lcount, setlcount] = useState("");
-  const [xlcount, setxlcount] = useState("");
-  const [xxlcount, setxxlcount] = useState("");
-  const [tags, setTags] = useState("");
-  const [originalPrice, setOriginalPrice] = useState();
-  const [discountPrice, setDiscountPrice] = useState();
-  const [stock, setStock] = useState();
+  const [xscount, setXscount] = useState();
+  const [scount, setScount] = useState();
+  const [mcount, setMcount] = useState();
+  const [lcount, setLcount] = useState();
+  const [xlcount, setXlcount] = useState();
+  const [xxlcount, setXxlcount] = useState();
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     if (error) {
@@ -35,16 +37,16 @@ const CustomProduct = () => {
       toast.error(error);
     }
     if (success) {
-      toast.success("Product created successfully!");
-      navigate("/garment-dashboard");
+      toast.success("Custom order created successfully!");
+      navigate("/");
       window.location.reload();
     }
   }, [dispatch, error, success]);
 
   const handleImageChange = (e) => {
     e.preventDefault();
+
     let files = Array.from(e.target.files);
-    console.log("files", files);
     setImages((prevImages) => [...prevImages, ...files]);
   };
 
@@ -56,24 +58,32 @@ const CustomProduct = () => {
     images.forEach((image) => {
       newForm.append("images", image);
     });
-    // newForm.append("name", name);
-    // newForm.append("description", description);
-    // newForm.append("category", category);
-    // newForm.append("material", material);
-    // newForm.append("colour", colour);
-    // newForm.append("thickness", thickness);
-    // newForm.append("tags", tags);
-    // newForm.append("originalPrice", originalPrice);
-    // newForm.append("discountPrice", discountPrice);
-    // newForm.append("stock", stock);
-    // newForm.append("garmentId", garment._id);
+    newForm.append("email", user.email);
+    newForm.append("name", name);
+    newForm.append("material", material);
+    newForm.append("productCount", productCount);
+    newForm.append("xscount", xscount);
+    newForm.append("scount", scount);
+    newForm.append("mcount", mcount);
+    newForm.append("lcount", lcount);
+    newForm.append("xlcount", xlcount);
+    newForm.append("xxlcount", xxlcount);
+    newForm.append("colour", colour);
+    newForm.append("description", description);
+    newForm.append("address", address);
+    newForm.append("userId", user._id);
 
-    dispatch(createProduct(newForm));
+
+
+    dispatch(createCustomOrder(newForm));
   };
 
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
+
+
+
 
   return (
     <div className="w-[80%] md:w-[50%] bg-white mt-16 shadow-md shadow-blue-500  rounded-[4px] overflow-y-scroll p-3">
@@ -83,7 +93,20 @@ const CustomProduct = () => {
       {/* create product form */}
       <form onSubmit={handleSubmit}>
         <br />
-
+        <div>
+          <label className="pb-2">
+            Order name / Your name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter order name..."
+          />
+        </div>
+        <br />
         <div>
           <label className="pb-2">
             Material <span className="text-red-500">*</span>
@@ -108,133 +131,115 @@ const CustomProduct = () => {
 
         <div>
           <label className="pb-2">
-            Products Count <span className="text-red-500">*</span>
+            Products Quantity <span className="text-red-500">*</span>
           </label>
           <input
             type="number"
-            name="name"
-            value={name}
+            name="productCount"
+            value={productCount}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter how mutch products you want..."
+            onChange={(e) => setProductCount(e.target.value)}
+            placeholder="Enter the total shirt Quntity"
           />
         </div>
-      
-        {/* <div>
-                    <label className="pb-2">
-                        Category <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                        className="w-full mt-2 border h-[35px] rounded-[5px]"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    >
-                        <option value="Choose a category">Choose a category</option>
-                        {categoriesData &&
-                            categoriesData.map((i) => (
-                                <option value={i.title} key={i.title}>
-                                    {i.title}
-                                </option>
-                            ))}
-                    </select>
-                </div> */}
+
 
         <br />
         <div className="">
-            <h2>Total Products Counts</h2>
-            <br />
+          <h2>Total Products Quantity</h2>
+          <br />
           <div className="flex w-full gap-4">
-            
+
             <div className="w-4/12">
               <label className="pb-2">
-                XS Count <span className="text-red-500">*</span>
+                XS Quantity <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
-                name="name"
+                name="xscount"
                 value={xscount}
                 className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                onChange={(e) => setxscount(e.target.value)}
-                placeholder="Enter your product name..."
+                onChange={(e) => setXscount(e.target.value)}
+                placeholder="Enter your Extra Small product count..."
               />
             </div>
 
             <div className="w-4/12">
               <label className="pb-2">
-                S Count <span className="text-red-500">*</span>
+                S Quantity <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
-                name="s_count"
+                name="scount"
                 value={scount}
                 className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                onChange={(e) => setscount(e.target.value)}
-                placeholder="Enter your product name..."
+                onChange={(e) => setScount(e.target.value)}
+                placeholder="Enter your small product count..."
               />
             </div>
 
             <div className="w-4/12">
               <label className="pb-2">
-                M Count <span className="text-red-500">*</span>
+                M Quantity <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
-                name="m_count"
+                name="mcount"
                 value={mcount}
                 className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                onChange={(e) => setmcount(e.target.value)}
-                placeholder="Enter your product name..."
+                onChange={(e) => setMcount(e.target.value)}
+                placeholder="Enter your Medium product count..."
               />
             </div>
 
           </div>
           <div>
-                <br />
-          <div className="flex w-full gap-4">
-            
-            <div className="w-4/12">
-              <label className="pb-2">
-                L Count <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="l_count"
-                value={lcount}
-                className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                onChange={(e) => setlcount(e.target.value)}
-                placeholder="Enter your Large product Count..."
-              />
-            </div>
+            <br />
+            <div className="flex w-full gap-4">
 
-            <div className="w-4/12">
-              <label className="pb-2">
-                XL Count <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="xl_count"
-                value={xlcount}
-                className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                onChange={(e) => setxlcount(e.target.value)}
-                placeholder="Enter your Extra Large product count..."
-              />
-            </div>
+              <div className="w-4/12">
+                <label className="pb-2">
+                  L Quantity <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="lcount"
+                  value={lcount}
+                  className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  onChange={(e) => setLcount(e.target.value)}
+                  placeholder="Enter your Large product Count..."
+                />
+              </div>
 
-            <div className="w-4/12">
-              <label className="pb-2">
-                XXL Count <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="xxl_count"
-                value={xxlcount}
-                className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                onChange={(e) => setxxlcount(e.target.value)}
-                placeholder="Enter your Double Extra Large product count..."
-              />
-            </div>
+              <div className="w-4/12">
+                <label className="pb-2">
+                  XL Quantity <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="xlcount"
+                  value={xlcount}
+                  className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  onChange={(e) => setXlcount(e.target.value)}
+                  placeholder="Enter your Extra Large product count..."
+                />
+              </div>
 
-          </div>
+              <div className="w-4/12">
+                <label className="pb-2">
+                  XXL Quantity <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="xxlcount"
+                  value={xxlcount}
+                  className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  onChange={(e) => setXxlcount(e.target.value)}
+                  placeholder="Enter your Double Extra Large product count..."
+                />
+              </div>
+
+            </div>
           </div>
         </div>
 
@@ -250,7 +255,7 @@ const CustomProduct = () => {
             required
             rows="1"
             type="text"
-            name="Colour"
+            name="colour"
             value={colour}
             className="mt-2 appearance-none block w-full p-2 px-3 border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setColour(e.target.value)}
@@ -275,19 +280,21 @@ const CustomProduct = () => {
         </div>
         <br />
 
-        {/* <div>
-          <label className="pb-2">Tags</label>
+        <div>
+          <label className="pb-2">
+            Postal Address <span className="text-red-500">*</span>
+          </label>
           <input
             type="text"
-            name="tags"
-            value={tags}
+            name="address"
+            value={address}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            onChange={(e) => setTags(e.target.value)}
-            placeholder="Enter your product tags..."
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Enter your Address..."
           />
         </div>
-        <br /> */}
-      
+        <br />
+
 
         <div>
           <label className="pb-2">

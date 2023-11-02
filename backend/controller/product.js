@@ -12,6 +12,9 @@ const fs = require('fs');
 // create product
 router.post("/create-product", upload.fields([{ name: "images", maxCount: 5 }, { name: "model", maxCount: 5 }]), catchAsyncErrors(async (req, res, next) => {
     try {
+        if (!req.files || !req.files['images'] || !req.files['model']) {
+            return next(new ErrorHandler("No files were uploaded", 400));
+        }
         const garmentId = req.body.garmentId;
         const garment = await Garment.findById(garmentId);
         if (!garment) {
@@ -42,6 +45,8 @@ router.post("/create-product", upload.fields([{ name: "images", maxCount: 5 }, {
 // getAll products of a garment
 router.get("/get-all-products-garment/:id", catchAsyncErrors(async (req, res, next) => {
     try {
+
+        
         const products = await Product.find({ garmentId: req.params.id })
         console.log("products: ", products);
         res.status(201).json({

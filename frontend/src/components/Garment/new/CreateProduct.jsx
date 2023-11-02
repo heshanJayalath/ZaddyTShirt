@@ -55,7 +55,8 @@ const CreateProduct = () => {
         images.forEach((image) => {
             newForm.append("images", image);
         });
-        newForm.append("name", name+" "+size);
+        newForm.append("name", name);
+        newForm.append("size", size);
         newForm.append("description", description);
         newForm.append("category", category);
         newForm.append("material", material);
