@@ -2,7 +2,7 @@ import axios from 'axios';
 import { server } from '../../server';
 
 // create custom-order
-export const createCustomOrder = (newForm) => async(dispatch) => {
+export const createCustomOrder = (newForm) => async (dispatch) => {
     try {
         dispatch({
             type: "customorderCreateRequest",
@@ -26,3 +26,41 @@ export const createCustomOrder = (newForm) => async(dispatch) => {
         });
     }
 }
+
+//get all custom orders
+export const getAllCustomOrders = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "getAllCustomOrdersRequest",
+        });
+        const { data } = await axios.get(`${server}/customorder/get-all-custom-orders`);
+        dispatch({
+            type: "getAllCustomOrdersSuccess",
+            payload: data.customorders,
+        });
+    } catch (error) {
+        dispatch({
+            type: "getAllCustomOrdersFailed",
+            payload: error.response.data.message,
+        });
+    }
+};
+
+// export const deleteCustomOrder = (id) => async (dispatch) => {
+//     try {
+//         dispatch({
+//             type: "deleteCustomOrderRequest",
+//         });
+//         const { data } = await axios.delete(`${server}/customorder/delete-custom-order/${id}`, { withCredentials: true });
+//         dispatch({
+//             type: "deleteCustomOrderSuccess",
+//             payload: data.message,
+//         });
+//     } catch (error) {
+//         dispatch({
+//             type: "deleteCustomOrderFailed",
+//             payload: error.response.data.message,
+//         });
+//     }
+// };
+

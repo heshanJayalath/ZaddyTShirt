@@ -21,12 +21,12 @@ router.post("/create-custom-order", upload.fields([{ name: "images", maxCount: 5
         } else {
             const files = req.files['images'];
             const imageUrls = files.map((file) => `${file.filename}`);
-            
+
             // console.log("model",modelFiles);
             const customData = req.body;
             customData.images = imageUrls;
             customData.user = user;
-            customData.xxlcount = req.body.xxlcount; 
+            customData.xxlcount = req.body.xxlcount;
             customData.xlcount = req.body.xlcount;
             customData.lcount = req.body.lcount;
             customData.mcount = req.body.mcount;
@@ -44,5 +44,73 @@ router.post("/create-custom-order", upload.fields([{ name: "images", maxCount: 5
         return next(new ErrorHandler(error, 400));
     }
 }));
+
+// get all custom-orders
+router.get(
+    "/get-all-custom-orders",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const customorders = await CustomOrder.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                customorders,
+            })
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// get all custom-orders for manager
+router.get(
+    "/manager-all-custom-orders",
+    isAuthenticated,
+    isManager("manager"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const customorders = await CustomOrder.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                customorders,
+            })
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// delete custom-order
+router.delete("/delete-custom-order/:id", isAuthenticated, isManager("manager"), catchAsyncErrors(async (req, res, next) => {
+    try {
+        const customorderId = req.params.id;
+        const customorderData = await CustomOrder.findById(customorderId);
+
+        customorderData.images.forEach((imageUrl) => {
+            const filename = imageUrl;
+            const filePath = `uploads/${filename}`;
+
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+
+        });
+        const customorder = await CustomOrder.findByIdAndDelete(customorderId);
+        if (!customorder) {
+            return next(new ErrorHandler('Custom order not found with this Id!', 500));
+        }
+        res.status(201).json({
+            success: true,
+            message: "Custom order deleted Successfully!"
+        })
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500))
+    }
+}))
 
 module.exports = router;

@@ -94,27 +94,15 @@ const ManagerSideBar = ({ active }) => {
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
       >
-        <Link to="/manager-transaction" className="w-full flex items-center">
+        <Link to="/manager-custom-order" className="w-full flex items-center">
 
           <HiOutlineCash size={30} color={active === 6 ? "red" : ""} />
           <span
             className={`pl-3 text-lg ${active === 6 ? "text-[red]" : ""} 800px:block `}
           >
-            Transactions
+            All Custom-orders
           </span>
         </Link>
-      </div>
-
-      <div
-        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
-
-      >
-        <HiOutlineUsers size={30} color={active === 9 ? "red" : ""} />
-        <span
-          className={`pl-3 text-lg ${active === 9 ? "text-[red]" : ""} 800px:block `}
-        >
-          System Users
-        </span>
       </div>
 
       <div

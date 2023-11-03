@@ -55,6 +55,8 @@ import {
   ManagerDashboardProduct,
   ManagerDashboardCustomer,
   ManagerDashboardGarment,
+  ManagerDashboardCustomOrder,
+  ManagerCustomOrderDetails,
 } from "./routes/ManagerRoutes.js";
 
 import {
@@ -101,7 +103,7 @@ const App = () => {
         <Route path='/best-selling' element={<BestSellingPage />} />
         <Route path='/faq' element={<FAQPage />} />
         <Route path='/checkout' element={<CheckoutPage />} />
-        
+
         <Route path='/custom-orders' element={
           <ProtectedRoute>
             <CustomOrders />
@@ -328,6 +330,24 @@ const App = () => {
           element={
             <ProtectedManagerRoute>
               <ManagerDashboardGarment />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/manager-custom-order"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardCustomOrder />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        <Route
+          path="/customorder/:id"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerCustomOrderDetails />
             </ProtectedManagerRoute>
           }
         />
