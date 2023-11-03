@@ -84,6 +84,20 @@ export const userReducer = createReducer(initialState, {
         state.usersLoading = false;
         state.error = action.payload;
     },
+
+    // get all users --- owner
+    getAllOwnerUsersRequest: (state) => {
+        state.usersLoading = true;
+    },
+    getAllOwnerUsersSuccess: (state, action) => {
+        state.usersLoading = false;
+        state.users = action.payload;
+    },
+    getAllOwnerUsersFailed: (state, action) => {
+        state.usersLoading = false;
+        state.error = action.payload;
+    },
+    
     clearErrors: (state) => {
         state.error = null;
     },

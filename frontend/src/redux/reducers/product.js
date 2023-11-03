@@ -45,8 +45,8 @@ export const productReducer = createReducer(initialState, {
     state.error = action.payload;
   },
 
-   // get all products
-   getAllProductsRequest: (state) => {
+  // get all products
+  getAllProductsRequest: (state) => {
     state.isLoading = true;
   },
   getAllProductsSuccess: (state, action) => {
@@ -54,6 +54,19 @@ export const productReducer = createReducer(initialState, {
     state.allProducts = action.payload;
   },
   getAllProductsFailed: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+  },
+
+  // get all products owner
+  getAllOwnerProductsRequest: (state) => {
+    state.isLoading = true;
+  },
+  getAllOwnerProductsSuccess: (state, action) => {
+    state.isLoading = false;
+    state.allProducts = action.payload;
+  },
+  getAllOwnerProductsFailed: (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
   },

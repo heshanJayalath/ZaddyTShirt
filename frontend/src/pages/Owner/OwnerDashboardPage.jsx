@@ -8,7 +8,7 @@ const OwnerDashboardPage = () => {
   const [active, setActive] = useState(1);
   return (
     <div>
-      < OwnerHeader />
+      <OwnerHeader />
 
       <div className="md:flex">
         <div className="md:w-[335px] w-full sticky 800px:mt-0 ms-4">

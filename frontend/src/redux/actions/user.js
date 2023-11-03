@@ -183,3 +183,26 @@ export const getAllManagerUsers = () => async (dispatch) => {
     });
   }
 };
+
+// get all users --- owner
+export const getAllOwnerUsers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "getAllOwnerUsersRequest",
+    });
+
+    const { data } = await axios.get(`${server}/user/owner-all-users`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "getAllOwnerUsersSuccess",
+      payload: data.users,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getAllOwnerUsersFailed",
+      payload: error.response.data.message,
+    });
+  }
+};

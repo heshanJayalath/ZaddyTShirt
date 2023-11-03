@@ -57,6 +57,19 @@ export const orderReducer = createReducer(initialState, {
     state.error = action.payload;
   },
 
+   // get all orders for Owner
+   ownerAllOrdersRequest: (state) => {
+    state.ownerOrderLoading = true;
+  },
+  ownerAllOrdersSuccess: (state, action) => {
+    state.ownerOrderLoading = false;
+    state.ownerOrders = action.payload;
+  },
+  ownerAllOrdersFailed: (state, action) => {
+    state.ownerOrderLoading = false;
+    state.error = action.payload;
+  },
+
   clearErrors: (state) => {
     state.error = null;
   },

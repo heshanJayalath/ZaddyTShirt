@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require('../utils/sendMail');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require("../utils/jwtToken");
-const { isAuthenticated,isAdmin, isManager } = require('../middleware/auth');
+const { isAuthenticated,isAdmin, isManager, isOwner } = require('../middleware/auth');
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
     try {
@@ -430,6 +430,27 @@ router.get("/user-info/:id", catchAsyncErrors(async(req,res,next)=>{
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
-}))
+}));
+
+
+// all users --- for owner
+router.get(
+  "/owner-all-users",
+  isAuthenticated,
+  isOwner("Owner"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const users = await User.find().sort({
+        createdAt: -1,
+      });
+      res.status(201).json({
+        success: true,
+        users,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
 
 module.exports = router;

@@ -53,7 +53,7 @@ const AllOrders = () => {
     const row = [];
     let count = 0
     managerOrders &&
-        managerOrders.forEach((item) => {
+    managerOrders.forEach((item) => {
             count++;
             row.push({
                 id: count,
