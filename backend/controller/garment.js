@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require('../utils/sendMail');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendToken = require("../utils/jwtToken");
-const { isAuthenticated, isGarment, isAdmin, isManager } = require('../middleware/auth');
+const { isAuthenticated, isGarment, isAdmin, isManager, isOwner } = require('../middleware/auth');
 const sendGarmentToken = require('../utils/garmentToken');
 
 router.post("/create-garment", upload.single("file"), async (req, res, next) => {
@@ -80,7 +80,7 @@ router.post("/activation", catchAsyncErrors(async (req, res, next) => {
 
         const newGarment = jwt.verify(activation_token, process.env.ACTIVATION_SECRET);
 
-        console.log("token:",newGarment)
+        console.log("token:", newGarment)
         if (!newGarment) {
             return next(new ErrorHandler("Invalid token", 400));
         }
@@ -134,7 +134,7 @@ router.post("/login-garment", catchAsyncErrors(async (req, res, next) => {
 }));
 
 // load garment
-router.get("/getgarment",isGarment, catchAsyncErrors(async (req, res, next) => {
+router.get("/getgarment", isGarment, catchAsyncErrors(async (req, res, next) => {
     try {
         const garment = await Garment.findById(req.garment.id);
 
@@ -169,15 +169,15 @@ router.get("/logout", catchAsyncErrors(async (req, res, next) => {
 }));
 
 // get Garment info
-router.get("/get-garment-info/:id", catchAsyncErrors(async(req,res,next)=>{
-    try{
+router.get("/get-garment-info/:id", catchAsyncErrors(async (req, res, next) => {
+    try {
         const garment = await Garment.findById(req.params.id);
         res.status(201).json({
-            success:true,
+            success: true,
             garment,
         })
-    }catch(error){
-        return next(new ErrorHandler(error.message,500));
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
     }
 }));
 
@@ -187,66 +187,87 @@ router.get(
     isAuthenticated,
     isAdmin("Admin"),
     catchAsyncErrors(async (req, res, next) => {
-      try {
-        const garment = await Garment.find().sort({
-          createdAt: -1,
-        });
-        // console.log("garment_backend:",garment);
-        res.status(201).json({
-          success: true,
-          garment,
-        });
-      } catch (error) {
-        return next(new ErrorHandler(error.message, 500));
-      }
+        try {
+            const garment = await Garment.find().sort({
+                createdAt: -1,
+            });
+            // console.log("garment_backend:",garment);
+            res.status(201).json({
+                success: true,
+                garment,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
     })
-  );
+);
 
-  // delete Garment ---admin
+// delete Garment ---admin
 router.delete(
     "/delete-garment/:id",
     isAuthenticated,
     isAdmin("Admin"),
     catchAsyncErrors(async (req, res, next) => {
-      try {
-        const garment = await Garment.findById(req.params.id);
-  
-        if (!garment) {
-          return next(
-            new ErrorHandler("Garment is not available with this id", 400)
-          );
-        }
-  
-        await Garment.findByIdAndDelete(req.params.id);
-  
-        res.status(201).json({
-          success: true,
-          message: "Garment deleted successfully!",
-        });
-      } catch (error) {
-        return next(new ErrorHandler(error.message, 500));
-      }
-    })
-  );
+        try {
+            const garment = await Garment.findById(req.params.id);
 
-  // all garment --- for manager
+            if (!garment) {
+                return next(
+                    new ErrorHandler("Garment is not available with this id", 400)
+                );
+            }
+
+            await Garment.findByIdAndDelete(req.params.id);
+
+            res.status(201).json({
+                success: true,
+                message: "Garment deleted successfully!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// all garment --- for manager
 router.get(
     "/manager-all-garments",
     isAuthenticated,
     isManager("manager"),
     catchAsyncErrors(async (req, res, next) => {
-      try {
-        const garment = await Garment.find().sort({
-          createdAt: -1,
-        });
-        res.status(201).json({
-          success: true,
-          garment,
-        });
-      } catch (error) {
-        return next(new ErrorHandler(error.message, 500));
-      }
+        try {
+            const garment = await Garment.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                garment,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
     })
-  );
+);
+
+// all garment --- for owner
+router.get(
+    "/owner-all-garments",
+    isAuthenticated,
+    isOwner("Owner"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const garment = await Garment.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                garment,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
 
 module.exports = router;

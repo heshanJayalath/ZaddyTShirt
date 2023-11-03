@@ -92,3 +92,26 @@ export const getAllOrdersOfManager = () => async (dispatch) => {
     });
   }
 };
+
+// get all orders of Owner
+export const getAllOrdersOfOwner = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "ownerAllOrdersRequest",
+    });
+
+    const { data } = await axios.get(`${server}/order/owner-all-orders`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "ownerAllOrdersSuccess",
+      payload: data.orders,
+    });
+  } catch (error) {
+    dispatch({
+      type: "ownerAllOrdersFailed",
+      payload: error.response.data.message,
+    });
+  }
+};

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const { isAuthenticated, isGarment, isAdmin, isManager } = require("../middleware/auth");
+const { isAuthenticated, isGarment, isAdmin, isManager, isOwner } = require("../middleware/auth");
 const Order = require("../model/order");
 const Garment = require("../model/garment");
 const Product = require("../model/product");
@@ -170,7 +170,7 @@ router.put(
     })
 );
 
-// accept the refund ---- seller
+// accept the refund ---- garment
 router.put(
     "/order-refund-success/:id",
     isGarment,
@@ -253,4 +253,24 @@ router.get(
     })
 );
 
+// all orders --- for owner
+router.get(
+    "/owner-all-orders",
+    isAuthenticated,
+    isOwner("Owner"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const orders = await Order.find().sort({
+                deliveredAt: -1,
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                orders,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
 module.exports = router;

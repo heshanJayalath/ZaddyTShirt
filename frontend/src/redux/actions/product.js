@@ -82,3 +82,23 @@ export const getAllProducts = () => async (dispatch) => {
       });
     }
   };
+
+  // get all products
+export const getAllOwnerProducts = () => async (dispatch) => {
+    try {
+      dispatch({
+        type: "getAllOwnerProductsRequest",
+      });
+  
+      const { data } = await axios.get(`${server}/product/get-all-owner-products`);
+      dispatch({
+        type: "getAllOwnerProductsSuccess",
+        payload: data.products,
+      });
+    } catch (error) {
+      dispatch({
+        type: "getAllOwnerProductsFailed",
+        payload: error.response.data.message,
+      });
+    }
+  };

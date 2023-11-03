@@ -84,6 +84,7 @@ import ProtectedManagerRoute from "./routes/ProtectedManagerRoute.js";
 import Layout from "./components/Owner/shared/Layout.jsx";
 // import OwnerDashboard from "./pages/Owner/Dashboard.jsx";
 import ManagerDashboard from "./pages/Manager/Dashboard.jsx";
+import ProtectedOwnerRoute from "./routes/ProtectedOwnerRoute.js";
 
 const App = () => {
   useEffect(() => {
@@ -333,34 +334,34 @@ const App = () => {
         <Route
           path="/owner/dashboard"
           element={
-            <ProtectedManagerRoute>
+            <ProtectedOwnerRoute>
               <OwnerDashboardPage />
-            </ProtectedManagerRoute>
+            </ProtectedOwnerRoute>
           }
         />
         <Route
           path="/owner-orders"
           element={
-            <ProtectedManagerRoute>
+            <ProtectedOwnerRoute>
               <OwnerAllOrdersPage />
-            </ProtectedManagerRoute>
+            </ProtectedOwnerRoute>
           }
         />
         <Route
           path="/owner-users"
           element={
-            <ProtectedManagerRoute>
+            <ProtectedOwnerRoute>
               <OwnerDashBoardCustomers />
-            </ProtectedManagerRoute>
+            </ProtectedOwnerRoute>
           }
         />
 
 <Route
           path="/owner-garments"
           element={
-            <ProtectedManagerRoute>
+            <ProtectedOwnerRoute>
               <OwnerDashboardGarments />
-            </ProtectedManagerRoute>
+            </ProtectedOwnerRoute>
           }
         />
 
@@ -368,9 +369,9 @@ const App = () => {
         <Route
           path="/owner-products"
           element={
-            <ProtectedManagerRoute>
+            <ProtectedOwnerRoute>
               <OwnerDashBoardProducts />
-            </ProtectedManagerRoute>
+            </ProtectedOwnerRoute>
           }
         />
       </Routes>

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isGarment, isAuthenticated, isAdmin, isManager } = require("../middleware/auth");
+const { isGarment, isAuthenticated, isAdmin, isManager, isOwner } = require("../middleware/auth");
 const Product = require("../model/product");
 const Garment = require("../model/garment");
 const Order = require("../model/order");
@@ -188,6 +188,26 @@ router.get(
     "/manager-all-products",
     isAuthenticated,
     isManager("manager"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const products = await Product.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                products,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// all products --- for owner
+router.get(
+    "/owner-all-products",
+    isAuthenticated,
+    isOwner("Owner"),
     catchAsyncErrors(async (req, res, next) => {
         try {
             const products = await Product.find().sort({

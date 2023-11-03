@@ -31,6 +31,32 @@ export const garmentReducer = createReducer(initialState, {
         state.isLoading = false;
         state.error = action.payload;
     },
+
+    // get all garments ---manager
+    getAllManagerGarmentsRequest: (state) => {
+        state.isLoading = true;
+    },
+    getAllManagerGarmentsSuccess: (state, action) => {
+        state.isLoading = false;
+        state.garment = action.payload;
+    },
+    getAllManagerGarmentFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+    },
+
+    // get all garments ---Owner
+    getAllOwnerGarmentsRequest: (state) => {
+        state.isownerLoading = true;
+    },
+    getAllOwnerGarmentsSuccess: (state, action) => {
+        state.isownerLoading = false;
+        state.ownergarments = action.payload;
+    },
+    getAllOwnerGarmentFailed: (state, action) => {
+        state.isownerLoading = false;
+        state.error = action.payload;
+    },
     clearErrors: (state) => {
         state.error = null;
     }
