@@ -66,7 +66,7 @@ const OwnerSIdeBar = ({ active }) => {
       </div>
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8">
-        <Link to="/manager-users" className="w-full flex items-center">
+        <Link to="/owner-users" className="w-full flex items-center">
 
           <HiOutlineUserGroup size={30} color={active === 4 ? "red" : ""} />
           <span
@@ -80,7 +80,7 @@ const OwnerSIdeBar = ({ active }) => {
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
       >
-        <Link to="/manager-garments" className="w-full flex items-center">
+        <Link to="/owner-garments" className="w-full flex items-center">
 
           <GiDress size={30} color={active === 5 ? "red" : ""} />
           <span

@@ -18,7 +18,7 @@ const ManagerDashboardPage = () => {
           className={`${styles.section} my-8 rounded-lg flex bg-[#f5f5f5] py-10`}
         >
 
-          <div className="w-full mr-8">
+          <div className="w-full flex justify-center items-center">
             <ManagerDashboardMain />
           </div>
         </div>

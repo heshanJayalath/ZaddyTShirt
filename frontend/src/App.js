@@ -63,6 +63,8 @@ import {
   OwnerDashboardPage,
   OwnerAllOrdersPage,
   OwnerDashBoardProducts,
+  OwnerDashBoardCustomers,
+  OwnerDashboardGarments,
 } from "./routes/OwnerRoutesNew.js";
 
 // import { OwnerPage } from "./routes/OwnerRoutes.js";
@@ -131,7 +133,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/user/order/:id"
           element={
@@ -140,7 +141,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/user/track/order/:id"
           element={
@@ -149,21 +149,16 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route path="/cutomize-tshirt" element={<CustomizeTShirt />} />
         {/* <Route path='/threed-model' element={<ThreeDmodel />} /> */}
         <Route path="/product/three-d-model/:id" element={<ModelThree />} />
-
         {/* garment Routes */}
         <Route
           path="/garment/activation/:activation_token"
           element={<SellerActivationPage />}
         />
-
         <Route path="/create-garment" element={<GarmentRegisterPage />} />
-
         <Route path="/login-garment" element={<GarmentLoginPage />} />
-
         <Route
           path="/garment/:id"
           element={
@@ -172,9 +167,7 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route path="/garment/preview/:id" element={<GarmentPreviewPage />} />
-
         <Route
           path="/garment-dashboard"
           element={
@@ -183,7 +176,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/garment-dashboard-orders"
           element={
@@ -192,7 +184,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/garment-dashboard-create-product"
           element={
@@ -209,7 +200,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/garment-dashboard-products"
           element={
@@ -218,7 +208,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/order/:id"
           element={
@@ -227,7 +216,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/garment-dashboard-refunds"
           element={
@@ -236,7 +224,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/garment-dashboard-messages"
           element={
@@ -245,7 +232,6 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-
         <Route
           path="/admin/dashboard"
           element={
@@ -270,7 +256,6 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-
         <Route
           path="/admin-garments"
           element={
@@ -279,7 +264,6 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-
         <Route
           path="/admin-users"
           element={
@@ -288,7 +272,6 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-
         <Route
           path="/manager/dashboard"
           element={
@@ -297,7 +280,6 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
         <Route
           path="/manager-orders"
           element={
@@ -306,7 +288,6 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
         <Route
           path="/manager-products"
           element={
@@ -315,7 +296,6 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
         <Route
           path="/manager-users"
           element={
@@ -324,7 +304,6 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
         <Route
           path="/manager-garments"
           element={
@@ -333,7 +312,6 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
         <Route
           path="/manager-custom-order"
           element={
@@ -360,7 +338,6 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
         <Route
           path="/owner-orders"
           element={
@@ -369,7 +346,25 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
+        <Route
+          path="/owner-users"
+          element={
+            <ProtectedManagerRoute>
+              <OwnerDashBoardCustomers />
+            </ProtectedManagerRoute>
+          }
+        />
 
+<Route
+          path="/owner-garments"
+          element={
+            <ProtectedManagerRoute>
+              <OwnerDashboardGarments />
+            </ProtectedManagerRoute>
+          }
+        />
+
+        
         <Route
           path="/owner-products"
           element={

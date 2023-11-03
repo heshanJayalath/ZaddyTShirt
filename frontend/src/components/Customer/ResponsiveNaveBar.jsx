@@ -29,6 +29,7 @@ const ResponsiveNaveBar = () => {
   const [active, setActive] = useState(false);
   const { isGarment } = useSelector((state) => state.garment);
   const [openCart, setOpenCart] = useState(false);
+  
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 70) {
@@ -134,7 +135,8 @@ const ResponsiveNaveBar = () => {
               </a>
             </li>
           ))}
-          <div className={`${styles.button}`}>
+
+         <div className={`${styles.button}`}>
             <Link
               to={`${isGarment ? "/garment-dashboard" : "/create-garment"}`}
             >
@@ -144,6 +146,7 @@ const ResponsiveNaveBar = () => {
               </h1>
             </Link>
           </div>
+
         </ul>
         {/* button */}
         {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
