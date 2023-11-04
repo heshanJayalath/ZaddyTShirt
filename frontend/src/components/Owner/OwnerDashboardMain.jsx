@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -16,6 +18,24 @@ import { getAllOrdersOfOwner } from "../../redux/actions/order";
 import { getAllOwnerGarments } from "../../redux/actions/garment";
 import { MdBorderClear,MdViewTimeline } from "react-icons/md";
 const OwnerDashboardMain = () => {
+  const pdfRef=useRef();
+  const downloadPDF = ()=>{
+    const input =pdfRef.current;
+    html2canvas(input).then((canvas)=>{
+      const imgData=canvas.toDataURL('image/png');
+      const pdf = new jspdf('p','mm','a4',true);
+      const pdfWidth=pdf.internal.pageSize.getWidth();
+      const pdfHight=pdf.internal.pageSize.getHeight();
+      const imgWidth=canvas.width;
+      const imgHeight=canvas.height;
+      const ratio = Math.min(pdfWidth/imgWidth,pdfHight/imgHeight);
+      const imgx= (pdfWidth-imgWidth*ratio)/2;
+      const imgy= 30;
+      pdf.addImage(imgData,'PNG',imgx,imgy,imgWidth*ratio,imgHeight*ratio);
+      pdf.save('Report');
+
+    });
+  };
   const dispatch = useDispatch();
 
   const { ownerOrders, ownerOrderLoading } = useSelector(
@@ -79,7 +99,7 @@ const OwnerDashboardMain = () => {
   ownerOrders &&
     ownerOrders.forEach((item) => {
       count++;
-      if (item.status == "Delivered") {
+      if (item.status === "Delivered") {
         diliveredOrders += 1;
       }
 
@@ -134,14 +154,15 @@ const OwnerDashboardMain = () => {
   let finalProfit = profit.toFixed(2);
   let processingOrders = (count) - diliveredOrders;
   return (
-    <>
+    <div className="flex w-full justify-center content-center mr-6">
       {ownerOrderLoading ? (
         <Loader />
       ) : (
-        <div className="w-[80%] p-4">
+        <div className="w-[75%] p-4"  ref={pdfRef}>
           <h3 className="text-[22px] font-Poppins pb-2">Overview</h3>
           <div className="w-full md:flex items-center justify-between">
-            <div className="w-full mb-4 800px:w-[30%] hover:scale-103 transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-300  min-h-[20vh] bg-white shadow rounded px-2 py-3 mr-4">
+            <div className="w-full mb-4 800px:w-[30%] hover:scale-103 transition-shadow duration-300 ease-in-out hover:shadow-lg
+             hover:shadow-blue-300  min-h-[20vh] bg-white shadow rounded px-2 py-3 mr-4">
               <div className=" md:items-center py-4">
                 <div className="flex">
                   <AiOutlineMoneyCollect
@@ -339,14 +360,23 @@ const OwnerDashboardMain = () => {
             <DataGrid
               rows={row}
               columns={columns}
-              pageSize={4}
+              pageSize={7}
               disableSelectionOnClick
               autoHeight
             />
           </div>
         </div>
+        
       )}
-    </>
+      <div>
+      <button type="button" onClick={downloadPDF}
+      class="w-36 text-white bg-gradient-to-r fixed from-blue-500 
+      via-blue-600 to-blue-700 hover:bg-gradient-to-br 
+      shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 
+      font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 bottom-8 ">Generate PDF</button>
+
+      </div>
+    </div>
   );
 };
 

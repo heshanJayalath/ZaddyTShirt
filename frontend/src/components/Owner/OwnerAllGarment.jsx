@@ -110,10 +110,10 @@ const OwnerAllGarment = () => {
         data.forEach((item) => {
             row.push({
                 id: item._id,
-                name: item?.name,
+                name: item?.companyName,
                 email: item?.email,
                 joinedAt: item.createdAt.slice(0, 10),
-                address: item.address,
+                address: item.companyAddress,
             });
         });
 
