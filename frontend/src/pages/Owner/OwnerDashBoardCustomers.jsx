@@ -2,6 +2,7 @@ import React from 'react'
 import OwnerHeader from '../../components/Owner/OwnerHeader'
 import OwnerSIdeBar from '../../components/Owner/OwnerSIdeBar'
 import AllCustomers from '../../components/manager/AllCustomers'
+import OwnerAllCustomers from '../../components/Owner/OwnerAllCustomers'
 const OwnerDashBoardCustomers = () => {
   return (
     <div>
@@ -11,7 +12,7 @@ const OwnerDashBoardCustomers = () => {
           <div className="w-[80px] 800px:w-[330px]">
             <OwnerSIdeBar active={4} />
           </div>
-          <AllCustomers />
+          < OwnerAllCustomers/>
         </div>
       </div>
     </div>

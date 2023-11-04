@@ -1,7 +1,7 @@
 import React from 'react'
 import GarmentDashboardHeader from '../../components/Garment/Layouts/GarmentDashboardHeader'
 import Footer from '../../components/Customer/Footer'
-import AllOrders from '../../components/manager/AllOrders'
+import OwnerAllOrders from '../../components/Owner/OwnerAllOrders'
 import OwnerHeader from '../../components/Owner/OwnerHeader'
 import OwnerSIdeBar from '../../components/Owner/OwnerSIdeBar'
 
@@ -14,7 +14,7 @@ const OwnerAllOrdersPage = () => {
             <div className="w-[80px] 800px:w-[330px]">
               <OwnerSIdeBar active={2} />
             </div>
-            <AllOrders />
+            <OwnerAllOrders />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OwnerSIdeBar from "../../components/Owner/OwnerSIdeBar";
 import styles from "../../Styles/Customer/styles";
 import OwnerHeader from "../../components/Owner/OwnerHeader";
-import ManagerDashboardMain from "../../components/manager/ManagerDashboardMain";
+import OwnerDashboardMain from "../../components/Owner/OwnerDashboardMain";
 
 const OwnerDashboardPage = () => {
   const [active, setActive] = useState(1);
@@ -19,7 +19,7 @@ const OwnerDashboardPage = () => {
         >
 
           <div className="w-full flex justify-center items-center">
-            <ManagerDashboardMain />
+            <OwnerDashboardMain/>
           </div>
         </div>
       </div>
