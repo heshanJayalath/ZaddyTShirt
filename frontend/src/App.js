@@ -150,7 +150,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/cutomize-tshirt" element={<CustomizeTShirt />} />
+        {/* <Route path="/cutomize-tshirt" element={<CustomizeTShirt />} /> */}
         {/* <Route path='/threed-model' element={<ThreeDmodel />} /> */}
         <Route path="/product/three-d-model/:id" element={<ModelThree />} />
         {/* garment Routes */}
