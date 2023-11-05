@@ -356,7 +356,7 @@ const App = () => {
           }
         />
 
-<Route
+        <Route
           path="/owner-garments"
           element={
             <ProtectedOwnerRoute>
@@ -365,7 +365,7 @@ const App = () => {
           }
         />
 
-        
+
         <Route
           path="/owner-products"
           element={
