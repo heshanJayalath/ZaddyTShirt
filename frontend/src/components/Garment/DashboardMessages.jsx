@@ -20,7 +20,7 @@ const DashboardMessages = () => {
     const [open, setOpen] = useState(false);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [messages, setMessages] = useState([]);
-    const [currentChat, setCurrentChat] = useState();
+    const [currentChat, setCurrentChat] = useState(null);
     const [newMessage, setNewMessage] = useState("");
     const [userData, setUserData] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
@@ -63,6 +63,7 @@ const DashboardMessages = () => {
     const onlineCheck = (chat) => {
         const chatMembers = chat.members.find((member) => member !== garment._id)
         const online = onlineUsers.find((user) => user.userId === chatMembers);
+        // setActiveStatus(online ? true : false);
 
         return online ? true : false;
 
