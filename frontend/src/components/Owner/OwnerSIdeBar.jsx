@@ -91,7 +91,7 @@ const OwnerSIdeBar = ({ active }) => {
         </Link>
       </div>
 
-      <div
+      {/* <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
       >
         <Link to="/manager-transaction" className="w-full flex items-center">
@@ -103,18 +103,20 @@ const OwnerSIdeBar = ({ active }) => {
             Transactions
           </span>
         </Link>
-      </div>
+      </div> */}
 
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
 
       >
-        <HiOutlineUsers size={30} color={active === 9 ? "red" : ""} />
+        <Link to="/owner-systemusers" className="w-full flex items-center">
+        <HiOutlineUsers size={30} color={active === 10 ? "red" : ""} />
         <span
-          className={`pl-3 text-lg ${active === 9 ? "text-[red]" : ""} 800px:block `}
+          className={`pl-3 text-lg ${active === 10 ? "text-[red]" : ""} 800px:block `}
         >
           System Users
         </span>
+        </Link>
       </div>
 
       <div

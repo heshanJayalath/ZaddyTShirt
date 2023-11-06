@@ -605,15 +605,16 @@ export const productData = [
 
 export const footerProductLinks = [
   {
-    name: "About us",
-    link: "/about"
+    name: "FAQ",
+    link: "/faq"
   },
   {
-    name: "Careers",
-    link: "/carrers"
+    name: "login",
+    link: "/login"
   },
   {
-    name: "Store Locations",
+    name: "signup",
+    link:"/signup"
   },
  
   {

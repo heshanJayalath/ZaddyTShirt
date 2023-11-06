@@ -70,7 +70,10 @@ const Cart = ({ setOpenCart }) => {
                             <div className='px-5 mb-3'>
                                 {/* checkout buttons */}
                                 <Link to="/checkout">
-                                    <div className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}>
+                                    <div className={`h-[45px] flex items-center justify-center w-[100%] text-white bg-gradient-to-r 
+                                    from-red-600 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-600 
+                                    dark:focus:ring-red-800 shadow-lg shadow-red-700 dark:shadow-lg dark:shadow-red-500 hover:shadow-red-900 font-medium rounded-lg 
+                                    text-sm px-5 py-2.5 text-center mr-2 mb-2`}>
                                         <h1 className='text-[#fff] text-[18px] font-[600]' >
                                             Checkout Now (Rs. {totalPrice})
                                         </h1>

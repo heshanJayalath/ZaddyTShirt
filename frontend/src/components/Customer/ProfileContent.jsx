@@ -61,14 +61,14 @@ const ProfileContent = ({ active }) => {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full pb-20'>
       {/* profile  */}
       {
         active === 1 && (
           <>
             <div className='flex justify-center w-full'>
               <div className='relative'>
-                <img src={`${backend_url}/${user?.avatar}`} className='w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"' alt='' />
+                <img src={`${backend_url}/${user?.avatar}`} className='w-[150px] z-[10] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"' alt='' />
                 <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
                   <input type="file" id="image"
                     className='hidden'
@@ -129,7 +129,7 @@ const ProfileContent = ({ active }) => {
 
                 </div>
                 <input
-                  className={`w-[250px] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
+                  className={`w-[250px] h-[40px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none cursor-pointer focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2`}
                   required
                   value="Update"
                   type="submit"
@@ -510,7 +510,9 @@ const ChangePassword = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <input
-              className={`w-[95%] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
+              className={`w-[95%] h-[40px] text-white bg-gradient-to-r from-blue-500 via-blue-600 
+              to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none mt-8 focus:ring-blue-300 
+              dark:focus:ring-blue-800 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer`}
               required
               value="Update"
               type="submit"
@@ -726,7 +728,9 @@ const Address = () => {
         <h1 className='text-[25px] font-[600] text-[#000000ba] pb-2'>
           My Addresses
         </h1>
-        <div className={`${styles.button} !rounded-md`}
+        <div className={`${styles.button}  text-white bg-gradient-to-r from-blue-500 via-blue-600 
+              to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none mt-8 focus:ring-blue-300 
+              dark:focus:ring-blue-800 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer`}
           onClick={() => setOpen(true)}>
           <span className='text-[#fff]'>Add New
           </span>

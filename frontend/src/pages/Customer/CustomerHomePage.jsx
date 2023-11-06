@@ -15,6 +15,7 @@ import ResponsiveHeader from "../../components/Customer/ResponsiveHeader.jsx";
 
 const CustomerHomePage = () => {
   const [material, setMaterial]=useState('All')
+
   return (
     <div>
       
@@ -26,8 +27,10 @@ const CustomerHomePage = () => {
       </div>
       
       
-
+     
       <Hero />
+      
+      
 
       <SpecialOpptions />
 

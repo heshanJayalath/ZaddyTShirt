@@ -10,7 +10,7 @@ const PricePredictor=()=>{
   return (
     <div >
         <div className='md:block hidden'>
-      <Header activeHeading={5} />
+      <Header activeHeading={4} />
       </div>
       <div className='md:hidden block z-10' >
       <ResponsiveHeader/>

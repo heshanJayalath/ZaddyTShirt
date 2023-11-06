@@ -16,6 +16,7 @@ const AllGarments = () => {
     const { garments } = useSelector((state) => state.garment);
     const [open, setOpen] = useState(false);
     const [userId, setUserId] = useState("");
+    const [garmentName,setGarmentName]=useState("");
     const [data,setData] = useState([]);
 
     useEffect(() => {
@@ -96,7 +97,7 @@ const AllGarments = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        <Button onClick={() => setUserId(params.id) || setOpen(true)}>
+                        <Button onClick={() => setUserId(params.id)|| setOpen(true)}>
                             <AiOutlineDelete size={20} />
                         </Button>
                     </>
@@ -110,10 +111,10 @@ const AllGarments = () => {
         data.forEach((item) => {
             row.push({
                 id: item._id,
-                name: item?.name,
+                name: item?.companyName,
                 email: item?.email,
                 joinedAt: item.createdAt.slice(0, 10),
-                address: item.address,
+                address: item.companyAddress,
             });
         });
 
@@ -131,33 +132,34 @@ const AllGarments = () => {
                     />
                 </div>
                 {open && (
-                    <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
-                        <div className="w-[95%] 800px:w-[40%] min-h-[20vh] bg-white rounded shadow p-5">
+                    <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center hover:shadow-sm py-2 justify-center h-screen">
+                        <div className="w-[25%] 800px:w-[40%] min-h-[20vh] bg-[#f9f9f99a]  hover:bg-[#f9f9f9c4] rounded shadow p-5">
                             <div className="w-full flex justify-end cursor-pointer">
-                                <RxCross1 size={25} onClick={() => setOpen(false)} />
+                                <RxCross1 size={20} onClick={() => setOpen(false)} />
                             </div>
-                            <h3 className="text-[25px] text-center py-5 font-Poppins text-[#000000cb]">
-                                Are you sure you wanna delete this user?
+                            <h3 className="text-[20px] text-center py-3 font-normal font-Poppins text-[#000000cb]">
+                                Are you sure you want to remove this garment ?
                             </h3>
-                            <div className="w-full flex items-center justify-center">
-                                <div
-                                    className={`${styles.button} text-white text-[18px] !h-[42px] mr-4`}
-                                    onClick={() => setOpen(false)}
-                                >
-                                    cancel
-                                </div>
-                                <div
-                                    className={`${styles.button} text-white text-[18px] !h-[42px] ml-4`}
-                                    onClick={() => setOpen(false) 
+                            <div className="w-full flex gap-2  pt-3 items-center justify-center">                   
+                                <button onClick={() => setOpen(false) 
                                     || 
                                     handleDelete(userId)
-                                    }
-                                >
+                                    } type="button" class="text-red-700  hover:text-white border font-semibold border-red-700 hover:bg-red-800 focus:ring-4 
+                                focus:outline-none  rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+                                dark:border-red-500 dark:text-red-700 dark:hover:text-white dark:hover:bg-red-600 ">
                                     confirm
-                                </div>
+                                    </button>
+
+                                    <button onClick={() => setOpen(false) } type="button" class="text-blue-900 hover:text-white border border-gray-800 hover:bg-gray-900 
+                                    focus:ring-4 focus:outline-none  font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+                                    dark:border-gray-600 dark:text-gray-700 dark:hover:text-white dark:hover:bg-gray-600 ">
+                                        cancel</button>
+
                             </div>
                         </div>
                     </div>
+
+                    
                 )}
             </div>
         </div>

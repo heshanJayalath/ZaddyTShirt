@@ -65,6 +65,7 @@ import {
   OwnerDashBoardProducts,
   OwnerDashBoardCustomers,
   OwnerDashboardGarments,
+  OwnerDashBoardSystemUsers
 } from "./routes/OwnerRoutesNew.js";
 
 // import { OwnerPage } from "./routes/OwnerRoutes.js";
@@ -352,6 +353,14 @@ const App = () => {
           element={
             <ProtectedOwnerRoute>
               <OwnerDashBoardCustomers />
+            </ProtectedOwnerRoute>
+          }
+        />
+        <Route
+          path="/owner-systemusers"
+          element={
+            <ProtectedOwnerRoute>
+              <OwnerDashBoardSystemUsers />
             </ProtectedOwnerRoute>
           }
         />
