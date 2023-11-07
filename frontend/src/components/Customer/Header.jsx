@@ -19,10 +19,11 @@ const Header = ({ activeHeading, visibility=true }) => {
     const { isAuthenticated, user, loading } = useSelector((state) => state.user);
     const { allProducts } = useSelector((state) => state.products)
     const { cart } = useSelector((state) => state.cart)
-    const {isGarment} = useSelector((state)=>state.garment)
+    const {isGarment} = useSelector((state)=>state.garment);
+    
 
     // console.log("isAuthenticated : ", isAuthenticated);
-    // console.log("user : ", user);
+    console.log("user : ", user);
     // console.log("loading : ", loading);
 
     const [searchTerm, setSearchTerm] = useState("");

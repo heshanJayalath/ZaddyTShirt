@@ -9,7 +9,7 @@ const GarmentInboxPage = () => {
     <GarmentDashboardHeader />
     <div className="flex items-start justify-between w-full">
       <div className="w-[80px] w-[330px]">
-        <GarmentDashboardSideBar active={8} />
+        <GarmentDashboardSideBar active={6} />
       </div>
        <DashboardMessages />
     </div>

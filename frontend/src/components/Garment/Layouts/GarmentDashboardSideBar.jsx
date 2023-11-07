@@ -78,9 +78,12 @@ const GarmentDashboardSideBar = ({active}) => {
         </Link>
       </div>
 
-      {/* <div className="w-full flex items-center p-4">
-        <Link to="/garment-dashboard-events" className="w-full flex items-center">
-          <MdOutlineLocalOffer
+      <div className="w-full flex items-center p-4">
+        <Link
+          to="/garment-dashboard-custom-orders"
+          className="w-full flex items-center"
+        >
+          <CiMoneyBill
             size={30}
             color={`${active === 5 ? "crimson" : "#555"}`}
           />
@@ -89,42 +92,7 @@ const GarmentDashboardSideBar = ({active}) => {
               active === 5 ? "text-[crimson]" : "text-[#555]"
             }`}
           >
-            All Events
-          </h5>
-        </Link>
-      </div>
-
-      <div className="w-full flex items-center p-4">
-        <Link to="/garment-dashboard-create-event" className="w-full flex items-center">
-          <VscNewFile
-            size={30}
-            color={`${active === 6 ? "crimson" : "#555"}`}
-          />
-          <h5
-            className={` 800px:block pl-2 text-[18px] font-[400] ${
-              active === 6 ? "text-[crimson]" : "text-[#555]"
-            }`}
-          >
-            Create Event
-          </h5>
-        </Link>
-      </div> */}
-
-      <div className="w-full flex items-center p-4">
-        <Link
-          to="/garment-dashboard-withdraw-money"
-          className="w-full flex items-center"
-        >
-          <CiMoneyBill
-            size={30}
-            color={`${active === 7 ? "crimson" : "#555"}`}
-          />
-          <h5
-            className={` 800px:block pl-2 text-[18px] font-[400] ${
-              active === 7 ? "text-[crimson]" : "text-[#555]"
-            }`}
-          >
-            Withdraw Money
+            Custom Orders
           </h5>
         </Link>
       </div>
@@ -133,11 +101,11 @@ const GarmentDashboardSideBar = ({active}) => {
         <Link to="/garment-dashboard-messages" className="w-full flex items-center">
           <BiMessageSquareDetail
             size={30}
-            color={`${active === 8 ? "crimson" : "#555"}`}
+            color={`${active === 6 ? "crimson" : "#555"}`}
           />
           <h5
             className={` 800px:block pl-2 text-[18px] font-[400] ${
-              active === 8 ? "text-[crimson]" : "text-[#555]"
+              active === 6 ? "text-[crimson]" : "text-[#555]"
             }`}
           >
             Shop Inbox
@@ -145,31 +113,15 @@ const GarmentDashboardSideBar = ({active}) => {
         </Link>
       </div>
 
-      {/* <div className="w-full flex items-center p-4">
-        <Link to="/garment-dashboard-coupouns" className="w-full flex items-center">
-          <AiOutlineGift
-            size={30}
-            color={`${active === 9 ? "crimson" : "#555"}`}
-          />
-          <h5
-            className={` 800px:block pl-2 text-[18px] font-[400] ${
-              active === 9 ? "text-[crimson]" : "text-[#555]"
-            }`}
-          >
-            Discount Codes
-          </h5>
-        </Link>
-      </div> */}
-
       <div className="w-full flex items-center p-4">
         <Link to="/garment-dashboard-refunds" className="w-full flex items-center">
           <HiOutlineReceiptRefund
             size={30}
-            color={`${active === 10 ? "crimson" : "#555"}`}
+            color={`${active === 7 ? "crimson" : "#555"}`}
           />
           <h5
             className={` 800px:block pl-2 text-[18px] font-[400] ${
-              active === 10 ? "text-[crimson]" : "text-[#555]"
+              active === 7 ? "text-[crimson]" : "text-[#555]"
             }`}
           >
             Refunds
@@ -177,21 +129,7 @@ const GarmentDashboardSideBar = ({active}) => {
         </Link>
       </div>
 
-      <div className="w-full flex items-center p-4">
-        <Link to="/garment-settings" className="w-full flex items-center">
-          <CiSettings
-            size={30}
-            color={`${active === 11 ? "crimson" : "#555"}`}
-          />
-          <h5
-            className={` 800px:block pl-2 text-[18px] font-[400] ${
-              active === 11 ? "text-[crimson]" : "text-[#555]"
-            }`}
-          >
-            Settings
-          </h5>
-        </Link>
-      </div>
+      
     </div>
     </div>
    

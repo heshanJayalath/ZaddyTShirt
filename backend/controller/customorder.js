@@ -113,4 +113,130 @@ router.delete("/delete-custom-order/:id", isAuthenticated, isManager("manager"),
     }
 }))
 
+// get all custom-orders of user
+router.get(
+    "/get-all-custom-orders/:userId",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const customorders = await CustomOrder.find({ "userId": req.params.userId }).sort({
+                createdAt: -1,
+            });
+
+            res.status(200).json({
+                success: true,
+                customorders,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// router.get(
+//     "/get-garment-all-custom-orders/:garmentId",
+//     catchAsyncErrors(async (req, res, next) => {
+//         try {
+//             const orders = await Order.find({
+//                 "cart.garmentId": req.params.garmentId,
+//             }).sort({
+//                 createdAt: -1,
+//             });
+
+//             res.status(200).json({
+//                 success: true,
+//                 orders,
+//             });
+//         } catch (error) {
+//             return next(new ErrorHandler(error.message, 500));
+//         }
+//     })
+// );
+
+// update custom order status for garment
+router.put(
+    "/update-custom-order-status/:id",
+    isGarment,
+    catchAsyncErrors((async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const { price, status, garment } = req.body;
+
+            const customorder = await CustomOrder.findById(id);
+            if (!customorder) {
+                return res.status(404).json({
+                    message: 'Custom order not found!'
+                });
+            }
+            customorder.status = status;
+            customorder.price = price;
+            customorder.garment = garment;
+
+            await customorder.save();
+
+            res.json({
+                message: 'Custom Order Updated!'
+            })
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    }))
+)
+
+// update custom order delivety status for garment
+router.put(
+    "/update-custom-order-delivety-status/:id",
+    isGarment,
+    catchAsyncErrors((async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+
+            const customorder = await CustomOrder.findById(id);
+            if (!customorder) {
+                return res.status(404).json({
+                    message: 'Custom order not found!'
+                });
+            }
+            customorder.status = status;
+
+            await customorder.save();
+
+            res.json({
+                message: 'Custom Order Updated!'
+            })
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    }))
+)
+
+// manager update status
+router.put(
+    "/manager-update-custom-order-status/:id",
+    catchAsyncErrors((async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+
+            const customorder = await CustomOrder.findById(id);
+            if (!customorder) {
+                return res.status(404).json({
+                    message: 'Custom order not found!'
+                });
+            }
+            customorder.status = status;
+
+            await customorder.save();
+
+            res.json({
+                customorder,
+                message: 'Custom Order Updated!'
+            })
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    }))
+)
+
+
 module.exports = router;

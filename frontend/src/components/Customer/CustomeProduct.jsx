@@ -62,6 +62,8 @@ const CustomProduct = () => {
     newForm.append("name", name);
     newForm.append("material", material);
     newForm.append("productCount", productCount);
+    newForm.append("status","Pending");
+    newForm.append("price",0);
     newForm.append("xscount", xscount);
     newForm.append("scount", scount);
     newForm.append("mcount", mcount);
@@ -72,7 +74,6 @@ const CustomProduct = () => {
     newForm.append("description", description);
     newForm.append("address", address);
     newForm.append("userId", user._id);
-
 
 
     dispatch(createCustomOrder(newForm));
