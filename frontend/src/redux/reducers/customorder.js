@@ -31,6 +31,18 @@ export const customorderReducer = createReducer(initialState, {
         state.isLoading = false;
         state.error = action.payload;
     },
+    // get all orders of garment
+    getAllCustomOrdersGarmentRequest: (state) => {
+        state.isLoading = true;
+    },
+    getAllCustomOrdersGarmentSuccess: (state, action) => {
+        state.isLoading = false;
+        state.orders = action.payload;
+    },
+    getAllCustomOrdersGarmentFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+    },
 
     // delete custom orders
     // deleteCustomOrderRequest: (state) => {
@@ -44,6 +56,19 @@ export const customorderReducer = createReducer(initialState, {
     //     state.isLoading = false;
     //     state.error = action.payload;
     // },
+
+    // get all orders of user
+    getAllCustomOrdersUserRequest: (state) => {
+        state.isLoading = true;
+    },
+    getAllCustomOrdersUserSuccess: (state, action) => {
+        state.isLoading = false;
+        state.orders = action.payload;
+    },
+    getAllCustomOrdersUserFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+    },
 
     clearErrors: (state) => {
         state.error = null;

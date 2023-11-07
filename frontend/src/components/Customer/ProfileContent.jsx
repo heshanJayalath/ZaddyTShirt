@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { backend_url } from '../../server'
 import { useDispatch, useSelector } from 'react-redux'
-import { AiOutlineArrowRight, AiOutlineCamera, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineArrowRight, AiOutlineCamera, AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 import { MdOutlineTrackChanges, MdTrackChanges } from 'react-icons/md'
 import { RxCross1 } from "react-icons/rx"
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ import axios from 'axios';
 import { server } from '../../server';
 import { Country, State } from 'country-state-city';
 import { getAllOrdersOfUser } from '../../redux/actions/order';
+import { getAllCustomOrdersOfUser } from '../../redux/actions/customorder';
 
 const ProfileContent = ({ active }) => {
 
@@ -180,6 +181,14 @@ const ProfileContent = ({ active }) => {
         active === 7 && (
           <div>
             <Address />
+          </div>
+        )
+      }
+      {/* custom-orders */}
+      {
+        active === 8 && (
+          <div>
+            <CustomOrders />
           </div>
         )
       }
@@ -762,5 +771,114 @@ const Address = () => {
   )
 }
 
+const CustomOrders = () => {
+  const { user } = useSelector((state) => state.user);
+  const { orders } = useSelector((state) => state.customorder);
+  console.log("custom-orders:", orders);
+  console.log("user._id: ", user._id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCustomOrdersOfUser(user._id));
+  }, [])
+
+  const columns = [
+    { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.2, hide: true },
+    { field: "count", headerName: "Order-Number", minWidth: 150, flex: 0.7, },
+    {
+      field: "name",
+      headerName: "Ordername",
+      minWidth: 100,
+      flex: 0.6,
+    },
+    {
+      field: "quantity",
+      headerName: "Quantity",
+      type: "number",
+      minWidth: 80,
+      flex: 0.5,
+    },
+
+    {
+      field: "status",
+      headerName: "Status",
+      minWidth: 130,
+      flex: 0.8,
+    },
+    {
+      field: "orderDate",
+      headerName: "Ordered Date",
+      minWidth: 130,
+      flex: 0.8,
+    },
+    {
+      field: "Preview",
+      flex: 0.4,
+      minWidth: 100,
+      headerName: "",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/user/custom-order/${params.id}`}>
+              <Button>
+                <AiOutlineEye size={20} />
+              </Button>
+            </Link>
+          </>
+        );
+      },
+    },
+
+    {
+      field: "Delete",
+      flex: 0.4,
+      minWidth: 100,
+      headerName: "",
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Button>
+              <AiOutlineDelete size={20}  />
+            </Button>
+          </>
+        );
+      },
+    },
+  ];
+  const row = [];
+  let count = 0;
+  orders &&
+    orders.forEach((item) => {
+      count++;
+      const createdAt = new Date(item.createdAt); // Convert createdAt to a Date object
+      const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const formattedDate = createdAt.toLocaleDateString(undefined, dateOptions);
+      row.push({
+        count: count,
+        id: item._id,
+        name: item.name,
+        quantity: item.productCount,
+        status: "Pending",
+        orderDate: formattedDate,
+      });
+    });
+  return (
+    <>
+      <div className="w-[100%] mx-8 pt-1 mt-10 bg-white">
+        <DataGrid
+          rows={row}
+          columns={columns}
+          pageSize={10}
+          disableSelectionOnClick
+          autoHeight
+        />
+      </div>
+    </>
+  );
+
+}
 
 export default ProfileContent

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const customorderSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -9,6 +10,9 @@ const customorderSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    garment: {
+        type: Object,
+    },
     material: {
         type: String,
         required: true,
@@ -16,6 +20,14 @@ const customorderSchema = new mongoose.Schema({
     productCount: {
         type: Number,
         required: true,
+    },
+    status: {
+        type: String,
+        required:true,
+    },
+    price:{
+        type:Number,
+        required:true,
     },
     xscount: {
         type: Number,

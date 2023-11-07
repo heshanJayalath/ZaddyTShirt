@@ -8,9 +8,9 @@ const ManagerCustomOrderDetails = () => {
 
   return (
     <div>
-        <Header/>
-          <CustomOrderDetails/>
-        <Footer/>
+      <Header />
+      <CustomOrderDetails />
+      <Footer />
     </div>
   )
 }
