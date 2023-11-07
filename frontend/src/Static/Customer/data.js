@@ -203,14 +203,52 @@ export const brandingData = [
 //user feedbacks
 export const feedbacks = [
   {
-    id:1,
-    name:"Naween",
-    product_name:" Blogger polo T shirt",
-    account_img:avatar,
-    comment:"highly recomended product. good seller. Buy without any hesitate",
-    
+    id: 1,
+    name: "Naween",
+    product_name: " Blogger polo T shirt",
+    account_img: avatar,
+    comment: "highly recomended product. good seller. Buy without any hesitate",
+
   }
 ]
+
+export const statusData = [
+  {
+    id: 1,
+    title: "Apply"
+  },
+  {
+    id: 2,
+    title: "Doesnot Apply"
+  }
+]
+
+export const ManagerApprovalData = [
+  {
+    id: 1,
+    title: "Approved by Manager"
+  },
+  {
+    id: 2,
+    title: "Rejected"
+  }
+]
+
+export const GarmentOptions = [
+  {
+    id: 1,
+    title: "Processing"
+  },
+  {
+    id: 2,
+    title: "Transferred to delivery partner"
+  },
+  {
+    id: 3,
+    title: "Delivered"
+  },
+]
+
 
 //material data
 export const materialData = [
@@ -238,37 +276,37 @@ export const categoriesData = [
     id: 1,
     title: "Men’s Crew Neck T-Shirt",
     subTitle: "",
-    image_Url:crewneck,
+    image_Url: crewneck,
   },
   {
     id: 2,
     title: "Men’s V-Neck T-Shirts",
     subTitle: "",
-    image_Url:vneck,
+    image_Url: vneck,
   },
   {
     id: 3,
     title: "Men’s Polo T-Shirt",
     subTitle: "",
-    image_Url:polo,
+    image_Url: polo,
   },
   {
     id: 4,
     title: "Men’s Hooded T-Shirts",
     subTitle: "",
-    image_Url:hooded,
+    image_Url: hooded,
   },
   {
     id: 5,
     title: "Men’s Long Sleeve Crew Neck T-Shirt",
     subTitle: "",
-    image_Url:crew_long,
+    image_Url: crew_long,
   },
   {
     id: 6,
     title: "Men’s Long Sleeve Polo T-Shirt",
     subTitle: "",
-    image_Url:polo_long,
+    image_Url: polo_long,
   }
 ];
 
@@ -616,7 +654,7 @@ export const footerProductLinks = [
     name: "signup",
     link:"/signup"
   },
- 
+
   {
     name: "Reviews",
   },
@@ -635,11 +673,11 @@ export const footercompanyLinks = [
   {
     name: "Custom Orders",
   },
- 
+
 ];
 
 export const footerSupportLinks = [
- 
+
   {
     name: "Reviews",
   },

@@ -61,6 +61,8 @@ const CustomProduct = () => {
     newForm.append("name", name);
     newForm.append("material", material);
     newForm.append("productCount", productCount);
+    newForm.append("status","Pending");
+    newForm.append("price",0);
     newForm.append("xscount", xscount);
     newForm.append("scount", scount);
     newForm.append("mcount", mcount);

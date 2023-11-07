@@ -9,7 +9,7 @@ const GarmentAllRefunds = () => {
     <GarmentDashboardHeader />
     <div className="flex justify-between w-full">
         <div className="w-[80px] 800px:w-[330px]">
-          <GarmentDashboardSideBar active={10} />
+          <GarmentDashboardSideBar active={7} />
         </div>
         <div className="w-full justify-center flex">
            <AllRefundOrders />

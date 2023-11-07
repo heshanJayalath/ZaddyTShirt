@@ -11,6 +11,7 @@ import {  FaRegCreditCard } from 'react-icons/fa';
 import {server} from '../../server'
 import axios from 'axios';
 import {toast} from 'react-toastify'
+import { BiCustomize } from 'react-icons/bi';
 
 const ProfileSideBar = ({ active, setActive }) => {
     const [open, setOpen] = useState(false);
@@ -111,13 +112,24 @@ const ProfileSideBar = ({ active, setActive }) => {
                 </span>
             </div>
             <div
-                className="flex justify-center hover:shadow-sm py-2 md:justify-start cursor-pointer w-full mb-4"
-                // onClick={() => setActive(8) || logoutHandler()}
-                onClick={()=>setOpen(true)}
+                className="flex justify-center md:justify-start cursor-pointer w-full mb-8"
+                onClick={() => setActive(8)}
             >
-                <AiOutlineLogout size={20} color={active === 8 ? "red" : ""} />
+                <BiCustomize size={20} color={active === 8 ? "red" : ""} />
                 <span
                     className={`hover:text-red-600 pl-3 ${active === 8 ? "text-[red]" : ""
+                        } 800px:block `}
+                >
+                    Custom-Orders
+                </span>
+            </div>
+            <div
+                className="flex justify-center md:justify-start cursor-pointer w-full mb-8"
+                onClick={() => setActive(9) || logoutHandler()}
+            >
+                <AiOutlineLogout size={20} color={active === 9 ? "red" : ""} />
+                <span
+                    className={`pl-3 ${active === 9 ? "text-[red]" : ""
                         } 800px:block `}
                 >
                     Logout

@@ -24,6 +24,7 @@ import {
   PricePredictor,
   TrackOrderPage,
   UserInbox,
+  CustomOrderDetailsPage,
 } from "./routes/Routes.js";
 
 import {
@@ -39,6 +40,8 @@ import {
   GarmentOrderDetails,
   GarmentAllRefunds,
   GarmentInboxPage,
+  GarmentCustomOrderPage,
+  GarmentCustomOrderDetailsPage,
 } from "./routes/GarmentRoutes.js";
 
 import {
@@ -143,6 +146,15 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/user/custom-order/:id"
+          element={
+            <ProtectedRoute>
+              <CustomOrderDetailsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/user/track/order/:id"
           element={
@@ -178,11 +190,28 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
+
+        <Route
+          path="/garment/custom-order/:id"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentCustomOrderDetailsPage />
+            </GarmentProtectedRoute>
+          }
+        />
         <Route
           path="/garment-dashboard-orders"
           element={
             <GarmentProtectedRoute>
               <GarmentAllOrders />
+            </GarmentProtectedRoute>
+          }
+        />
+        <Route
+          path="/garment-dashboard-custom-orders"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentCustomOrderPage />
             </GarmentProtectedRoute>
           }
         />
