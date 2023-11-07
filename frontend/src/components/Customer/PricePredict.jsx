@@ -8,6 +8,8 @@ import cuf from "../../Assets/predictor/cuff.webp";
 import scprint from "../../Assets/predictor/print.jpeg"
 import { createProduct } from "../../redux/actions/product";
 import axios from "axios";
+import bg from "../../Assets/Customer/CustomerHomePage/bg21.png";
+import bg2 from "../../Assets/Customer/CustomerHomePage/bg22.png"
 
 const PricePredict = () => {
   //   const { garment } = useSelector((state) => state.garment);
@@ -62,7 +64,79 @@ const PricePredict = () => {
   };
 
   return (
-    <div className="w-[80%] md:w-[50%] bg-white mt-16 shadow-md shadow-blue-500  rounded-[4px] overflow-y-scroll p-8">
+    <div className="w-full bg-cover flex m-auto  justify-center ">
+       <div className="relative">
+      <div className="absolute inset-0 bg-sky-800 opacity-50"></div>
+
+      <div className="flex">
+      <img
+          className="  w-1/2 object-cover object-center"
+          src={bg}
+          alt="nature image"
+        />
+         <img
+          className="  w-1/2 object-cover object-center"
+          src={bg2}
+          alt="nature image"
+        />
+      </div>
+      <div className="flex">
+      <img
+          className="  w-1/2 object-cover object-center"
+          src={bg2}
+          alt="nature image"
+        />
+         <img
+          className="  w-1/2 object-cover object-center"
+          src={bg}
+          alt="nature image"
+        />
+      </div>
+      <div className="flex">
+      <img
+          className="  w-1/2 object-cover object-center"
+          src={bg}
+          alt="nature image"
+        />
+         <img
+          className="  w-1/2 object-cover object-center"
+          src={bg2}
+          alt="nature image"
+        />
+      </div>
+      <div className="flex">
+      <img
+          className="  w-1/2 object-cover object-center"
+          src={bg}
+          alt="nature image"
+        />
+         <img
+          className="  w-1/2 object-cover object-center"
+          src={bg2}
+          alt="nature image"
+        />
+      </div>
+
+{/*         
+        <img
+          className=" bg-cover  w-full object-cover object-center"
+          src={bg}
+          alt="nature image"
+        />
+        
+        <img
+          className=" bg-cover  w-full object-cover object-center"
+          src={bg}
+          alt="nature image"
+        />
+       
+        <img
+          className=" bg-cover  w-full object-cover object-center"
+          src={bg}
+          alt="nature image"
+        /> */}
+      </div>
+    <div className="w-[80%] absolute md:w-[50%] bg-white mt-16 shadow-md shadow-blue-500  rounded-[4px] overflow-y-scroll p-8">
       <h5 className="text-[30px] font-Poppins text-center">Price Predictor</h5>
 
       <form onSubmit={handleSubmit}>
@@ -386,6 +460,7 @@ const PricePredict = () => {
         </div>
         
       </div>
+    </div>
     </div>
   );
 };

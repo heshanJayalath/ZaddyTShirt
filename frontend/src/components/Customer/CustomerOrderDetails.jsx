@@ -212,7 +212,7 @@ const CustomerOrderDetails = () => {
       <br />
       <br />
       <div className="w-full flex items-center">
-        <div className="w-full w-[60%]">
+        <div className="w-full md:w-[60%]">
           <h4 className="pt-3 text-[20px] font-[600]">Shipping Address:</h4>
           <h4 className="pt-3 text-[20px]">
             {data?.shippingAddress.address1 +

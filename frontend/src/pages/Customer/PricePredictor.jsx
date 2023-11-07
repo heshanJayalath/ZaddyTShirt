@@ -15,7 +15,7 @@ const PricePredictor=()=>{
       <div className='md:hidden block z-10' >
       <ResponsiveHeader/>
       </div>
-        <div className="justify-center flex mb-16 mt-8">
+        <div className="justify-center flex">
         <PricePredict/>
         </div>
      
