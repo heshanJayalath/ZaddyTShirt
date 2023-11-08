@@ -15,7 +15,7 @@ const GarmentDashboardHeader = () => {
         <div className="w-full h-[80px] bg-white shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
             <div>
                 <Link to="/">
-                    <img className='px-4 w-24'
+                    <img className='hover:shadow-md rounded-md hover:shadow-blue-400 px-4 h-20 '
                         src={logo}
                         alt=""
                     />
@@ -24,35 +24,35 @@ const GarmentDashboardHeader = () => {
             <div className="flex items-center">
                 <div className="flex items-center mr-4">
                 
-                    <Link to="/garment-dashboard-events" className="800px:block ">
+                    {/* <Link to="/garment-dashboard-events" className="800px:block ">
                         <MdOutlineLocalOffer
                             color="#555"
                             size={30}
                             className="mx-5 cursor-pointer"
                         />
-                    </Link>
+                    </Link> */}
                     <Link to="/garment-dashboard-products" className="800px:block ">
                         <FiShoppingBag
                             color="#555"
                             size={30}
-                            className="mx-5 cursor-pointer"
+                            className="mx-5 hover:shadow-md hover:shadow-blue-800 rounded-md cursor-pointer"
                         />
                     </Link>
                     <Link to="/garment-dashboard-orders" className="800px:block ">
-                        <FiPackage color="#555" size={30} className="mx-5 cursor-pointer" />
+                        <FiPackage color="#555" size={30} className="mx-5 hover:shadow-md hover:shadow-blue-800 rounded-md cursor-pointer" />
                     </Link>
-                    <Link to="/garment-dashboard-messages" className="800px:block ">
+                    <Link to="/garment-dashboard-messages hover:shadow-md hover:shadow-blue-800 rounded-md" className="800px:block ">
                         <BiMessageSquareDetail
                             color="#555"
                             size={30}
-                            className="mx-5 cursor-pointer"
+                            className="mx-5 hover:shadow-md hover:shadow-blue-800 rounded-md cursor-pointer"
                         />
                     </Link>
                     <Link to={`/garment/${garment._id}`}>
                         <img
                             src={`${backend_url}/${garment.avatar}`}
                             alt=""
-                            className="w-[50px] h-[50px] rounded-full object-cover"
+                            className="w-[50px] h-[50px]  rounded-full object-cover"
                         />
                     </Link>
                 </div>
