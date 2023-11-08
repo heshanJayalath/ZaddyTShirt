@@ -31,6 +31,9 @@ const Header = ({ activeHeading, visibility = true }) => {
   const [dropDown, setDropDown] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [userRole, setUserRole]=useState('');
+  const [link,setLink]=useState('');
+  const [dashbordText,setDashbordText]=useState('');
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -56,6 +59,40 @@ const Header = ({ activeHeading, visibility = true }) => {
   const handleRefreshClick = () => {
     window.location.reload();
   };
+
+ let userRole1='';
+  let link1='';
+  let dbtext='';
+  const setUserProperties=(role,link,bdText)=>{
+   userRole1=role;   
+    link1=link;
+    dbtext=bdText;  
+  }
+
+
+  if (user && user.role.toLowerCase() === "owner" && visibility) {
+    
+      // setUserRole('owner')   
+      // setLink('/owner/dashboard')
+      // setDashbordText('Go Dashboard')  
+      setUserProperties('owner','/owner/dashboard','Go Dashboard') 
+    
+      
+  }else if (user && user.role.toLowerCase() === "manager" && visibility) {
+    setUserProperties('manager','/manager/dashboard','Go Dashboard') 
+  }else if (user && user.role.toLowerCase() === "admin" && visibility){ 
+    setUserProperties('admin','/admin/dashboard','Go Dashboard') 
+  }else if(isGarment && visibility){  
+    setUserProperties('garment','/garment-dashboard','Go Dashboard') 
+  }else if(user&& visibility){
+    setUserProperties('registereduser','/login-garment','Become Seller')  
+  }else if(!user&&!isGarment&&visibility){
+    setUserProperties('','/login','Login') 
+  }
+  
+  
+
+
   return (
     <>
       {loading ? null : (
@@ -110,20 +147,40 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               </div>
 
-              {user && user.role.toLowerCase() === "user"&&isGarment && visibility && (
+
+             {userRole1&&(
+              <div>
+              <Link to={link1}>
+                <div className={`${styles.button}`}>
+                <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
+                    {dbtext}
+                    <IoIosArrowForward className="ml-1" />
+                  </h1>
+                </div>
+              </Link>
+            </div>
+             )}
+
+               {! userRole1&&!isGarment&&visibility && (
                 <div>
-                  <Link to={"/garment-dashboard"}>
-                    <div className={`${styles.button}`}>
+                    <div className= {`flex ${styles.button}  px-2 gap-4 w-[230px]`}>
+                  <Link to={"/login"}>
                     <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
-                        Go Dashboard"
+                        Customer
                         <IoIosArrowForward className="ml-1" />
                       </h1>
-                    </div>
                   </Link>
+                  <Link to={"/login-garment"}>
+                      <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
+                        Seller
+                        <IoIosArrowForward className="ml-1" />
+                      </h1>
+                      </Link>
+                    </div>
                 </div>
               )}
 
-              {user && user.role.toLowerCase() === "owner" && visibility && (
+             {/* {user && user.role.toLowerCase() === "owner" && visibility && (
                 <div>
                   <Link to={`owner/dashboard`}>
                     <div className={`${styles.button}`}>
@@ -172,7 +229,9 @@ const Header = ({ activeHeading, visibility = true }) => {
                     </div>
                   </Link>
                 </div>
-              )}
+              )} */}
+
+              
             </div>
           </div>
           <div

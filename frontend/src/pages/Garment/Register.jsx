@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
-import { server } from '../../server';
+import { server } from "../../server";
 import FormData from "form-data";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-
+import { BiHomeAlt2 } from "react-icons/bi";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -23,8 +23,6 @@ const Register = () => {
   const [companyContact, setCompanyContact] = useState("");
   const navigate = useNavigate();
   const [visible, setVisible] = useState(true);
-
-  
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -47,10 +45,10 @@ const Register = () => {
     newForm.append("city", city);
     newForm.append("companyContact", companyContact);
 
-    axios.post(`${server}/garment/create-garment`, newForm, config)
+    axios
+      .post(`${server}/garment/create-garment`, newForm, config)
       .then((res) => {
-        
-        console.log("garment data:",res.data);
+        console.log("garment data:", res.data);
 
         toast.success(res.data.message);
         setUsername("");
@@ -64,11 +62,11 @@ const Register = () => {
         setCompanyAddress("");
         setCity("");
         setCompanyContact("");
-
-      }).catch((err) => {
-        toast.error(err.response.data.message);
       })
-  }
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   return (
     <section className="bg-gray-50  min-h-screen items-center justify-center">
@@ -82,7 +80,10 @@ const Register = () => {
           </p>
         </div>
 
-        <form className=" justify-center items-center content-center " onSubmit={handleSubmit}>
+        <form
+          className=" justify-center items-center content-center "
+          onSubmit={handleSubmit}
+        >
           <div className="md:flex  gap-4">
             <div className="md:w-1/2 md:pl-10 md:pr-5 pl-5 pr-5 ">
               <h5 className="p-2 font-bold md:text-2xl text-base text-[#002D74]">
@@ -290,6 +291,23 @@ const Register = () => {
             <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">
               Login
             </button>
+          </Link>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: "0",
+            top: "0",
+            margin: "10px",
+            color: "#fff",
+            background: "#000",
+            padding: "10px",
+            borderRadius: "10px",
+          }}
+        >
+          <Link to="/" className="flex">
+            <BiHomeAlt2 size={20} />
+            Home
           </Link>
         </div>
       </div>

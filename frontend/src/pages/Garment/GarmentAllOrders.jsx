@@ -8,10 +8,10 @@ const GarmentAllOrders = () => {
     <div>
             <GarmentDashboardHeader />
             <div className="flex justify-between w-full">
-                <div className="w-[80px] 800px:w-[330px]">
+                <div className="w-1/6">
                   <GarmentDashboardSideBar active={2} />
                 </div>
-                <div className="w-full justify-center flex">
+                <div className="w-5/6 px-8 justify-center flex">
                    <AllOrders />
                 </div>
               </div>

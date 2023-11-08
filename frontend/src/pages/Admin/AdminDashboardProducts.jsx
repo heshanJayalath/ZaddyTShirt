@@ -7,13 +7,17 @@ const AdminDashboardProducts = () => {
   return (
     <div>
       <AdminHeader />
-      <div className="w-full flex">
-        <div className="flex items-start justify-between w-full">
-          <div className="w-[80px] 800px:w-[330px]">
+      
+        <div className="flex justify-between w-full">
+          <div className="w-1/6 ">
             <AdminSideBar active={5} />
           </div>
+          <div className="w-5/6 px-12">
+        
           <AllProducts />
-        </div>
+          </div>
+          
+      
       </div>
     </div>
   )

@@ -18,8 +18,9 @@ const AllOrders = () => {
     }, [dispatch]);
 
     const columns = [
-        { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
-
+        // { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+        { field: "orderid", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+        
         {
             field: "status",
             headerName: "Status",
@@ -69,13 +70,16 @@ const AllOrders = () => {
     ];
 
     const row = [];
-
+    let count=0
     orders &&
         orders.forEach((item) => {
+            console.log(item)
+            count+=1
             row.push({
                 id: item._id,
-                itemsQty: item.cart.length,
-                total: "Rs. " + item.totalPrice + ".00",
+                orderid:count,
+                itemsQty:  item.cart.reduce((acc, item) => acc + item.qty, 0),
+                total: "Rs. " + item.cart.reduce((acc, item) => acc + item.discountPrice*item.qty, 0),
                 status: item.status,
             });
         });
@@ -85,7 +89,7 @@ const AllOrders = () => {
             {isLoading ? (
                 <Loader/>
             ) : (
-                <div className="w-[77%] mx-8 pt-1 mt-10 bg-white">
+                <div className="w-full justify-center content-center flex  pt-1 mt-10 bg-white">
                     <DataGrid
                         rows={row}
                         columns={columns}

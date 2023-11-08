@@ -25,6 +25,9 @@ const ProfileSideBar = ({ active, setActive }) => {
             console.log(error.response.data.message);
         })
     }
+    const logoutPopup=(value)=>{
+        setOpen(value)
+    }
     return (
         <div className='w-full bg-blue-20 shadow-md shadow-blue-300 pb-4 p-4 pt-8'>
             <div
@@ -125,7 +128,7 @@ const ProfileSideBar = ({ active, setActive }) => {
             </div>
             <div
                 className="flex justify-center md:justify-start cursor-pointer w-full mb-8"
-                onClick={() => setActive(9) || logoutHandler()}
+                onClick={() => setActive(9) || logoutPopup(true)}
             >
                 <AiOutlineLogout size={20} color={active === 9 ? "red" : ""} />
                 <span
@@ -145,18 +148,24 @@ const ProfileSideBar = ({ active, setActive }) => {
                                 Are you sure you want to logout?
                             </h3>
                             <div className="w-full flex gap-2  pt-3 items-center justify-center">                   
-                                <button onClick={() => setOpen(false) 
-                                    || 
-                                    setActive(8) || logoutHandler()
-                                    } type="button" class="text-red-700  hover:text-white border font-semibold border-red-700 hover:bg-red-800 focus:ring-4 
+                                <button onClick={() => {
+                                    setOpen(false);
+                                    setActive(1)
+                                    logoutHandler();
+                                     }
+                                    } type="button" class="text-red-700  hover:text-white border font-semibold border-red-700 hover:bg-red-800  
                                 focus:outline-none focus:ring-red-300 rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
-                                dark:border-red-500 dark:text-red-700 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                dark:border-red-500 focus:shadow-md focus:shadow-red-600 dark:text-red-700 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                     confirm
                                     </button>
 
-                                    <button type="button" class="text-blue-900 hover:text-white border border-gray-800 hover:bg-gray-900 
-                                    focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
-                                    dark:border-gray-600 dark:text-gray-700 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                                    <button onClick={() => {
+                                    setOpen(false);
+                                    setActive(1)
+                                     }
+                                    }  type="button" class="text-blue-900 hover:text-white border border-gray-800 hover:bg-gray-900 
+                                     focus:outline-none focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+                                    dark:border-gray-600 focus:shadow-md focus:shadow-gray-600 dark:text-gray-700 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
                                         cancel</button>
 
                             </div>
