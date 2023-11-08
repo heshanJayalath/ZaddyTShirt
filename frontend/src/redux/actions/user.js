@@ -32,7 +32,7 @@ export const loadGarment = () => async (dispatch) => {
     });
 
     const { data } = await axios.get(`${server}/garment/getGarment`, { withCredentials: true });
-    console.log(data)
+    console.log("garmentData new-x:",data)
     dispatch({
       type: "LoadGarmentSuccess",
       payload: data.garment,

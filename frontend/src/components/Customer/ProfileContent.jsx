@@ -26,6 +26,8 @@ const ProfileContent = ({ active }) => {
   const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
 
+  {console.log("User-profile:", user)};
+
   useEffect(() => {
     if (error) {
       toast.error(error);

@@ -177,7 +177,7 @@ const CustomOrderDetails = () => {
             {data?.description}
           </dd>
         </div>
-        {data?.status === "Apply" || data?.status === "Approved by Manager" || data?.status === "Rejected" 
+        {(data?.status === "Apply" || data?.status === "Approved by Manager" || data?.status === "Rejected" || data?.status === "Processing" || data?.status === "Transferred to delivery partner"|| data?.status === "Delivered")
           ? (
             <>
               <hr />

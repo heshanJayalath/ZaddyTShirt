@@ -42,6 +42,7 @@ import {
   GarmentInboxPage,
   GarmentCustomOrderPage,
   GarmentCustomOrderDetailsPage,
+  GarmentMyCustomOrderPage
 } from "./routes/GarmentRoutes.js";
 
 import {
@@ -212,6 +213,14 @@ const App = () => {
           element={
             <GarmentProtectedRoute>
               <GarmentCustomOrderPage />
+            </GarmentProtectedRoute>
+          }
+        />
+         <Route
+          path="/garment-dashboard-my-custom-orders"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentMyCustomOrderPage />
             </GarmentProtectedRoute>
           }
         />
