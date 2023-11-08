@@ -13,7 +13,7 @@ import { GarmentOptions, statusData } from '../../../Static/Customer/data';
 const GarmentCustomOrderDetails = () => {
   const { allCustomOrders } = useSelector((state) => state.customorder);
   const { garment } = useSelector((state) => state.garment);
-  // console.log("now garment:", garment);
+  console.log("now garment:", garment);
   const [status, setStatus] = useState("");
   const [price, setPrice] = useState("");
   const dispatch = useDispatch();
