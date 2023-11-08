@@ -51,6 +51,8 @@ const Header = ({ activeHeading, visibility = true }) => {
       setActive(false);
     }
   });
+
+  console.log(user && user.role.toLowerCase())
   const handleRefreshClick = () => {
     window.location.reload();
   };
@@ -108,7 +110,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               </div>
 
-              {isGarment && visibility && (
+              {user && user.role.toLowerCase() === "user"&&isGarment && visibility && (
                 <div>
                   <Link to={"/garment-dashboard"}>
                     <div className={`${styles.button}`}>
@@ -121,7 +123,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               )}
 
-              {user && user.role === "Owner" && visibility && (
+              {user && user.role.toLowerCase() === "owner" && visibility && (
                 <div>
                   <Link to={`owner/dashboard`}>
                     <div className={`${styles.button}`}>
@@ -133,7 +135,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                   </Link>
                 </div>
               )}
-              {user && user.role == "manager" && visibility && (
+              {user && user.role.toLowerCase() === "manager" && visibility && (
                 <div>
                   <Link to={`/manager-garments`}>
                     <div className={`${styles.button}`}>
@@ -146,7 +148,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               )}
 
-              {user && user.role == "Admin" && visibility && (
+              {user && user.role.toLowerCase() === "admin" && visibility && (
                 <div>
                   <Link to={`/admin/dashboard`}>
                     <div className={`${styles.button}`}>
@@ -159,7 +161,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               )}
 
-              {(!user||user.role=='user') && visibility && (
+              {(!user||user.role.toLowerCase()==='user') && visibility && (
                 <div>
                   <Link to={`/create-garment`}>
                     <div className={`${styles.button} `}>
