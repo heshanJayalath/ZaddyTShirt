@@ -86,6 +86,7 @@ const AllOrders = () => {
                 <Loader/>
             ) : (
                 <div className="w-[77%] mx-8 pt-1 mt-10 bg-white">
+                    <h1 className="text-[22px] font-Poppins pb-2">All Orders</h1>
                     <DataGrid
                         rows={row}
                         columns={columns}
