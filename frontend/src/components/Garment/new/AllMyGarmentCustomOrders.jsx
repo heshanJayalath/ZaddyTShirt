@@ -7,9 +7,12 @@ import styles from "../../../Styles/Customer/styles";
 import { RxCross1 } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../../server";
+import { useSelector } from "react-redux";
 
 
-const AllGarmentCustomOrders = () => {
+const AllMyGarmentCustomOrders = () => {
+    const {garment} = useSelector((state)=>state.garment);
+    console.log("My custom order garment id", garment);
     const [data, setData] = useState([]);
     const [open, setOpen] = useState(false);
     const [customorderId, setCustomOrderId] = useState("");
@@ -91,7 +94,7 @@ const AllGarmentCustomOrders = () => {
     let count = 0;
     data &&
         data.forEach((item, index) => {
-            if (item.status === "Pending") {
+            if (item?.garment?.companyName === garment?.companyName) {
                 count++;
                 const createdAt = new Date(item.createdAt); // Convert createdAt to a Date object
                 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -160,4 +163,4 @@ const AllGarmentCustomOrders = () => {
     );
 };
 
-export default AllGarmentCustomOrders;
+export default AllMyGarmentCustomOrders;

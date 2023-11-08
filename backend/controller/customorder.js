@@ -66,8 +66,6 @@ router.get(
 // get all custom-orders for manager
 router.get(
     "/manager-all-custom-orders",
-    isAuthenticated,
-    isManager("manager"),
     catchAsyncErrors(async (req, res, next) => {
         try {
             const customorders = await CustomOrder.find().sort({

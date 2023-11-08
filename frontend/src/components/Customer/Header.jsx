@@ -121,7 +121,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               )}
 
-              {user && user.role == "Owner" && visibility && (
+              {user && user.role === "Owner" && visibility && (
                 <div>
                   <Link to={`owner/dashboard`}>
                     <div className={`${styles.button}`}>
