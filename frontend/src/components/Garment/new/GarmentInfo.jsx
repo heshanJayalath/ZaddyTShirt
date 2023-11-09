@@ -7,6 +7,7 @@ import styles from '../../../Styles/Customer/styles';
 import axios from 'axios';
 import { server } from '../../../server';
 import { getAllProductsGarment } from '../../../redux/actions/product';
+import { RxCross1 } from "react-icons/rx";
 
 const GarmentInfo = ({ isGarmentOwner }) => {
   const [data, setData] = useState();
@@ -15,7 +16,7 @@ const GarmentInfo = ({ isGarmentOwner }) => {
   const {id} = useParams();
   const dispatch = useDispatch();
 
-
+  const [open, setOpen] = useState(false);
   useEffect(()=>{
     dispatch(getAllProductsGarment(id));
     setIsLoading(true);
@@ -33,7 +34,9 @@ const GarmentInfo = ({ isGarmentOwner }) => {
     axios.get(`${server}/garment/logout`, { withCredentials: true });
     window.location.reload();
   }
-
+  const logoutPopup=(value)=>{
+    setOpen(value)
+}
 
   return (
     <>
@@ -79,15 +82,55 @@ const GarmentInfo = ({ isGarmentOwner }) => {
               <div className="py-3 px-4">
                 <Link to="/settings">
                   <div className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}>
-                    <span className="text-white">Edit Shop</span>
+                    <span className="text-white rounded-md hover:px-28 p-2 hover:shadow-md hover:shadow-red-600">Edit Shop</span>
                   </div>
                 </Link>
-                <div className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}
-                  onClick={logoutHandler}
+                <div className={`${styles.button}   !w-full !h-[42px] !rounded-[5px]`}
+                  onClick={()=>{setOpen(true)}}
+
                 >
-                  <span className="text-white">Log Out</span>
+                  <span className="text-white rounded-md hover:px-28 p-2 hover:shadow-md hover:shadow-red-600"> Log Out   </span>
                 </div>
+
+
+                {open && (
+                    <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center hover:shadow-sm py-2 justify-center h-screen">
+                        <div className="w-[25%] 800px:w-[40%] min-h-[20vh] bg-[#f9f9f99a]  hover:bg-[#f9f9f9c4] rounded shadow p-5">
+                            <div className="w-full flex justify-end cursor-pointer">
+                                <RxCross1 size={20} onClick={() => setOpen(false)} />
+                            </div>
+                            <h3 className="text-[20px] text-center py-3 font-normal font-Poppins text-[#000000cb]">
+                                Are you sure you want to logout?
+                            </h3>
+                            <div className="w-full flex gap-2  pt-3 items-center justify-center">                   
+                                <button onClick={() => {
+                                    setOpen(false);
+                                    
+                                    logoutHandler();
+                                     }
+                                    } type="button" class="text-red-700  hover:text-white border font-semibold border-red-700 hover:bg-red-800  
+                                focus:outline-none focus:ring-red-300 rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+                                dark:border-red-500 focus:shadow-md focus:shadow-red-600 dark:text-red-700 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                    confirm
+                                    </button>
+
+                                    <button onClick={() => {
+                                    setOpen(false);
+                                   
+                                     }
+                                    }  type="button" class="text-blue-900 hover:text-white border border-gray-800 hover:bg-gray-900 
+                                     focus:outline-none focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+                                    dark:border-gray-600 focus:shadow-md focus:shadow-gray-600 dark:text-gray-700 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                                        cancel</button>
+
+                            </div>
+                        </div>
+                    </div>
+                )}
+
               </div>
+
+              
             )}
           </div>
         )

@@ -84,7 +84,8 @@ const GarmentViewReport = () => {
 
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    // { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "orderid", headerName: "Order ID", minWidth: 150, flex: 0.7 },
 
     {
       field: "status",
@@ -123,7 +124,7 @@ const GarmentViewReport = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/dashboard/order/${params.id}`}>
+            <Link to={`/order/${params.id}`}>
               <Button>
                 <AiOutlineArrowRight size={20} />
               </Button>
@@ -141,10 +142,12 @@ const GarmentViewReport = () => {
   orders &&
     orders.forEach((item) => {
       number += 1;
+      console.log('single item...........:',item)
       row.push({
-        id: number,
+        id: item._id,
+        orderid:number,
         itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
-        total: "Rs. " + item.totalPrice,
+        total: "Rs. " + item.cart.reduce((acc, item) => acc + item.discountPrice*item.qty, 0),
         status: item.status,
       });
     });

@@ -64,6 +64,7 @@ const AdminDashboardMain = () => {
         },
     ];
 
+    console.log('adminn',adminOrders)
     const row = [];
     let count = 0
     adminOrders &&
@@ -71,8 +72,8 @@ const AdminDashboardMain = () => {
             count++;
             row.push({
                 id: count,
-                itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-                total: "Rs. "+ item?.totalPrice,
+                itemsQty:  item.cart.reduce((acc, item) => acc + item.qty, 0),
+                total: "Rs. " + item.cart.reduce((acc, item) => acc + item.discountPrice*item.qty, 0),
                 status: item?.status,
                 createdAt: item?.createdAt.slice(0, 10),
             });
@@ -84,7 +85,7 @@ const AdminDashboardMain = () => {
                 adminOrderLoading ? (
                     <Loader />
                 ) : (
-                    <div className="w-[80%] p-4">
+                    <div className="w-full p-4">
                         <h3 className="text-[22px] font-Poppins pb-2">Overview</h3>
                         <div className="w-full flex items-center justify-between">
                             <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
