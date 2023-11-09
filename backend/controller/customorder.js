@@ -19,7 +19,7 @@ router.post("/create-custom-order", upload.fields([{ name: "images", maxCount: 5
         if (!user) {
             return next(new ErrorHandler("User Id is invalid", 400));
         } else {
-            const files = req.files['images'];
+            const filename = req.files['images'];
             const imageUrls = files.map((file) => `${file.filename}`);
 
             // console.log("model",modelFiles);
