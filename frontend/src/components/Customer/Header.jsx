@@ -110,11 +110,11 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               </div>
 
-              {user && user.role.toLowerCase() === "user"&&isGarment && visibility && (
+              {user && user.role.toLowerCase() === "user" && isGarment && visibility && (
                 <div>
                   <Link to={"/garment-dashboard"}>
                     <div className={`${styles.button}`}>
-                    <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
+                      <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
                         Go Dashboard"
                         <IoIosArrowForward className="ml-1" />
                       </h1>
@@ -127,7 +127,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 <div>
                   <Link to={`owner/dashboard`}>
                     <div className={`${styles.button}`}>
-                    <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
+                      <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
                         Go Dashboard
                         <IoIosArrowForward className="ml-1" />
                       </h1>
@@ -139,7 +139,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 <div>
                   <Link to={`/manager-garments`}>
                     <div className={`${styles.button}`}>
-                    <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
+                      <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
                         Go Dashboard
                         <IoIosArrowForward className="ml-1" />
                       </h1>
@@ -152,7 +152,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 <div>
                   <Link to={`/admin/dashboard`}>
                     <div className={`${styles.button}`}>
-                    <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
+                      <h1 className="text-[#fff] font-medium flex items-center p-2 hover:shadow-md hover:bg-black hover:shadow-blue-500 duration-300 rounded-lg ">
                         Go Dashboard
                         <IoIosArrowForward className="ml-1" />
                       </h1>
@@ -161,7 +161,7 @@ const Header = ({ activeHeading, visibility = true }) => {
                 </div>
               )}
 
-              {(!user||user.role.toLowerCase()==='user') && visibility && (
+              {(!user || user.role.toLowerCase() === 'user') && visibility && (
                 <div>
                   <Link to={`/create-garment`}>
                     <div className={`${styles.button} `}>
@@ -180,9 +180,8 @@ const Header = ({ activeHeading, visibility = true }) => {
               setShowSuggestions(false);
               setSearchTerm("");
             }}
-            className={`${
-              active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-            } transition 800px flex items-center justify-between w-full bg-[#3321cb] h-[70px]`}
+            className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+              } transition 800px flex items-center justify-between w-full bg-[#3321cb] h-[70px]`}
           >
             {/* categories */}
             <div>

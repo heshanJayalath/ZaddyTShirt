@@ -61,6 +61,7 @@ import {
   ManagerDashboardGarment,
   ManagerDashboardCustomOrder,
   ManagerCustomOrderDetails,
+  ManagerDashboardServiceCharges,
 } from "./routes/ManagerRoutes.js";
 
 import {
@@ -216,7 +217,7 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/garment-dashboard-my-custom-orders"
           element={
             <GarmentProtectedRoute>
@@ -360,7 +361,14 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
+        <Route
+          path="/manager-service-charges"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardServiceCharges />
+            </ProtectedManagerRoute>
+          }
+        />
         <Route
           path="/customorder/:id"
           element={

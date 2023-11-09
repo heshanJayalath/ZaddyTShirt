@@ -108,17 +108,29 @@ const ManagerSideBar = ({ active }) => {
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
       >
-        <Link to="/profile" className="w-full flex items-center">
+        <Link to="/manager-service-charges" className="w-full flex items-center">
 
           <RiUserSettingsLine size={30} color={active === 7 ? "red" : ""} />
           <span
             className={`pl-3 text-lg ${active === 7 ? "text-[red]" : ""} 800px:block `}
           >
+            All Charges
+          </span>
+        </Link>
+      </div>
+      <div
+        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
+      >
+        <Link to="/profile" className="w-full flex items-center">
+
+          <RiUserSettingsLine size={30} color={active === 8 ? "red" : ""} />
+          <span
+            className={`pl-3 text-lg ${active === 8 ? "text-[red]" : ""} 800px:block `}
+          >
             Settings
           </span>
         </Link>
       </div>
-      
     </div>
   );
 };
