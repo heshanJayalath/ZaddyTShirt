@@ -39,45 +39,46 @@ const AllCustomOrders = () => {
         {
             field: "name",
             headerName: "Ordername",
-            minWidth: 100,
-            flex: 0.7,
+            minWidth: 30,
+            maxWidth:30,
+            flex: 1,
         },
         {
             field: "email",
             headerName: "Email",
-            minWidth: 180,
+            minWidth: 80,
             flex: 0.6,
         },
         {
             field: "quantity",
             headerName: "Quantity",
             type: "number",
-            minWidth: 150,
+            minWidth: 80,
             flex: 0.3,
         },
 
         {
             field: "status",
             headerName: "Status",
-            minWidth: 130,
+            minWidth: 80,
             flex: 0.5,
         },
         {
             field: "assigned",
             headerName: "Assigned Garment",
-            minWidth: 130,
+            minWidth: 80,
             flex: 0.7,
         },
         {
             field: "orderDate",
             headerName: "Ordered Date",
-            minWidth: 130,
+            minWidth: 80,
             flex: 0.8,
         },
         {
             field: "Preview",
             flex: 0.4,
-            minWidth: 100,
+            minWidth: 80,
             headerName: "",
             sortable: false,
             renderCell: (params) => {
@@ -96,7 +97,7 @@ const AllCustomOrders = () => {
         {
             field: "Delete",
             flex: 0.4,
-            minWidth: 100,
+            minWidth: 80,
             headerName: "",
             type: "number",
             sortable: false,
@@ -137,6 +138,7 @@ const AllCustomOrders = () => {
         <>
             <div className="w-[80%] flex justify-center pt-5">
                 <div className="w-[97%]">
+                <h3 className="text-[22px] font-Poppins pb-2">All Custom orders</h3>
                     <div className="w-full min-h-[45vh] bg-white rounded">
                         <DataGrid
                             rows={row}

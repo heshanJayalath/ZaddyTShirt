@@ -23,10 +23,10 @@ const ProfilePage = () => {
         </h2>
       </div>
       <div className={`${styles.section} md:flex bg-white py-10`}>
-        <div className="md:w-72 w-full z-[999] sticky 800px:mt-0 ">
+        <div className="md:w-2/12 w-full z-[999] sticky 800px:mt-0 ">
           <ProfileSideBar active={active} setActive={setActive} />
         </div>
-        <div className="w-full md:mt-0 mt-4 md:w-9/12 md:pl-8">
+        <div className="w-full md:mt-0 mt-4 md:w-10/12 md:pl-8">
           <ProfileContent active={active} />
         </div>
       </div>

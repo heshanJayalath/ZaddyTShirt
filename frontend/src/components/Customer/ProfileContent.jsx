@@ -783,13 +783,14 @@ const CustomOrders = () => {
   console.log("custom-orders:", orders);
   console.log("user._id: ", user._id);
   const dispatch = useDispatch();
+ 
 
   useEffect(() => {
     dispatch(getAllCustomOrdersOfUser(user._id));
   }, [])
 
   const columns = [
-    { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.2, hide: true },
+    { field: "id", headerName: "Product Id", minWidth: 100, flex: 0.2, hide: true },
     { field: "count", headerName: "Order-Number", minWidth: 150, flex: 0.7, },
     {
       field: "name",
@@ -799,7 +800,7 @@ const CustomOrders = () => {
     },
     {
       field: "quantity",
-      headerName: "Quantity",
+      headerName: "Qty",
       type: "number",
       minWidth: 80,
       flex: 0.5,
@@ -873,7 +874,7 @@ const CustomOrders = () => {
     });
   return (
     <>
-      <div className="w-[100%] mx-8 pt-1 mt-10 bg-white">
+      <div className="w-[100%] mx-2 pt-1 mt-10 bg-white">
         <DataGrid
           rows={row}
           columns={columns}

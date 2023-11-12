@@ -94,8 +94,8 @@ const AllUsers = () => {
   let count = 0;
   users &&
     users.forEach((item) => {
-      count++;
-      row.push({
+      item.role=='user'&&count++;
+      item.role=='user'&&row.push({
         count: count,
         id: item._id,
         name: item.name,
@@ -103,6 +103,7 @@ const AllUsers = () => {
         role: item.role,
         joinedAt: item.createdAt.slice(0, 10),
       });
+
     });
 
   return (
