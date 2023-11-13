@@ -66,6 +66,7 @@ const GarmentViewReport = () => {
     });
     newForm.append("garmentName", garment?.companyName);
     newForm.append("fee", serviceChargers);
+    newForm.append("status","Pending");
     newForm.append("garmentId", garment._id);
     newForm.append("garment", JSON.stringify(garment) );
 

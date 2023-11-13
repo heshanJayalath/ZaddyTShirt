@@ -27,6 +27,7 @@ router.post("/create-service-payment", upload.fields([{ name: "images", maxCount
             const serviceChargeData = req.body;
             serviceChargeData.images = imageUrls
             serviceChargeData.fee = req.body.fee;
+            serviceChargeData.status = req.body.status;
             serviceChargeData.garment = JSON.parse(req.body.garment);
             serviceChargeData.name = req.body.garmentName;
 
@@ -58,6 +59,49 @@ router.get(
                 success: true,
                 serviceCharges,
             });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+)
+// Get All service charges for garment
+router.get(
+    "/garment-all-service-charges/:id",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const id = req.params.id;
+           const serviceCharges = await ServiceCharge.find({garmentId:id});
+           console.log(serviceCharges); 
+           res.status(201).json({
+                success: true,
+                serviceCharges,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+)
+
+router.put(
+    "/update-service-charge-status/:id",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+
+            const serviceCharge = await ServiceCharge.findById(id)
+            if (!serviceCharge) {
+                return res.status(404).json({
+                    message: "Service Charge not found!"
+                });
+            }
+
+            serviceCharge.status = status;
+            await serviceCharge.save();
+
+            res.json({
+                message: 'Service Charge Updated!'
+            })
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));
         }

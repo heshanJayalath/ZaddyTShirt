@@ -42,7 +42,8 @@ import {
   GarmentInboxPage,
   GarmentCustomOrderPage,
   GarmentCustomOrderDetailsPage,
-  GarmentMyCustomOrderPage
+  GarmentMyCustomOrderPage,
+  GarmentAllServiceChargesPage,
 } from "./routes/GarmentRoutes.js";
 
 import {
@@ -62,6 +63,7 @@ import {
   ManagerDashboardCustomOrder,
   ManagerCustomOrderDetails,
   ManagerDashboardServiceCharges,
+  ManagerServiceCharge,
 } from "./routes/ManagerRoutes.js";
 
 import {
@@ -273,6 +275,15 @@ const App = () => {
             </GarmentProtectedRoute>
           }
         />
+
+        <Route
+          path="/garment-all-service-charges"
+          element={
+            <GarmentProtectedRoute>
+              <GarmentAllServiceChargesPage />
+            </GarmentProtectedRoute>
+          }
+        />
         <Route
           path="/admin/dashboard"
           element={
@@ -377,7 +388,14 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
-
+        <Route
+          path="manager/service-charge/:id"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerServiceCharge />
+            </ProtectedManagerRoute>
+          }
+        />
         <Route
           path="/owner/dashboard"
           element={

@@ -12,7 +12,8 @@ import GarmentInboxPage from '../pages/Garment/GarmentInboxPage.jsx';
 import GarmentUpdateProduct from '../pages/Garment/GarmentUpdateProducts.jsx';
 import GarmentCustomOrderPage from '../pages/Garment/GarmentCustomOrderPage.jsx';
 import GarmentCustomOrderDetailsPage from '../pages/Garment/GarmentCustomOrderDetailsPage.jsx'
-import GarmentMyCustomOrderPage from '../pages/Garment/GarmentMyCustomOrderPage.jsx'
+import GarmentMyCustomOrderPage from '../pages/Garment/GarmentMyCustomOrderPage.jsx';
+import GarmentAllServiceChargesPage from '../pages/Garment/GarmentAllServiceChargesPage.jsx';
 
 export {
     GarmentDashboardPage,
@@ -30,4 +31,5 @@ export {
     GarmentCustomOrderPage,
     GarmentCustomOrderDetailsPage,
     GarmentMyCustomOrderPage,
+    GarmentAllServiceChargesPage,
 }

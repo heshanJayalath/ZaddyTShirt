@@ -53,7 +53,7 @@ const AllServiceCharges = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/product/${params.id}`}>
+            <Link to={`/manager/service-charge/${params.id}`}>
               <Button>
                 <AiOutlineEye size={20} />
               </Button>

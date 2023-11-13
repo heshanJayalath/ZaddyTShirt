@@ -22,6 +22,10 @@ const servicechargeSchema = new mongoose.Schema({
     garment: {
         type: Object,
     },
+    status: {
+        type: String,
+        required:true,
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
