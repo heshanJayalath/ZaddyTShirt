@@ -223,7 +223,7 @@ const CustomerOrderDetails = () => {
           <h4 className=" text-[20px]">{data?.shippingAddress.city}</h4>
           <h4 className=" text-[20px]">{data?.user?.phoneNumber}</h4>
         </div>
-        <div className="w-full w-[40%]">
+        <div className="w-full">
           <h4 className=" text-[20px]">Payment Info:</h4>
           <h4>
             Status:{" "}

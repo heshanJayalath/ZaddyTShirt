@@ -20,6 +20,8 @@ const ModelThree = () => {
   console.log("all Products: ", allProducts);
   const releventdata = allProducts?.find((i) => i._id === id);
 
+  console.log(releventdata)
+
 
 
   return (

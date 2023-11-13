@@ -87,6 +87,7 @@ const AllProducts = () => {
     return (
         <>
             <div className="w-[78%] mx-8 pt-1 mt-10 bg-white">
+            <h3 className="text-[22px] font-Poppins pb-2">All Products</h3>
                 <DataGrid
                     rows={row}
                     columns={columns}
