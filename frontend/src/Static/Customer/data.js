@@ -212,6 +212,13 @@ export const feedbacks = [
   }
 ]
 
+export const serviceChargeStatus = [
+  {
+    id: 1,
+    title: "Payed Confirm"
+  },
+]
+
 export const statusData = [
   {
     id: 1,
@@ -652,7 +659,7 @@ export const footerProductLinks = [
   },
   {
     name: "signup",
-    link:"/signup"
+    link: "/signup"
   },
 
   {
