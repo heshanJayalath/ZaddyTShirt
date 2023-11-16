@@ -64,6 +64,7 @@ import {
   ManagerCustomOrderDetails,
   ManagerDashboardServiceCharges,
   ManagerServiceCharge,
+  ManagerDashboardCreateServiceCharges
 } from "./routes/ManagerRoutes.js";
 
 import {
@@ -380,6 +381,15 @@ const App = () => {
             </ProtectedManagerRoute>
           }
         />
+        <Route
+          path="/manager-create-charges"
+          element={
+            <ProtectedManagerRoute>
+              <ManagerDashboardCreateServiceCharges />
+            </ProtectedManagerRoute>
+          }
+        />
+        
         <Route
           path="/customorder/:id"
           element={

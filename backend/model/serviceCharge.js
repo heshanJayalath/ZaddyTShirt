@@ -17,7 +17,6 @@ const servicechargeSchema = new mongoose.Schema({
     ],
     garmentId: {
         type: String,
-        required: true,
     },
     garment: {
         type: Object,

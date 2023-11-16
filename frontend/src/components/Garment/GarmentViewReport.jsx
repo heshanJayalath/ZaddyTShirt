@@ -19,17 +19,38 @@ const GarmentViewReport = () => {
   const { orders } = useSelector((state) => state.order);
   const { garment } = useSelector((state) => state.garment);
   const { products } = useSelector((state) => state.products);
+
   const [deliveredOrder, setDeliveredOrder] = useState(null);
+  const [releventServiceChargeData, setReleventServiceChargeData] = useState(null)
   const [showCharges, setShowChargers] = useState(false);
   const [garmentName, setGarmentName] = useState();
   const [fee, setFee] = useState();
   const [images, setImages] = useState([]);
+  const [data, setData] = useState();
 
   useEffect(() => {
     dispatch(getAllOrdersOfGarment(garment._id));
     dispatch(getAllProductsGarment(garment._id));
   }, [dispatch]);
 
+  useEffect(() => {
+    axios.get(`${server}/servicecharge/garment-all-service-charges`).then((res) => {
+      setData(res.data.serviceCharges);
+      console.log("Dar:", data)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (data && garment) {
+      const filteredServiceCharges = data.filter(charge => ((charge.name === garment?.companyName) && (charge.status === 'invoice')));
+      console.log("Filtered Service Charges:", filteredServiceCharges);
+      filteredServiceCharges?.map((item) => {
+        setReleventServiceChargeData(item);
+      });
+
+      console.log(releventServiceChargeData);
+    }
+  }, [data, garment]);
 
 
   const orderData =
@@ -43,7 +64,7 @@ const GarmentViewReport = () => {
   let availableBalance = totalEarnings?.toFixed(2) || 0;
 
 
-  let serviceChargers = availableBalance * 0.1;
+  // let serviceChargers = availableBalance * 0.1;
 
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
@@ -57,27 +78,29 @@ const GarmentViewReport = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
     const config = { headers: { "Content-Type": "multipart/form-data" } };
-    const newForm = new FormData();
 
+
+    const formData = new FormData();
     images.forEach((image) => {
-      newForm.append("images", image);
+      formData.append("images", image);
     });
-    newForm.append("garmentName", garment?.companyName);
-    newForm.append("fee", serviceChargers);
-    newForm.append("status","Pending");
-    newForm.append("garmentId", garment._id);
-    newForm.append("garment", JSON.stringify(garment) );
+    formData.append('garmentName', releventServiceChargeData?.name);
+    formData.append('fee', releventServiceChargeData?.fee);
+    formData.append('status', 'Pending');
+    formData.append('garmentId', garment._id);
+    formData.append('garment', JSON.stringify(garment));
 
-    axios.post(`${server}/servicecharge/create-service-payment`, newForm, config)
+    axios.put(`${server}/servicecharge/update-service-payment/${releventServiceChargeData._id}`, formData, config)
       .then((res) => {
         window.location.reload(true);
         toast.success(res.data.message);
         setGarmentName("");
         setFee();
         setImages([]);
-        serviceChargers=0;
       }).catch((err) => {
         toast.error(err.response.data.message);
       })
@@ -143,12 +166,11 @@ const GarmentViewReport = () => {
   orders &&
     orders.forEach((item) => {
       number += 1;
-      console.log('single item...........:',item)
       row.push({
         id: item._id,
-        orderid:number,
+        orderid: number,
         itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
-        total: "Rs. " + item.cart.reduce((acc, item) => acc + item.discountPrice*item.qty, 0),
+        total: "Rs. " + item.cart.reduce((acc, item) => acc + item.discountPrice * item.qty, 0),
         status: item.status,
       });
     });
@@ -175,14 +197,17 @@ const GarmentViewReport = () => {
             Rs.{availableBalance}
           </h5>
 
-          <h5
-            className="pt-4 pl-[2] font-medium text-[#9c6a07] cursor-pointer"
+
+          {releventServiceChargeData?.status === "invoice" && (<h5
+            className="p-4  font-medium rounded-md text-center text-[#fff] bg-red-600 cursor-pointer"
             onClick={() => {
               setShowChargers(true);
             }}
           >
-            Service Chargers : Rs. {serviceChargers}
+            Payable amount : {releventServiceChargeData?.fee}
+
           </h5>
+          )}
         </div>
         {/* w-[30%] */}
         <div className="w-full mb-4  min-h-[20vh] bg-white shadow rounded px-2 py-5">
@@ -238,7 +263,9 @@ const GarmentViewReport = () => {
       {showCharges && (
         <div className="w-full flex justify-center">
           <div className="relative bg-slate-400 rounded-lg z-0 w-[80%] flex m-auto justify-center">
-            <form className="w-full ps-16 p-8" onSubmit={handleSubmit}>
+            <form className="w-full ps-16 p-8"
+              onSubmit={handleSubmit}
+            >
               <div class="mb-6  w-full">
                 <label
                   for="email"
@@ -249,7 +276,7 @@ const GarmentViewReport = () => {
                 <input
                   type="text"
                   id="garamentName"
-                  value={garment?.companyName}
+                  value={releventServiceChargeData?.name}
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@flowbite.com"
                   required
@@ -265,7 +292,7 @@ const GarmentViewReport = () => {
                 <input
                   type="text"
                   id="serviceCharge"
-                  value={serviceChargers}
+                  value={releventServiceChargeData?.fee}
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                    focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
                     dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
@@ -275,7 +302,7 @@ const GarmentViewReport = () => {
               </div>
 
               <label className="pb-2">
-                Upload T-Shirt Design Images{" "}
+                Upload Bank Slip{" "}
                 <span className="text-red-500">*</span>
               </label>
               <input
