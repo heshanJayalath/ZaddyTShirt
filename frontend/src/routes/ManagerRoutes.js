@@ -7,6 +7,7 @@ import ManagerDashboardCustomOrder from '../pages/Manager/ManagerDashboardCustom
 import ManagerCustomOrderDetails from '../pages/Manager/ManagerCustomOrderDetails';
 import ManagerDashboardServiceCharges from '../pages/Manager/ManagerDashboardServiceCharges.jsx';
 import ManagerServiceCharge from '../pages/Manager/ManagerServiceCharge.jsx'
+import ManagerDashboardCreateServiceCharges from '../pages/Manager/ManagerDashboardCreateServiceCharges.jsx'
 
 export {
     ManagerDashboardPage,
@@ -18,4 +19,5 @@ export {
     ManagerCustomOrderDetails,
     ManagerDashboardServiceCharges,
     ManagerServiceCharge,
+    ManagerDashboardCreateServiceCharges
 }

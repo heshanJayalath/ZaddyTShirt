@@ -2,12 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineFolderAdd, AiOutlineGift } from 'react-icons/ai'
 import { FiPackage, FiShoppingBag } from 'react-icons/fi'
-import { MdOutlineLocalOffer } from 'react-icons/md'
+import { MdOutlineDashboardCustomize, MdOutlineLocalOffer } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 import { VscNewFile } from 'react-icons/vsc'
 import { CiMoneyBill, CiSettings } from 'react-icons/ci'
 import { BiMessageSquareDetail } from 'react-icons/bi'
 import { HiOutlineReceiptRefund } from 'react-icons/hi'
+import { TbReportMoney } from 'react-icons/tb'
 
 const GarmentDashboardSideBar = ({ active }) => {
   return (
@@ -123,7 +124,7 @@ const GarmentDashboardSideBar = ({ active }) => {
         </div>
         <div className="w-full flex items-center p-4">
           <Link to="/garment-dashboard-my-custom-orders" className="w-full flex items-center">
-            <HiOutlineReceiptRefund
+            <MdOutlineDashboardCustomize
               size={30}
               color={`${active === 8 ? "crimson" : "#555"}`}
             />
@@ -137,7 +138,7 @@ const GarmentDashboardSideBar = ({ active }) => {
         </div>
         <div className="w-full flex items-center p-4">
           <Link to="/garment-all-service-charges" className="w-full flex items-center">
-            <HiOutlineReceiptRefund
+            <TbReportMoney
               size={30}
               color={`${active === 9? "crimson" : "#555"}`}
             />

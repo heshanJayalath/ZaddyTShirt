@@ -7,13 +7,14 @@ import {
   HiOutlineCash,
   HiOutlineUsers,
 } from "react-icons/hi";
-import { GiDress } from "react-icons/gi";
+import { GiDress, GiMoneyStack } from "react-icons/gi";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { RxPerson } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import { server } from "../../server";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FaFileInvoiceDollar } from "react-icons/fa";
 
 const ManagerSideBar = ({ active }) => {
   // const navigate = useNavigate();
@@ -104,15 +105,28 @@ const ManagerSideBar = ({ active }) => {
           </span>
         </Link>
       </div>
+      <div
+        className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
+      >
+        <Link to="/manager-create-charges" className="w-full flex items-center">
+
+          <GiMoneyStack size={30} color={active === 7 ? "red" : ""} />
+          <span
+            className={`pl-3 text-lg ${active === 7 ? "text-[red]" : ""} 800px:block `}
+          >
+            Create Charges
+          </span>
+        </Link>
+      </div>
 
       <div
         className="flex text-gray-600 items-center cursor-pointer w-full mb-8"
       >
         <Link to="/manager-service-charges" className="w-full flex items-center">
 
-          <RiUserSettingsLine size={30} color={active === 7 ? "red" : ""} />
+          <FaFileInvoiceDollar size={30} color={active === 8 ? "red" : ""} />
           <span
-            className={`pl-3 text-lg ${active === 7 ? "text-[red]" : ""} 800px:block `}
+            className={`pl-3 text-lg ${active === 8 ? "text-[red]" : ""} 800px:block `}
           >
             All Charges
           </span>
@@ -123,9 +137,9 @@ const ManagerSideBar = ({ active }) => {
       >
         <Link to="/profile" className="w-full flex items-center">
 
-          <RiUserSettingsLine size={30} color={active === 8 ? "red" : ""} />
+          <RiUserSettingsLine size={30} color={active === 9 ? "red" : ""} />
           <span
-            className={`pl-3 text-lg ${active === 8 ? "text-[red]" : ""} 800px:block `}
+            className={`pl-3 text-lg ${active === 9 ? "text-[red]" : ""} 800px:block `}
           >
             Settings
           </span>

@@ -44,6 +44,12 @@ const AllServiceCharges = () => {
       flex: 0.6,
     },
     {
+      field: "status",
+      headerName: "status",
+      minWidth: 130,
+      flex: 0.6,
+    },
+    {
       field: "Preview",
       flex: 0.8,
       minWidth: 100,
@@ -78,6 +84,7 @@ const AllServiceCharges = () => {
         name: item?.garment?.companyName,
         fee: "Rs. " + item.fee,
         payedOn: formattedDate,
+        status:item.status
       });
     });
     return (
