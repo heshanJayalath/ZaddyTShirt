@@ -37,19 +37,21 @@ const ManagerServiceChargeComponent = () => {
 
     const releventData = data && data.find((item) => item._id === id)
     return (
-        <>
-            <div>
-                <div>
-                    <div>Company Name:</div>
-                    <div>{releventData?.name}</div>
+        <div className='flex justify-center mb-16 mt-16 '>
+            
+            <div className='shadow-md p-10 px-16  bg-slate-50'>
+            <h1 className='mb-10 text-center font-semibold text-2xl font-mono text-gray-800'>Service Charge Invoice</h1>
+                <div className='w-full text-base font-mono font-semibold text-md flex  justify-start' >
+                    <h1>Company Name : </h1>
+                    <h1> {releventData?.name}</h1>
                 </div>
-                <div>
-                    <div>Fees:</div>
-                    <div>Rs.{releventData?.fee}.00</div>
+                <div className='flex font-mono text-md justify-end mb-8'>
+                    <div>Fees : </div>
+                    <div>Rs.{parseFloat(releventData?.fee).toFixed(2)}</div>
                 </div>
-                <div>
-                    <div>Payment Slip:</div>
-                    <div>
+                <div className='font-mono'>
+                    <div>Payment Slip</div>
+                    <div className='mt-4 bg-slate-50'>
                         <img
                             src={`${backend_url}/${releventData?.images[0]}`}
                             className='w-[400px]'
@@ -92,7 +94,7 @@ const ManagerServiceChargeComponent = () => {
                     )
                 }
             </div>
-        </>
+        </div>
     )
 }
 

@@ -7,11 +7,14 @@ const ManagerDashboardCreateServiceCharges = () => {
     <div>
       <ManagerHeader />
       <div className="w-full flex">
-        <div className="flex items-start justify-between w-full">
-          <div className="w-[80px] 800px:w-[330px]">
+        <div className="md:flex items-start p-8 md:p-0 justify-between w-full">
+          <div className="md:w-2/12 w-full ">
             <ManagerSideBar active={7} />
           </div>
+          <div className='w-full flex justify-center'>
+            {/* <h1>Service Charge Invoice</h1> */}
           <CreateServiceCharges />
+          </div>
         </div>
       </div>
     </div>

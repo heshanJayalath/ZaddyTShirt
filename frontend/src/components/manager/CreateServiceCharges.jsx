@@ -63,7 +63,7 @@ const CreateServiceCharges = () => {
     }
 
     return (
-        <div className=" w-[100%]  md:w-[50%] bg-slate-100 mt-12 mb-8 shadow-md shadow-blue-500 rounded-[6px]  p-10">
+        <div className=" w-[100%]  md:w-[50%] bg-slate-50 mt-12 py-16 mb-8 shadow-md  rounded-[6px]  p-10">
             <h5 className="text-[30px] font-Poppins text-center">
                 Create Invoice
             </h5>
@@ -111,7 +111,7 @@ const CreateServiceCharges = () => {
                 <input
                     type="submit"
                     value="Send Invoice"
-                    className="mt-2 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 hover:border-blue-200 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 hover:bg-blue-50 hover:text-blue-600 focus:border-blue-500 sm:text-sm"
+                    className="mt-4 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 hover:border-blue-200 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 hover:bg-blue-50 hover:text-blue-600 focus:border-blue-500 sm:text-sm"
                 />
             </form>
         </div>

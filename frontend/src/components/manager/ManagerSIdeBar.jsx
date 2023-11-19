@@ -31,7 +31,7 @@ const ManagerSideBar = ({ active }) => {
   //     });
   // };
   return (
-    <div className="w-full md:w-2/12 md:mx-0 bg-white shadow-sm rounded-[10px] fixed md:h-auto h-60 pl-4 pt-8 overflow-y-scroll">
+    <div className="w-full md:w-2/12 md:mx-0 bg-white shadow-sm rounded-[10px] md:fixed md:h-auto h-60 pl-4 pt-8 overflow-y-scroll">
       <div
         className="flex  text-gray-600 items-center cursor-pointer w-full mb-8">
         <Link to="/manager/dashboard" className="w-full flex items-center">

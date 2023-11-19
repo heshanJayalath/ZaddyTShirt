@@ -200,7 +200,7 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
     }, [me, data]);
 
     return (
-        <div className={`w-full flex p-4 px-3 ${active === index ? 'bg-[#00000010]' : 'bg-transparent'} cursor-pointer`}
+        <div className={`w-full flex p-4 px-3 ${active === index ? 'bg-[#e8d9d9]' : 'bg-transparent'} cursor-pointer`}
             onClick={(e) => setActive(index) || handleClick(data._id) || setCurrentChat(data)}>
             <div className='relative'>
                 <img src={`${backend_url}/${userData?.avatar}`} alt=''
