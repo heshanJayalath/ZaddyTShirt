@@ -75,7 +75,7 @@ const AllServiceCharges = () => {
 
     return (
         <>
-            <div className="w-[80%] flex justify-center pt-5">
+            <div className="w-[95%] flex justify-center pt-5">
                 <div className="w-[97%]">
                     <div className="w-full pt-1 mt-10 bg-white">
                         <DataGrid

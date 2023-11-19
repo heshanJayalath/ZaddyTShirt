@@ -7,13 +7,13 @@ const GarmentDashboardPage = () => {
   return (
     <div>
       <GarmentDashboardHeader />
-      <div className="md:flex items-start justify-between w-full">
+      <div className="md:flex items-start gap-2 justify-between w-full">
         <div className="md:w-2/12 ">
           <GarmentDashboardSideBar active={9} />
 
         </div>
 
-        <div className='w-10/12'>
+        <div className='w-10/12 flex justify-center'>
           <AllServiceCharges />
         </div>
 
