@@ -143,6 +143,7 @@ const AllProducts = () => {
         <Loader />
       ) : (
         <div className="w-full pt-1 mt-10 bg-white ">
+          <h1>All Products</h1>
           <DataGrid
             rows={row}
             columns={columns}

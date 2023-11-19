@@ -13,7 +13,7 @@ const GarmentDashboardPage = () => {
 
         </div>
 
-        <div className='w-10/12'>
+        <div className='w-10/12 px-4 '>
           <GarmentViewReport />
         </div>
 

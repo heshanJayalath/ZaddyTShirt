@@ -5,7 +5,9 @@ import { AiOutlineCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import { categoriesData, materialData } from '../../../Static/Customer/data';
 import { toast } from 'react-toastify'
 import { createProduct } from "../../../redux/actions/product";
+import { backend_url } from '../../../server';
 import { RxAvatar } from 'react-icons/rx';
+import da from 'date-fns/esm/locale/da/index.js';
 
 
 const UpdateProduct = ({data}) => {
@@ -27,6 +29,7 @@ const UpdateProduct = ({data}) => {
     const [discountPrice, setDiscountPrice] = useState();
     const [stock, setStock] = useState();
     const [model, setModel] = useState(null);
+    const [imgMain,setImagMain]=useState(0)
 
     useEffect(() => {
         if (error) {
@@ -46,6 +49,8 @@ const UpdateProduct = ({data}) => {
         console.log("files", files);
         setImages((prevImages) => [...prevImages, ...files])
     }
+
+    console.log(data)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -83,10 +88,23 @@ const UpdateProduct = ({data}) => {
     }
 
     return (
-        <div className="w-[60%] 800px:w-[50%] bg-white  shadow h-[80vh] rounded-[4px] p-3 overflow-y-scroll">
-            <h5 className="text-[30px] font-Poppins text-center">Update Product</h5>
+        <div className="w-[60%] 800px:w-[50%] bg-white shadow h-[80vh] rounded-[4px] p-3 overflow-y-scroll">
+            <h5 className="text-[30px] mb-10 font-Poppins text-center">Update Product</h5>
             {/* create product form */}
             <form onSubmit={handleSubmit}>
+
+            <div>
+              {data &&
+                  <div  className="mt-4 flex justify-center md:mt-6">
+                    <img
+                      src={`${backend_url}/${data.images && data?.images[imgMain]}`}
+                      alt=""
+                      className="max-h-[300px] shadow-md max-w-md md:max-w-sm  md:py-14 rounded-lg overflow-hidden  transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30"
+                    />
+                  </div>
+                }
+            </div>
+
                 <br />
                 <div>
                     <label className="pb-2">

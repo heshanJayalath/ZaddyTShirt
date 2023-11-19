@@ -5,17 +5,20 @@ import AllRefundOrders from '../../components/Garment/new/AllRefundOrders'
 
 const GarmentAllRefunds = () => {
   return (
-    <div>
+   <div>
     <GarmentDashboardHeader />
-    <div className="flex justify-between w-full">
-        <div className="w-[80px] 800px:w-[330px]">
-          <GarmentDashboardSideBar active={7} />
-        </div>
-        <div className="w-full justify-center flex">
-           <AllRefundOrders />
-        </div>
+    <div className="md:flex items-start justify-between gap-2 w-full">
+      <div className="md:w-2/12 ">
+        <GarmentDashboardSideBar active={7} />
+
       </div>
-</div>
+
+      <div className='w-10/12 mx-4 flex justify-center'>
+        <AllRefundOrders />
+      </div>
+
+    </div>
+  </div>
   )
 }
 

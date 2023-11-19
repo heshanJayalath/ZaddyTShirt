@@ -15,6 +15,7 @@ const GarmentCustomOrderDetails = () => {
   const { garment } = useSelector((state) => state.garment);
   const [status, setStatus] = useState("");
   const [price, setPrice] = useState("");
+  const [mainImg, setmainImg] =useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -76,18 +77,42 @@ const GarmentCustomOrderDetails = () => {
             </div>
 
             {/* <h1>Images:</h1> */}
+
+            <div>
             <div>
               {data &&
+                  <div  className="mt-4 flex justify-center md:mt-6">
+                    <img
+                      src={`${backend_url}/${data.images && data?.images[mainImg]}`}
+                      alt=""
+                      className="max-h-[600px] max-w-md md:max-w-sm  md:py-14 rounded-lg overflow-hidden shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30"
+                    />
+                  </div>
+                }
+            </div>
+
+            <div className='flex'>
+              {data &&
                 data.images.map((i, index) => (
-                  <div key={index} className="mt-4 md:mt-6">
+                  <div key={index}
+                  
+                  onClick={()=>setmainImg(index)}
+                  className="mt-4 min-h-60 w-1/2 md:mt-6 
+                  transition-shadow duration-300 rounded-lg ease-in-out hover:shadow-lg 
+                  hover:shadow-black/30">
                     <img
                       src={`${backend_url}/${data.images && data?.images[index]}`}
                       alt=""
-                      className="h-auto max-w-md md:max-w-sm  md:py-14 rounded-lg overflow-hidden shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30"
+                      className=" rounded-lg
+                       shadow-none "
                     />
                   </div>
                 ))}
             </div>
+
+            </div>
+
+            
 
           </div>
 

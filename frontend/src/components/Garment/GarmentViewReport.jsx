@@ -48,7 +48,7 @@ const GarmentViewReport = () => {
         setReleventServiceChargeData(item);
       });
 
-      console.log(releventServiceChargeData);
+      console.log('rellllllll',releventServiceChargeData);
     }
   }, [data, garment]);
 

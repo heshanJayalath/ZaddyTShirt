@@ -113,9 +113,11 @@ const AllGarmentCustomOrders = () => {
 
     return (
         <>
-            <div className="w-[80%] flex justify-center pt-5">
+        
+            <div className="w-full flex justify-center">
                 <div className="w-[97%]">
                     <div className="w-full min-h-[45vh] bg-white rounded">
+                    <h1>All Custom Orders</h1>
                         <DataGrid
                             rows={row}
                             columns={columns}

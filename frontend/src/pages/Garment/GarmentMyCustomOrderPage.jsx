@@ -6,11 +6,12 @@ const GarmentMyCustomOrderPage = () => {
   return (
     <div>
         <GarmentDashboardHeader />
-        <div className="flex items-center justify-between w-full">
-            <div className="w-[80px] 800px:w-[330px]">
+        <div className="flex justify-between w-full">
+          
+            <div className="w-2/12">
               <GarmentDashboardSideBar active={8} />
             </div>
-            <div className="w-full justify-center flex">
+            <div className="w-10/12 mx-4 ms-8 justify-center flex">
                 <AllMyGarmentCustomOrders />
             </div>
           </div>

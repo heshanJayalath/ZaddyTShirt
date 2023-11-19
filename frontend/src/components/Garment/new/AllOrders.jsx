@@ -85,11 +85,13 @@ const AllOrders = () => {
         });
 
     return (
-        <>
+        <div>
+       
             {isLoading ? (
                 <Loader/>
             ) : (
-                <div className="w-full justify-center content-center flex  pt-1 mt-10 bg-white">
+                <div className="w-full justify-center content-center pt-1 mt-5 bg-white">
+                     <h1 >All Orders</h1>
                     <DataGrid
                         rows={row}
                         columns={columns}
@@ -99,7 +101,7 @@ const AllOrders = () => {
                     />
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
