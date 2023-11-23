@@ -8,6 +8,8 @@ import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
+import md5 from 'crypto-js/md5';
+
 const Checkout = () => {
   const { user } = useSelector((state) => state.user);
   const { cart } = useSelector((state) => state.cart);
@@ -23,7 +25,66 @@ const Checkout = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const SUCCESS_URL = "/"
+  const CANCEL_URL = "/checkout"
+
+  window.payhere.onCompleted = function onCompleted(orderId) {
+      console.log("Payment completed. OrderID:" + orderId);
+      // reset cart
+      navigate(SUCCESS_URL);
+  };
+
+  // Payment window closed
+  window.payhere.onDismissed = function onDismissed() {
+    // Note: Prompt user to pay again or show an error page
+    console.log("Payment dismissed");
+    navigate(CANCEL_URL)
+  };
+
+  // Error occurred
+  window.payhere.onError = function onError(error) {
+      // Note: show an error page
+      console.log("Error:"  + error);
+      navigate(CANCEL_URL)
+  };
+
+  const generateOrderId = () => {
+    return 'INV' + zipCode + user?.id;
+  }
+
   const paymentSubmit = () => {
+    let merchantSecret  = 'MzgwNDY3MjUzOTMzMTIyNTQyMjkzMjY3OTM1NTI4MzY1OTQ3ODU3Nw==';
+    let merchantId      = '1224854';
+    let orderId         = generateOrderId();
+    let hashedSecret    = md5(merchantSecret).toString().toUpperCase();
+    let totalPriceFormated  = parseFloat( totalPrice ).toLocaleString( 'en-us', { minimumFractionDigits : 2 } ).replaceAll(',', '');
+    let currency        = 'LKR';
+    let hash            = md5(merchantId + orderId + totalPriceFormated + currency + hashedSecret).toString().toUpperCase();
+  
+    var payment = {
+      "sandbox": true,
+      "merchant_id": merchantId,    // Replace your Merchant ID
+      "return_url": undefined,     // Important
+      "cancel_url": undefined,     // Important
+      "notify_url": "http://sample.com/notify",
+      "order_id": orderId,
+      "items": "T-shirt",
+      "amount": totalPrice,
+      "currency": "LKR",
+      "hash": hash, // *Replace with generated hash retrieved from backend
+      "first_name": user && user.name,
+      "last_name": "",
+      "email": user && user.email,
+      "phone": user && user.phoneNumber,
+      "address": user && user.address,
+      "city": city,
+      "country": country,
+      "delivery_address": user && user.address,
+      "delivery_city": city,
+      "delivery_country": country,
+      "custom_1": "",
+      "custom_2": ""
+    };
     if (address1 === "" || address2 === "" || zipCode === null || country === "" || city === "") {
       toast.error("Please choose your delivery address!")
     } else {
@@ -46,7 +107,9 @@ const Checkout = () => {
 
       // update local storage with the updated orders array
       localStorage.setItem("latestOrder", JSON.stringify(orderData));
-      navigate("/payment");
+    
+
+      window.payhere.startPayment(payment);
     }
   };
 
@@ -78,6 +141,7 @@ const Checkout = () => {
             setAddress2={setAddress2}
             zipCode={zipCode}
             setZipCode={setZipCode}
+            totalPrice={totalPrice}
           />
         </div>
         <div className="w-full 800px:w-[35%] 800px:mt-0 mt-8">
@@ -112,7 +176,9 @@ const ShippingInfo = ({
   setAddress2,
   zipCode,
   setZipCode,
+  totalPrice
 }) => {
+
   return (
     <div className="w-full 800px:w-[95%] bg-white rounded-md p-5 pb-8">
       <h5 className="text-[18px] font-[500]">Shipping Address</h5>
@@ -231,7 +297,8 @@ const ShippingInfo = ({
           </div>
         </div>
 
-        <div></div>
+        <div>
+        </div>
       </form>
       <h5
         className="text-[18px] cursor-pointer inline-block"
@@ -260,7 +327,9 @@ const ShippingInfo = ({
               </div>
             ))}
         </div>
+        
       )}
+      
     </div>
   );
 };
