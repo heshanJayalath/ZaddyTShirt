@@ -16,7 +16,7 @@ const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 
 const UserInbox = () => {
-    const { user } = useSelector((state) => state.user);
+    const { user, loading } = useSelector((state) => state.user);
     const [conversations, setConversations] = useState([]);
     const [open, setOpen] = useState(false);
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -151,10 +151,11 @@ const UserInbox = () => {
 
     return (
         <div className='w-full'>
-            <Header />
+
             {
                 !open && (
                     <>
+                        <Header />
                         <h1 className='text-center text-[30px] py-3'>All Messages</h1>
 
                         {/* All messages List */}
@@ -171,6 +172,7 @@ const UserInbox = () => {
                                     userData={userData}
                                     online={onlineCheck(item)}
                                     setActiveStatus={setActiveStatus}
+                                    loading={loading}
                                 />
                             ))
                         }
@@ -194,7 +196,7 @@ const UserInbox = () => {
     )
 }
 
-const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, userData, online, setActiveStatus, isLoading }) => {
+const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, userData, online, setActiveStatus, isLoading, loading }) => {
     const [active, setActive] = useState(0);
     const [user, setUser] = useState([]);
     const navigate = useNavigate();
@@ -246,11 +248,17 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
 
             <div className='pl-3'>
                 <h1 className='text-[18px]'>{user?.companyName}</h1>
-                <p className='text-[16px] text-[#000]'>
+                {/* <p className='text-[16px] text-[#000]'>
                     {
                         data?.lastMessageId !== userData?._id ?
                             "You:"
                             : userData?.name?.split(" ")[0] + ": "}
+                    {data?.lastMessage}
+                </p> */}
+                <p className="text-[16px] text-[#000c]">
+                    {!loading && data?.lastMessageId !== userData?._id
+                        ? "You:"
+                        : userData?.name.split(" ")[0] + ": "}{" "}
                     {data?.lastMessage}
                 </p>
             </div>

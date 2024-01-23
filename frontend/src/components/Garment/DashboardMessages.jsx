@@ -41,14 +41,32 @@ const DashboardMessages = () => {
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages((prev) => [...prev, arrivalMessage]);
     }, [arrivalMessage, currentChat])
 
-    useEffect(() => {
-        axios.get(`${server}/conversation/get-all-conversation-garment/${garment?._id}`, { withCredentials: true }).then((res) => {
-            setConversations(res.data.conversations);
-        }).catch((error) => {
-            console.log(error);
-        });
+    // useEffect(() => {
+    //     axios.get(`${server}/conversation/get-all-conversation-garment/${garment?._id}`, { withCredentials: true }).then((res) => {
+    //         setConversations(res.data.conversations);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
 
-    }, [garment]);
+    // }, [garment]);
+
+    useEffect(() => {
+        const getConversation = async () => {
+            try {
+                const resonse = await axios.get(
+                    `${server}/conversation/get-all-conversation-garment/${garment?._id}`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                setConversations(resonse.data.conversations);
+            } catch (error) {
+                // console.log(error);
+            }
+        };
+        getConversation();
+    }, [garment, messages]);
 
     useEffect(() => {
         if (garment) {
@@ -169,6 +187,7 @@ const DashboardMessages = () => {
                         garmentId={garment._id}
                         userData={userData}
                         activeStatus={activeStatus}
+                        setMessages={setMessages}
                     />
                 )
             }
@@ -177,6 +196,7 @@ const DashboardMessages = () => {
 }
 
 const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, userData, online, setActiveStatus, isLoading }) => {
+    const [user, setUser] = useState([]);
     const navigate = useNavigate();
     const handleClick = (id) => {
         navigate(`?${id}`);
@@ -185,25 +205,40 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
     const [active, setActive] = useState(0);
 
 
+    // useEffect(() => {
+    //     setActiveStatus(online);
+    //     const userId = data.members.find((user) => user != me);
+    //     const getUser = async () => {
+    //         try {
+    //             const res = await axios.get(`${server}/user/user-info/${userId}`);
+    //             setUserData(res.data.user);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     getUser();
+    // }, [me, data]);
+
     useEffect(() => {
-        setActiveStatus(online);
         const userId = data.members.find((user) => user != me);
+
         const getUser = async () => {
             try {
                 const res = await axios.get(`${server}/user/user-info/${userId}`);
-                setUserData(res.data.user);
+                setUser(res.data.user);
             } catch (error) {
                 console.log(error);
             }
-        }
+        };
         getUser();
     }, [me, data]);
 
     return (
+
         <div className={`w-full flex p-4 px-3 ${active === index ? 'bg-[#e8d9d9]' : 'bg-transparent'} cursor-pointer`}
-            onClick={(e) => setActive(index) || handleClick(data._id) || setCurrentChat(data)}>
+            onClick={(e) => setActive(index) || handleClick(data._id) || setCurrentChat(data) || setUserData(user) || setActiveStatus(online)}>
             <div className='relative'>
-                <img src={`${backend_url}/${userData?.avatar}`} alt=''
+                <img src={`${backend_url}/${user?.avatar}`} alt=''
                     className='w-[50px] h-[50px] rounded-full'
                 />
                 {
@@ -216,16 +251,22 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
             </div>
 
             <div className='pl-3'>
-                <h1 className='text-[18px]'>{userData?.name}</h1>
-                <p className='text-[16px] text-[#000]'>{
-                    data.lastMessageId !== userData?._id ? "You:" : userData?.name.split(" ")[0] + ": "
-                } {data?.lastMessage}</p>
+                <h1 className='text-[18px]'>{user?.name}</h1>
+                {/* <p className='text-[16px] text-[#000]'>{
+                    data.lastMessageId !== user?._id ? "You:" : user?.name.split(" ")[0] + ": "
+                } {data?.lastMessage}</p> */}
+                <p className="text-[16px] text-[#000c]">
+                    {!isLoading && data?.lastMessageId !== user?._id
+                        ? "You:"
+                        : user?.name?.split(" ")[0] + ": "}{" "}
+                    {data?.lastMessage}
+                </p>
             </div>
         </div>
     )
 }
 
-const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, messages, garmentId, userData, activeStatus, hadleImageUpload, }) => {
+const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, messages, garmentId, userData, activeStatus, }) => {
     return (
         <div className='w-full min-h-full flex flex-col justify-between'>
             {/* message header */}
@@ -250,7 +291,8 @@ const GarmentInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler, 
                         <div className={`flex w-full my-2 ${item.sender === garmentId ? 'justify-end' : 'justify-start'}`}>
                             {
                                 item.sender !== garmentId && (
-                                    <img src='https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg'
+                                    <img src={`${backend_url}/${userData?.avatar}`}
+                                        alt=''
                                         className='w-[48px] h-[48px] mr-3 rounded-full'
                                     />
                                 )

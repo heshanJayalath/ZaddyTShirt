@@ -373,7 +373,7 @@ const OwnerDashboardMain = () => {
       class="w-36 text-white bg-gradient-to-r fixed from-blue-500 
       via-blue-600 to-blue-700 hover:bg-gradient-to-br 
       shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 
-      font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 bottom-8 ">Generate PDF</button>
+      font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 bottom-8 ">Generate Report</button>
 
       </div>
     </div>

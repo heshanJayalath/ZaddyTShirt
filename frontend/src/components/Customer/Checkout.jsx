@@ -53,6 +53,68 @@ const Checkout = () => {
   }
 
   const paymentSubmit = () => {
+    // let merchantSecret  = 'MzgwNDY3MjUzOTMzMTIyNTQyMjkzMjY3OTM1NTI4MzY1OTQ3ODU3Nw==';
+    // let merchantId      = '1224854';
+    // let orderId         = generateOrderId();
+    // let hashedSecret    = md5(merchantSecret).toString().toUpperCase();
+    // let totalPriceFormated  = parseFloat( totalPrice ).toLocaleString( 'en-us', { minimumFractionDigits : 2 } ).replaceAll(',', '');
+    // let currency        = 'LKR';
+    // let hash            = md5(merchantId + orderId + totalPriceFormated + currency + hashedSecret).toString().toUpperCase();
+  
+    // var payment = {
+    //   "sandbox": true,
+    //   "merchant_id": merchantId,    // Replace your Merchant ID
+    //   "return_url": undefined,     // Important
+    //   "cancel_url": undefined,     // Important
+    //   "notify_url": "http://sample.com/notify",
+    //   "order_id": orderId,
+    //   "items": "T-shirt",
+    //   "amount": totalPrice,
+    //   "currency": "LKR",
+    //   "hash": hash, // *Replace with generated hash retrieved from backend
+    //   "first_name": user && user.name,
+    //   "last_name": "",
+    //   "email": user && user.email,
+    //   "phone": user && user.phoneNumber,
+    //   "address": user && user.address,
+    //   "city": city,
+    //   "country": country,
+    //   "delivery_address": user && user.address,
+    //   "delivery_city": city,
+    //   "delivery_country": country,
+    //   "custom_1": "",
+    //   "custom_2": ""
+    // };
+    if (address1 === "" || address2 === "" || zipCode === null || country === "" || city === "") {
+      toast.error("Please choose your delivery address!")
+    } else {
+      const shippingAddress = {
+        address1,
+        address2,
+        zipCode,
+        country,
+        city,
+      };
+
+      const orderData = {
+        cart,
+        totalPrice,
+        subTotalPrice,
+        shipping,
+        shippingAddress,
+        user,
+      }
+
+      // update local storage with the updated orders array
+      localStorage.setItem("latestOrder", JSON.stringify(orderData));
+      navigate("/payment");
+    
+
+      // window.payhere.startPayment(payment);
+    }
+  };
+
+  const paymentSubmit2 = () => {
     let merchantSecret  = 'MzgwNDY3MjUzOTMzMTIyNTQyMjkzMjY3OTM1NTI4MzY1OTQ3ODU3Nw==';
     let merchantId      = '1224854';
     let orderId         = generateOrderId();
@@ -107,6 +169,7 @@ const Checkout = () => {
 
       // update local storage with the updated orders array
       localStorage.setItem("latestOrder", JSON.stringify(orderData));
+      navigate("/payment");
     
 
       window.payhere.startPayment(payment);
@@ -152,12 +215,24 @@ const Checkout = () => {
           />
         </div>
       </div>
+
+      <div className="flex gap-8">
       <div
-        className={`${styles.button} w-[150px] 800px:w-[280px] mt-10`}
+        className={`${styles.button} bg-blue-900 w-[150px] 800px:w-[280px] mt-10`}
         onClick={paymentSubmit}
       >
-        <h5 className="text-white">Go to Payment</h5>
+        <h5 className="text-white">Cash On Delivery</h5>
       </div>
+
+      <div
+        className={`${styles.button} bg-red-900 w-[150px] 800px:w-[280px] mt-10`}
+        onClick={paymentSubmit2}
+      >
+        <h5 className="text-white">Online Payment</h5>
+      </div>
+
+      </div>
+    
     </div>
   );
 };
