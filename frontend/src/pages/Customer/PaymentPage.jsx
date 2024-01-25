@@ -16,8 +16,21 @@ const PaymentPage = () => {
   let currency        = 'LKR';
   let hash            = md5(merchantId + orderId + amountFormated + currency + hashedSecret).toString().toUpperCase();
   return (
-    
-      <div>
+    <div className="w-full min-h-screen bg-[#f6f9fc]">
+    <div className="md:block hidden">
+      <Header activeHeading={1} />
+    </div>
+    <div className="md:hidden block z-10">
+      <ResponsiveHeader />
+    </div>
+    <br />
+    <br />
+    <CheckoutSteps active={2} />
+    <Payment />
+    <br />
+    <br />
+    <Footer />
+      {/* <div>
         <form method="post" action="https://sandbox.payhere.lk/pay/checkout">   
             <input type="hidden" name="merchant_id" value={merchantId}/>
             <input type="hidden" name="return_url" value="http://sample.com/return"/>
@@ -39,7 +52,7 @@ const PaymentPage = () => {
             <input type="hidden" name="country" value="Sri Lanka"/>
             <input type="hidden" name="hash" value={hash}/>
             <input type="submit" className="btn bg-white" value="Buy Now"/>   
-        </form>
+        </form> */}
     </div>
       
   );

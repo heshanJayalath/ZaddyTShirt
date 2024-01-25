@@ -22,6 +22,8 @@ const AdminHeader = () => {
                     />
                 </Link>
             </div>
+
+            <h1 className='text-base font-semibold'>Admin Dashboard</h1>
             <div className="flex items-center">
                 <div className="flex items-center mr-4">
                     <Link to="/dashboard/cupouns" className="800px:block hidden">
